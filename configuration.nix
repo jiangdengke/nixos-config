@@ -16,12 +16,12 @@
   # Use the systemd-boot EFI boot loader.
   boot.loader.systemd-boot.enable = true;
   boot.loader.efi.canTouchEfiVariables = true;
+programs.starship.enable = true;
 
+programs.zsh.enable = true;
   users.users.jdk = {
-    shell = pkgs.zsh;
     isNormalUser = true;
     extraGroups = [ "wheel" ]; # 启用sudo权限
-    # 其他用户设置...
   };
  # networking.hostName = "nixos"; # Define your hostname.
   # Pick only one of the below networking options.

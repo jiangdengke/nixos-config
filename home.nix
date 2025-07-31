@@ -9,7 +9,7 @@
 
   # 设置鼠标指针大小以及字体 DPI（适用于 4K 显示器）
   xresources.properties = {
-    "Xcursor.size" = 16;
+    "Xcursor.size" = 10;
     "Xft.dpi" = 172;
   };
 
@@ -94,30 +94,65 @@
     };
   };
 
-
-  programs.bash = {
-    enable = true;
-    enableCompletion = true;
-    # TODO 在这里添加你的自定义 bashrc 内容
-    bashrcExtra = ''
-      export PATH="$PATH:$HOME/bin:$HOME/.local/bin:$HOME/go/bin"
-    '';
-
-    # TODO 设置一些别名方便使用，你可以根据自己的需要进行增删
-    shellAliases = {
-      k = "kubectl";
-      urldecode = "python3 -c 'import sys, urllib.parse as ul; print(ul.unquote_plus(sys.stdin.read()))'";
-      urlencode = "python3 -c 'import sys, urllib.parse as ul; print(ul.quote_plus(sys.stdin.read()))'";
-    };
+  programs.zsh = {
+  enable = true;
+  autosuggestion.enable = true;
+  enableCompletion = true;
+  
+  # 基本配置
+ initContent = ''
+    export PATH="$PATH:$HOME/bin:$HOME/.local/bin:$HOME/go/bin"
+    
+    # 历史记录设置
+    HISTSIZE=10000
+    SAVEHIST=10000
+    setopt HIST_IGNORE_DUPS
+    setopt HIST_IGNORE_SPACE
+    setopt EXTENDED_HISTORY
+    
+    # 其他自定义设置
+    setopt AUTO_CD
+    setopt CORRECT
+  '';
+  
+  # 别名设置
+  shellAliases = {
+    k = "kubectl";
+    urldecode = "python3 -c 'import sys, urllib.parse as ul; print(ul.unquote_plus(sys.stdin.read()))'";
+    urlencode = "python3 -c 'import sys, urllib.parse as ul; print(ul.quote_plus(sys.stdin.read()))'";
+    # zsh 特有的别名
+    ll = "ls -la";
+    ".." = "cd ..";
+    "..." = "cd ../..";
   };
+  
+  # 可选：配置 oh-my-zsh
+  oh-my-zsh = {
+    enable = true;
+    plugins = [
+      "git"
+      "docker"
+      "kubectl"
+      "sudo"
+      "history"
+      "z"
+    ];
+    theme = "robbyrussell"; # 或者其他你喜欢的主题
+  };
+  
+  # 可选：配置 zsh 插件
+  plugins = [
+    {
+      name = "zsh-syntax-highlighting";
+      src = pkgs.fetchFromGitHub {
+        owner = "zsh-users";
+        repo = "zsh-syntax-highlighting";
+        rev = "0.7.1";
+        sha256 = "03r6hpb5fy4yaakqm3lbf4xcvd408r44jgpv4lnzl9asp4sb9qc0";
+      };
+    }
+  ];
+};
 
-  # This value determines the Home Manager release that your
-  # configuration is compatible with. This helps avoid breakage
-  # when a new Home Manager release introduces backwards
-  # incompatible changes.
-  #
-  # You can update Home Manager without changing this value. See
-  # the Home Manager release notes for a list of state version
-  # changes in each release.
   home.stateVersion = "25.05";
 }
