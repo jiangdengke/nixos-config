@@ -1,4 +1,4 @@
-i{ config, pkgs, ... }:
+{ config, pkgs, ... }:
 
 {
   # 导入所有程序配置

@@ -15,11 +15,6 @@
   # 启用 home-manager
   programs.home-manager.enable = true;
 
-  # 基础 X11 配置
-  xresources.properties = {
-    "Xcursor.size" = 16;
-    "Xft.dpi" = 140;
-  };
 
   # 基础环境变量
   home.sessionVariables = {
