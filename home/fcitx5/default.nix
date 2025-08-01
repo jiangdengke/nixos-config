@@ -2,9 +2,7 @@
 
 {
   i18n.inputMethod = {
-    # 将 enabled = "fcitx5" 改为下面两行
-    enabled = true;  # 启用输入法
-    type = "fcitx5";  # 指定输入法类型
+    enabled = "fcitx5";
     
     # 其余配置保持不变
     fcitx5.addons = 
