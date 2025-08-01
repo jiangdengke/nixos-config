@@ -7,10 +7,16 @@
   programs.home-manager.enable = true;
 
 
+  # 设置字体
+  fonts.fontconfig = {
+    enable = true;
+  };
+
+
   # 设置鼠标指针大小以及字体 DPI（适用于 4K 显示器）
   xresources.properties = {
-    "Xcursor.size" = 10;
-    "Xft.dpi" = 172;
+    "Xcursor.size" = 16;
+    "Xft.dpi" = 140;
   };
 
   # 通过 home.packages 安装一些常用的软件
@@ -25,6 +31,8 @@
     xz
     unzip
     p7zip
+    xorg.xfontsel
+    xorg.xset
 
     # utils
     ripgrep # recursively searches directories for a regex pattern
