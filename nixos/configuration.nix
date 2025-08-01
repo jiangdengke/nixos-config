@@ -6,7 +6,8 @@
     ../modules/boot.nix
     ../modules/i3.nix
     ../modules/fonts.nix
-    ../modules/input-method.nix
+    #../modules/input-method.nix
+    ../modules/i18n.nix
     ../modules/networking.nix
     ../modules/packages.nix
     ../modules/dae.nix
