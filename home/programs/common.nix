@@ -28,8 +28,8 @@
 
     # Node.js 开发环境
     nodejs         # Node.js JavaScript 运行环境
-    nodePackages.npm  # Node.js 包管理器
-    nodePackages.pnpm # 性能更好的 Node.js 包管理器
+#    nodePackages.npm  # Node.js 包管理器
+#    nodePackages.pnpm # 性能更好的 Node.js 包管理器
     yarn           # 另一个 Node.js 包管理器
 
     # 数据库相关工具
