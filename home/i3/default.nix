@@ -37,6 +37,11 @@
       
       # 自动启动应用
       startup = [
+        {
+          command = "${pkgs.flameshot}/bin/flameshot";
+          notification = false;
+          always = false;
+        }
         # 自动启动 Picom
         {
           command = "picom -b";
@@ -57,12 +62,12 @@
         "${config.xsession.windowManager.i3.config.modifier}+Return" = "exec ${config.xsession.windowManager.i3.config.terminal}";
         "${config.xsession.windowManager.i3.config.modifier}+Shift+q" = "kill";
         "${config.xsession.windowManager.i3.config.modifier}+d" = "exec rofi -show drun";
+        # 使用 vim 风格的 hjkl 键在窗口之间导航
+        "${config.xsession.windowManager.i3.config.modifier}+h" = "focus left";
+        "${config.xsession.windowManager.i3.config.modifier}+j" = "focus down";
+        "${config.xsession.windowManager.i3.config.modifier}+k" = "focus up";
+        "${config.xsession.windowManager.i3.config.modifier}+l" = "focus right";
         
-        # 窗口操作
-        "${config.xsession.windowManager.i3.config.modifier}+Left" = "focus left";
-        "${config.xsession.windowManager.i3.config.modifier}+Down" = "focus down";
-        "${config.xsession.windowManager.i3.config.modifier}+Up" = "focus up";
-        "${config.xsession.windowManager.i3.config.modifier}+Right" = "focus right";
         
         "${config.xsession.windowManager.i3.config.modifier}+Shift+Left" = "move left";
         "${config.xsession.windowManager.i3.config.modifier}+Shift+Down" = "move down";
@@ -98,12 +103,21 @@
         # 亮度控制
         "XF86MonBrightnessUp" = "exec brightnessctl set +10%";
         "XF86MonBrightnessDown" = "exec brightnessctl set 10%-";
+        # Flameshot 截图快捷键
+        "Ctrl+1" = "exec --no-startup-id ${pkgs.flameshot}/bin/flameshot gui";
         
-        # 截图
-        "Print" = "exec flameshot gui";
-        "${config.xsession.windowManager.i3.config.modifier}+Print" = "exec flameshot full -p ~/Pictures/Screenshots";
+        # 直接调用贴图功能的快捷键（将最近的截图固定到屏幕）
+        "Ctrl+Shift+1" = "exec --no-startup-id ${pkgs.flameshot}/bin/flameshot gui --pin";
+        
       };
       
+ # 浮动窗口规则 - 让 Flameshot 的贴图窗口自动浮动
+      floating = {
+        criteria = [
+          # 其他浮动窗口规则...
+          { class = "flameshot"; }  # 让 Flameshot 的所有窗口浮动
+        ];
+      };
       # 窗口规则
       assigns = {
         "1" = [{ class = "^Firefox$"; }];
@@ -116,35 +130,6 @@
       ];
       
       # 栏配置
-      bars = [
-        {
-          position = "bottom";
-          statusCommand = "${pkgs.i3status}/bin/i3status";
-          fonts = {
-            names = [ "DejaVu Sans Mono" "FontAwesome 10" ];
-            size = 10.0;
-          };
-          colors = {
-            background = "#282A36";
-            statusline = "#F8F8F2";
-            separator = "#44475A";
-            focusedWorkspace = { background = "#44475A"; border = "#44475A"; text = "#F8F8F2"; };
-            activeWorkspace = { background = "#282A36"; border = "#44475A"; text = "#F8F8F2"; };
-            inactiveWorkspace = { background = "#282A36"; border = "#282A36"; text = "#BFBFBF"; };
-            urgentWorkspace = { background = "#FF5555"; border = "#FF5555"; text = "#F8F8F2"; };
-            bindingMode = { background = "#FF5555"; border = "#FF5555"; text = "#F8F8F2"; };
-          };
-        }
-      ];
-      
-      # 颜色主题
-      colors = {
-        focused = { background = "#6272A4"; border = "#6272A4"; childBorder = "#6272A4"; indicator = "#6272A4"; text = "#F8F8F2"; };
-        focusedInactive = { background = "#44475A"; border = "#44475A"; childBorder = "#44475A"; indicator = "#44475A"; text = "#F8F8F2"; };
-        unfocused = { background = "#282A36"; border = "#282A36"; childBorder = "#282A36"; indicator = "#282A36"; text = "#BFBFBF"; };
-        urgent = { background = "#FF5555"; border = "#FF5555"; childBorder = "#FF5555"; indicator = "#FF5555"; text = "#F8F8F2"; };
-        placeholder = { background = "#282A36"; border = "#282A36"; childBorder = "#282A36"; indicator = "#282A36"; text = "#F8F8F2"; };
-      };
     };
   };
   

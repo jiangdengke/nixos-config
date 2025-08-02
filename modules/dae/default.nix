@@ -5,6 +5,6 @@
   # DAE代理配置
   services.dae = {
     enable = true;
-    configFile = "./config.dae";
+    configFile = builtins.toString ./config.dae; # 这会引用与 default.nix 同级的 config.dae
   };
 }
