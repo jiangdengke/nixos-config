@@ -19,7 +19,7 @@
     };
     
     # ZSH 初始化脚本
-    initExtra = ''
+    initContent = ''
       # 自定义配置
       setopt AUTO_CD              # 自动切换目录
       setopt EXTENDED_HISTORY     # 记录命令时间戳
@@ -45,10 +45,10 @@
     # 常用别名
     shellAliases = {
       # 文件操作
-      ls = "exa";                            # 使用 exa 替代 ls
-      l = "exa -l --icons --git";            # 长格式，带图标和 Git 信息
-      la = "exa -la --icons --git";          # 长格式，显示隐藏文件
-      lt = "exa -T --icons --git-ignore";    # 树形显示
+      ls = "eza";                            # 使用 eza 替代 ls
+      l = "eza -l --icons --git";            # 长格式，带图标和 Git 信息
+      la = "eza -la --icons --git";          # 长格式，显示隐藏文件
+      lt = "eza -T --icons --git-ignore";    # 树形显示
       cat = "bat";                           # 使用 bat 替代 cat
       
       # 系统操作
@@ -131,7 +131,7 @@
   
   # 安装必要的包
   home.packages = with pkgs; [
-    exa       # 现代化的 ls 替代品
+    eza       # 现代化的 ls 替代品
     bat       # cat 的替代品，带有语法高亮
     fd        # find 的替代品
     ripgrep   # grep 的替代品

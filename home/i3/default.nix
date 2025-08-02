@@ -1,79 +1,79 @@
+{ config, pkgs, ... }:
+
 {
-  pkgs,
-  config,
-  lib,
-  ...
-}: {
-  # 使用 Home Manager 的原生 i3 配置
+  # 导入 i3status 配置
+  imports = [
+    ./i3status.nix
+    ./picom.nix
+  ];
+  
+  # i3 窗口管理器配置
   xsession.windowManager.i3 = {
     enable = true;
     
-    # 这里是您的 i3 配置，之前在 ./config 文件中
+    # i3 包配置
+    package = pkgs.i3;
+    
+    # i3 配置
     config = {
-      # 定义修饰键
-      modifier = "Mod4"; # Super键 (Windows键)
+      # 修饰键 (Mod4 = Super 键/Windows 键)
+      modifier = "Mod4";
       
-      # 默认终端
-      terminal = "kitty";
+      # 终端
+      terminal = "alacritty";
       
-      # 窗口边框样式
-      defaultWorkspace = "workspace number 1";
+      # 窗口样式
+      gaps = {
+        inner = 10;
+        outer = 5;
+        smartGaps = true;
+      };
       
-      # 窗口边框设置
+      # 窗口边框
       window = {
         border = 1;
         titlebar = false;
-        hideEdgeBorders = "none";
       };
       
-      # 窗口间距
-      gaps = {
-        inner = 14;
-        outer = 0;
-        smartGaps = true;
-        smartBorders = "on";
-      };
-      
-      # 焦点设置
-      focus = {
-        followMouse = true;
-        mouseWarping = true;
-        newWindow = "smart";
-      };
-      
-      # 启动应用
+      # 自动启动应用
       startup = [
-        # 设置壁纸
-        { command = "feh --bg-scale ${../../wallpaper.jpg}"; always = true; notification = false; }
-        # 启动通知守护进程
-        { command = "dunst"; always = false; notification = false; }
-        # 启动输入法
-        { command = "fcitx5 -d"; always = false; notification = false; }
-        # 启动网络管理
-        { command = "nm-applet"; always = false; notification = false; }
-        # 其他您需要的启动程序
+        # 自动启动 Picom
+        {
+          command = "picom -b";
+          always = false;
+          notification = false;
+        }
+        # 壁纸设置
+        {
+          command = "feh --bg-fill ~/Pictures/wallpaper.jpg";
+          always = true;
+          notification = false;
+        }
+        # 屏幕亮度调整
+        {
+          command = "brightnessctl set 70%";
+          always = false;
+          notification = false;
+        }
       ];
       
-      # 键位绑定
-      keybindings = lib.mkOptionDefault {
+      # 快捷键设置
+      keybindings = {
         # 基本操作
         "${config.xsession.windowManager.i3.config.modifier}+Return" = "exec ${config.xsession.windowManager.i3.config.terminal}";
-        "${config.xsession.windowManager.i3.config.modifier}+q" = "kill";
+        "${config.xsession.windowManager.i3.config.modifier}+Shift+q" = "kill";
         "${config.xsession.windowManager.i3.config.modifier}+d" = "exec rofi -show drun";
-        "${config.xsession.windowManager.i3.config.modifier}+Shift+c" = "reload";
-        "${config.xsession.windowManager.i3.config.modifier}+Shift+r" = "restart";
-        "${config.xsession.windowManager.i3.config.modifier}+Shift+e" = "exec i3-nagbar -t warning -m 'Do you want to exit i3?' -b 'Yes, exit i3' 'i3-msg exit'";
         
         # 窗口操作
-        "${config.xsession.windowManager.i3.config.modifier}+h" = "focus left";
-        "${config.xsession.windowManager.i3.config.modifier}+j" = "focus down";
-        "${config.xsession.windowManager.i3.config.modifier}+k" = "focus up";
-        "${config.xsession.windowManager.i3.config.modifier}+l" = "focus right";
+        "${config.xsession.windowManager.i3.config.modifier}+Left" = "focus left";
+        "${config.xsession.windowManager.i3.config.modifier}+Down" = "focus down";
+        "${config.xsession.windowManager.i3.config.modifier}+Up" = "focus up";
+        "${config.xsession.windowManager.i3.config.modifier}+Right" = "focus right";
         
-        "${config.xsession.windowManager.i3.config.modifier}+Shift+h" = "move left";
-        "${config.xsession.windowManager.i3.config.modifier}+Shift+j" = "move down";
-        "${config.xsession.windowManager.i3.config.modifier}+Shift+k" = "move up";
-        "${config.xsession.windowManager.i3.config.modifier}+Shift+l" = "move right";
+        "${config.xsession.windowManager.i3.config.modifier}+Shift+Left" = "move left";
+        "${config.xsession.windowManager.i3.config.modifier}+Shift+Down" = "move down";
+        "${config.xsession.windowManager.i3.config.modifier}+Shift+Up" = "move up";
+        "${config.xsession.windowManager.i3.config.modifier}+Shift+Right" = "move right";
         
         # 工作区切换
         "${config.xsession.windowManager.i3.config.modifier}+1" = "workspace number 1";
@@ -85,7 +85,6 @@
         "${config.xsession.windowManager.i3.config.modifier}+7" = "workspace number 7";
         "${config.xsession.windowManager.i3.config.modifier}+8" = "workspace number 8";
         "${config.xsession.windowManager.i3.config.modifier}+9" = "workspace number 9";
-        "${config.xsession.windowManager.i3.config.modifier}+0" = "workspace number 10";
         
         # 移动窗口到工作区
         "${config.xsession.windowManager.i3.config.modifier}+Shift+1" = "move container to workspace number 1";
@@ -97,165 +96,60 @@
         "${config.xsession.windowManager.i3.config.modifier}+Shift+7" = "move container to workspace number 7";
         "${config.xsession.windowManager.i3.config.modifier}+Shift+8" = "move container to workspace number 8";
         "${config.xsession.windowManager.i3.config.modifier}+Shift+9" = "move container to workspace number 9";
-        "${config.xsession.windowManager.i3.config.modifier}+Shift+0" = "move container to workspace number 10";
         
-        # 布局控制
-        "${config.xsession.windowManager.i3.config.modifier}+b" = "split h";
-        "${config.xsession.windowManager.i3.config.modifier}+v" = "split v";
-        "${config.xsession.windowManager.i3.config.modifier}+f" = "fullscreen toggle";
-        "${config.xsession.windowManager.i3.config.modifier}+s" = "layout stacking";
-        "${config.xsession.windowManager.i3.config.modifier}+w" = "layout tabbed";
-        "${config.xsession.windowManager.i3.config.modifier}+e" = "layout toggle split";
-        "${config.xsession.windowManager.i3.config.modifier}+Shift+space" = "floating toggle";
-        
-        # 音量控制
-        "XF86AudioRaiseVolume" = "exec --no-startup-id pactl set-sink-volume @DEFAULT_SINK@ +5%";
-        "XF86AudioLowerVolume" = "exec --no-startup-id pactl set-sink-volume @DEFAULT_SINK@ -5%";
-        "XF86AudioMute" = "exec --no-startup-id pactl set-sink-mute @DEFAULT_SINK@ toggle";
+        # 重新加载/重启 i3
+        "${config.xsession.windowManager.i3.config.modifier}+Shift+c" = "reload";
+        "${config.xsession.windowManager.i3.config.modifier}+Shift+r" = "restart";
         
         # 亮度控制
-        "XF86MonBrightnessUp" = "exec --no-startup-id brightnessctl set +10%";
-        "XF86MonBrightnessDown" = "exec --no-startup-id brightnessctl set 10%-";
+        "XF86MonBrightnessUp" = "exec brightnessctl set +10%";
+        "XF86MonBrightnessDown" = "exec brightnessctl set 10%-";
         
         # 截图
-        "Print" = "exec --no-startup-id flameshot gui";
-        
-        # 其他您需要的键位绑定
+        "Print" = "exec flameshot gui";
+        "${config.xsession.windowManager.i3.config.modifier}+Print" = "exec flameshot full -p ~/Pictures/Screenshots";
       };
       
-      # 颜色设置
-      colors = {
-        background = "#222222";
-        focused = {
-          border = "#4c7899";
-          background = "#285577";
-          text = "#ffffff";
-          indicator = "#2e9ef4";
-          childBorder = "#285577";
-        };
-        unfocused = {
-          border = "#333333";
-          background = "#222222";
-          text = "#888888";
-          indicator = "#292d2e";
-          childBorder = "#222222";
-        };
-        urgent = {
-          border = "#2f343a";
-          background = "#900000";
-          text = "#ffffff";
-          indicator = "#900000";
-          childBorder = "#900000";
-        };
+      # 窗口规则
+      assigns = {
+        "1" = [{ class = "^Firefox$"; }];
+        "2" = [{ class = "^code-oss$"; }];
       };
       
-      # 状态栏设置
+      window.commands = [
+        { command = "border pixel 1"; criteria = { class = "^.*"; }; }
+        { command = "floating enable"; criteria = { class = "^Pavucontrol$"; }; }
+      ];
+      
+      # 栏配置
       bars = [
         {
           position = "bottom";
-          statusCommand = "i3status";
+          statusCommand = "${pkgs.i3status}/bin/i3status";
+          fonts = {
+            names = [ "DejaVu Sans Mono" "FontAwesome 10" ];
+            size = 10.0;
+          };
           colors = {
-            background = "#000000";
-            statusline = "#ffffff";
-            separator = "#666666";
-            
-            focusedWorkspace = {
-              border = "#4c7899";
-              background = "#285577";
-              text = "#ffffff";
-            };
-            activeWorkspace = {
-              border = "#333333";
-              background = "#5f676a";
-              text = "#ffffff";
-            };
-            inactiveWorkspace = {
-              border = "#333333";
-              background = "#222222";
-              text = "#888888";
-            };
-            urgentWorkspace = {
-              border = "#2f343a";
-              background = "#900000";
-              text = "#ffffff";
-            };
-            bindingMode = {
-              border = "#2f343a";
-              background = "#900000";
-              text = "#ffffff";
-            };
+            background = "#282A36";
+            statusline = "#F8F8F2";
+            separator = "#44475A";
+            focusedWorkspace = { background = "#44475A"; border = "#44475A"; text = "#F8F8F2"; };
+            activeWorkspace = { background = "#282A36"; border = "#44475A"; text = "#F8F8F2"; };
+            inactiveWorkspace = { background = "#282A36"; border = "#282A36"; text = "#BFBFBF"; };
+            urgentWorkspace = { background = "#FF5555"; border = "#FF5555"; text = "#F8F8F2"; };
+            bindingMode = { background = "#FF5555"; border = "#FF5555"; text = "#F8F8F2"; };
           };
         }
       ];
-    };
-    
-    # 额外配置
-    extraConfig = ''
-      # 这里可以添加任何无法用结构化配置表示的内容
-      # 例如一些复杂的规则或自定义命令
-    '';
-  };
-  
-  # i3status 配置
-  programs.i3status = {
-    enable = true;
-    general = {
-      colors = true;
-      interval = 5;
-    };
-    
-    modules = {
-      "wireless _first_" = {
-        position = 1;
-        settings = {
-          format_up = "W: (%quality at %essid) %ip";
-          format_down = "W: down";
-        };
-      };
       
-      "ethernet _first_" = {
-        position = 2;
-        settings = {
-          format_up = "E: %ip (%speed)";
-          format_down = "E: down";
-        };
-      };
-      
-      "battery all" = {
-        position = 3;
-        settings = {
-          format = "%status %percentage %remaining";
-        };
-      };
-      
-      "disk /" = {
-        position = 4;
-        settings = {
-          format = "%avail";
-        };
-      };
-      
-      "load" = {
-        position = 5;
-        settings = {
-          format = "%1min";
-        };
-      };
-      
-      "memory" = {
-        position = 6;
-        settings = {
-          format = "%used | %available";
-          threshold_degraded = "1G";
-          format_degraded = "MEMORY < %available";
-        };
-      };
-      
-      "tztime local" = {
-        position = 7;
-        settings = {
-          format = "%Y-%m-%d %H:%M:%S";
-        };
+      # 颜色主题
+      colors = {
+        focused = { background = "#6272A4"; border = "#6272A4"; childBorder = "#6272A4"; indicator = "#6272A4"; text = "#F8F8F2"; };
+        focusedInactive = { background = "#44475A"; border = "#44475A"; childBorder = "#44475A"; indicator = "#44475A"; text = "#F8F8F2"; };
+        unfocused = { background = "#282A36"; border = "#282A36"; childBorder = "#282A36"; indicator = "#282A36"; text = "#BFBFBF"; };
+        urgent = { background = "#FF5555"; border = "#FF5555"; childBorder = "#FF5555"; indicator = "#FF5555"; text = "#F8F8F2"; };
+        placeholder = { background = "#282A36"; border = "#282A36"; childBorder = "#282A36"; indicator = "#282A36"; text = "#F8F8F2"; };
       };
     };
   };
@@ -275,5 +169,30 @@
     flameshot   # 截图工具
     brightnessctl # 亮度控制
     networkmanager_dmenu # 网络管理
+    picom       # 窗口合成器 (透明效果)
   ];
+  
+  # Picom 配置 (窗口透明度)
+  services.picom = {
+    enable = true;
+    
+    # 基本设置
+    backend = "glx";  # 使用 GLX 后端，性能更好
+    vSync = true;     # 启用垂直同步，减少画面撕裂
+    
+    # 透明度设置
+    activeOpacity = 1.0;          # 活动窗口透明度 (1.0 = 完全不透明)
+    inactiveOpacity = 0.9;        # 非活动窗口透明度
+    menuOpacity = 0.95;           # 菜单透明度
+    
+    # 启用透明度规则
+    opacityRules = [
+      # 特定应用的透明度设置
+      "90:class_g = 'Alacritty'",   # 终端透明度为 90%
+      "85:class_g = 'URxvt'",       # URxvt 终端透明度为 85%
+      "95:class_g = 'code-oss'",    # VSCode 透明度为 95%
+      "90:class_g = 'Rofi'",        # Rofi 程序启动器透明度为 90%
+      "100:class_g = 'Firefox'"     # Firefox 完全不透明
+    ];
+  };
 }

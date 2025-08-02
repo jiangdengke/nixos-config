@@ -45,21 +45,21 @@
         format = "[$symbol$branch]($style) ";
       };
       
-      # Git 状态配置
-      git_status = {
-        format = '([\[$all_status$ahead_behind\]]($style) )';
-        style = "bold red";
-        conflicted = "≠";
-        ahead = "↑$count";
-        behind = "↓$count";
-        diverged = "↕";
-        untracked = "?";
-        stashed = "📦";
-        modified = "!";
-        staged = "+";
-        renamed = "»";
-        deleted = "✘";
-      };
+      # Git 状态配置 - 使用双引号避免语法错误
+git_status = {
+  format = "[$all_status$ahead_behind ]($style)";
+  style = "bold red";
+  conflicted = "≠";
+  ahead = "↑$count";
+  behind = "↓$count";
+  diverged = "↕";
+  untracked = "?";
+  stashed = "📦";
+  modified = "!";
+  staged = "+";
+  renamed = "»";
+  deleted = "✘";
+};
       
       # 命令执行时间
       cmd_duration = {
@@ -84,9 +84,9 @@
         display_private = true;
       };
       
-      # Python 环境
+      # Python 环境 - 修复语法错误
       python = {
-        format = '[${symbol}${pyenv_prefix}(${version} )(\($virtualenv\) )]($style)';
+        format = "[$symbol$pyenv_prefix($version )(\\($virtualenv\\) )]($style)";
         symbol = "🐍 ";
         style = "bold green";
       };
