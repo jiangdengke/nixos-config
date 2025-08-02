@@ -10,14 +10,14 @@
     vSync = true;     # 启用垂直同步，减少画面撕裂
     
     # 透明度设置
-    activeOpacity = 1.0;          # 活动窗口透明度 (1.0 = 完全不透明)
+    activeOpacity = 0.9;          # 活动窗口透明度 (1.0 = 完全不透明)
     inactiveOpacity = 0.9;        # 非活动窗口透明度
     menuOpacity = 0.95;           # 菜单透明度
     
     # 启用透明度规则
     opacityRules = [
       # 特定应用的透明度设置
-      "90:class_g = 'Alacritty'"    # 终端透明度为 90%
+      "60:class_g = 'kitty'"    # 终端透明度为 90%
       "85:class_g = 'URxvt'"        # URxvt 终端透明度为 85%
       "95:class_g = 'code-oss'"     # VSCode 透明度为 95%
       "90:class_g = 'Rofi'"         # Rofi 程序启动器透明度为 90%

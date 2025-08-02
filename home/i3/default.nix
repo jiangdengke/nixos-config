@@ -43,12 +43,6 @@
           always = false;
           notification = false;
         }
-        # 壁纸设置
-        {
-          command = "feh --bg-fill ~/Pictures/wallpaper.jpg";
-          always = true;
-          notification = false;
-        }
         # 屏幕亮度调整
         {
           command = "brightnessctl set 70%";
