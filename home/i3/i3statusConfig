@@ -1,0 +1,50 @@
+# i3status configuration file.
+# see "man i3status" for documentation.
+
+# 通常将这个文件放在 ~/.config/i3status/config 位置
+# 或者在 i3 配置文件中指定其他路径
+
+general {
+        colors = true
+        interval = 5
+}
+
+order += "wireless _first_"
+order += "ethernet _first_"
+order += "battery all"
+order += "disk /"
+order += "load"
+order += "memory"
+order += "tztime local"
+
+wireless _first_ {
+        format_up = "W: (%quality at %essid) %ip"
+        format_down = "W: down"
+}
+
+ethernet _first_ {
+        format_up = "E: %ip (%speed)"
+        format_down = "E: down"
+}
+
+battery all {
+        format = "%status %percentage %remaining"
+}
+
+disk "/" {
+        format = "%avail"
+}
+
+load {
+        format = "%1min"
+}
+
+memory {
+        format = "%used | %available"
+        threshold_degraded = "1G"
+        format_degraded = "MEMORY < %available"
+}
+
+tztime local {
+        format = "%Y-%m-%d %H:%M:%S"
+}
