@@ -10,7 +10,7 @@
     ../modules/i18n.nix
     ../modules/networking.nix
     ../modules/packages.nix
-    ../modules/dae.nix
+    ../modules/dae
     ../modules/users.nix
   ];
 
