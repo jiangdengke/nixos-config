@@ -7,47 +7,52 @@
     
     # 常规设置
     general = {
+      output_format = "i3bar";
       colors = true;
-      color_good = "#50FA7B";
-      color_degraded = "#F1FA8C";
-      color_bad = "#FF5555";
       interval = 5;
     };
     
-    # 模块设置
+    # 直接使用模块位置而不是 order 列表
     modules = {
-      "disk /" = {
-        position = 1;
-        settings = {
-          format = "💾 %avail";
-        };
-      };
-      
       "cpu_usage" = {
-        position = 2;
+        position = 1;  # 第一个位置
         settings = {
           format = "CPU: %usage";
         };
       };
       
-      "load" = {
-        position = 5;
+      "memory" = {
+        position = 2;  # 第二个位置
         settings = {
-          format = "%1min";
+          format = "RAM: %used | %available";
         };
       };
       
-      "memory" = {
-        position = 6;
+      "disk /" = {
+        position = 3;  # 第三个位置
         settings = {
-          format = "%used | %available";
-          threshold_degraded = "1G";
-          format_degraded = "MEMORY < %available";
+          format = "Disk: %avail";
+        };
+      };
+      
+      "wireless _first_" = {
+        position = 4;  # 第四个位置
+        settings = {
+          format_up = "WiFi: %essid %quality";
+          format_down = "WiFi: down";
+        };
+      };
+      
+      "battery 0" = {
+        position = 5;  # 第五个位置
+        settings = {
+          format = "Bat: %status %percentage";
+          last_full_capacity = true;
         };
       };
       
       "tztime local" = {
-        position = 7;
+        position = 6;  # 第六个位置
         settings = {
           format = "%Y-%m-%d %H:%M:%S";
         };

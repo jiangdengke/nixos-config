@@ -20,11 +20,11 @@
       modifier = "Mod4";
       
       # 终端
-      terminal = "alacritty";
+      terminal = "kitty";
       
       # 窗口样式
       gaps = {
-        inner = 10;
+        inner = 5;
         outer = 5;
         smartGaps = true;
       };
@@ -172,27 +172,4 @@
     picom       # 窗口合成器 (透明效果)
   ];
   
-  # Picom 配置 (窗口透明度)
-  services.picom = {
-    enable = true;
-    
-    # 基本设置
-    backend = "glx";  # 使用 GLX 后端，性能更好
-    vSync = true;     # 启用垂直同步，减少画面撕裂
-    
-    # 透明度设置
-    activeOpacity = 1.0;          # 活动窗口透明度 (1.0 = 完全不透明)
-    inactiveOpacity = 0.9;        # 非活动窗口透明度
-    menuOpacity = 0.95;           # 菜单透明度
-    
-    # 启用透明度规则
-    opacityRules = [
-      # 特定应用的透明度设置
-      "90:class_g = 'Alacritty'",   # 终端透明度为 90%
-      "85:class_g = 'URxvt'",       # URxvt 终端透明度为 85%
-      "95:class_g = 'code-oss'",    # VSCode 透明度为 95%
-      "90:class_g = 'Rofi'",        # Rofi 程序启动器透明度为 90%
-      "100:class_g = 'Firefox'"     # Firefox 完全不透明
-    ];
-  };
 }

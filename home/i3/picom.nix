@@ -1,7 +1,7 @@
 { config, pkgs, ... }:
 
 {
-  # Picom 配置
+  # Picom 配置 (窗口透明度)
   services.picom = {
     enable = true;
     
@@ -17,10 +17,10 @@
     # 启用透明度规则
     opacityRules = [
       # 特定应用的透明度设置
-      "90:class_g = 'Alacritty'",   # 终端透明度为 90%
-      "85:class_g = 'URxvt'",       # URxvt 终端透明度为 85%
-      "95:class_g = 'code-oss'",    # VSCode 透明度为 95%
-      "90:class_g = 'Rofi'",        # Rofi 程序启动器透明度为 90%
+      "90:class_g = 'Alacritty'"    # 终端透明度为 90%
+      "85:class_g = 'URxvt'"        # URxvt 终端透明度为 85%
+      "95:class_g = 'code-oss'"     # VSCode 透明度为 95%
+      "90:class_g = 'Rofi'"         # Rofi 程序启动器透明度为 90%
       "100:class_g = 'Firefox'"     # Firefox 完全不透明
     ];
     
@@ -41,42 +41,28 @@
       "_GTK_FRAME_EXTENTS@:c"
     ];
     
-    # 模糊效果 (需要 GLX 后端)
-    blur = true;
-    blurExclude = [
-      "window_type = 'dock'"
-      "window_type = 'desktop'"
-      "_GTK_FRAME_EXTENTS@:c"
-    ];
-    
-    # 其他设置
+    # 高级设置 - 使用 settings 字段
     settings = {
-      blur-method = "dual_kawase";
-      blur-strength = 5;
-      corner-radius = 10;  # 窗口圆角
+      # 模糊效果
+      blur = {
+        method = "dual_kawase";
+        strength = 5;
+      };
+      
+      # 窗口圆角
+      corner-radius = 10;
       
       # 高级透明度设置
       frame-opacity = 0.9;         # 窗口边框透明度
       inactive-opacity-override = false;
       detect-client-opacity = true;
       
-      # 性能设置
-      mark-wmwin-focused = true;
-      mark-ovredir-focused = true;
-      detect-rounded-corners = true;
-      detect-transient = true;
-      glx-no-stencil = true;
-      glx-no-rebind-pixmap = true;
-      use-damage = true;
-      
-      # 窗口类型设置
-      wintypes = {
-        tooltip = { fade = true; shadow = true; opacity = 0.9; focus = true; };
-        dock = { shadow = false; clip-shadow-above = true; };
-        dnd = { shadow = false; };
-        popup_menu = { opacity = 0.95; };
-        dropdown_menu = { opacity = 0.95; };
-      };
+      # 排除特定窗口类型的模糊效果
+      blur-exclude = [
+        "window_type = 'dock'"
+        "window_type = 'desktop'"
+        "_GTK_FRAME_EXTENTS@:c"
+      ];
     };
   };
 }
