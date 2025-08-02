@@ -7,6 +7,7 @@
 #    ./fcitx5       # 中文输入法配置
     ./programs
     ./zsh
+    ./kitty
   ];
 
   # 用户基本信息

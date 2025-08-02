@@ -54,6 +54,12 @@
           always = false;
           notification = false;
         }
+        
+        {
+          command = "${pkgs.variety}/bin/variety";
+          notification = false;
+          always = false;  # 只在 i3 首次启动时运行，而非每次重载配置
+        }
       ];
       
       # 快捷键设置

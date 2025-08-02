@@ -12,6 +12,11 @@
     ];
   };
   
+  environment.variables = {
+    GTK_IM_MODULE = "fcitx";
+    QT_IM_MODULE = "fcitx";
+    XMODIFIERS = "@im=fcitx";
+  };
   # 最小化配置文件
   home-manager.users.jdk = { ... }: {
     xdg.configFile = {
