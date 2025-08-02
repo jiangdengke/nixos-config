@@ -4,8 +4,9 @@
   # 导入所有子模块
   imports = [
     ./i3           # i3wm 窗口管理器配置
-    ./fcitx5       # 中文输入法配置
+#    ./fcitx5       # 中文输入法配置
     ./programs
+    ./zsh
   ];
 
   # 用户基本信息
