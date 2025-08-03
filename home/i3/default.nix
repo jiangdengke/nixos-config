@@ -96,11 +96,11 @@ home.file.".local/bin/lock-screen.sh" = {
     notification = false;
   }
     # 自动启动fcitx5
- {
-          command = "${pkgs.fcitx5}/bin/fcitx5 -d"; # 使用 -d 选项在后台运行
-          always = false; # false 表示仅在 i3 首次启动时运行，不是每次重新加载时
-          notification = false; # 不显示通知
-        }
+     {
+    command = "$HOME/.local/bin/fcitx5-toggle.sh";
+    always = false;
+    notification = false;
+  }
        # 自动启动flameshot
         {
           command = "${pkgs.flameshot}/bin/flameshot";

@@ -14,5 +14,9 @@
   home.file = {
   ".config/fcitx5/conf/classicui.conf".source = ./classicui.conf;
   ".local/share/fcitx5/themes/Nord/theme.conf".text = import ./theme.nix;
+  ".local/bin/fcitx5-toggle.sh" = {
+    source = ./fcitx5-toggle.sh;
+    executable = true;
+  };
 };
 }
