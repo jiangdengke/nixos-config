@@ -4,7 +4,6 @@
   # 系统软件包
   environment.systemPackages = with pkgs; [
     # 基础工具
-    vim
     wget
     git
     neovim
@@ -33,5 +32,6 @@ kdePackages.dolphin
     wechat-uos
     # dev
 jetbrains.idea-ultimate
+    vscode
   ];
 }

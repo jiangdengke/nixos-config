@@ -21,7 +21,7 @@
   };
   
   nixpkgs.config.allowUnfree = true;
-  environment.variables.EDITOR = "neovim";
+  environment.variables.EDITOR = "nvim";
   
   # 时区设置
   time.timeZone = "Asia/Shanghai";

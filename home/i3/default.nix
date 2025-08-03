@@ -95,6 +95,13 @@ home.file.".local/bin/lock-screen.sh" = {
     always = true;
     notification = false;
   }
+    # 自动启动fcitx5
+ {
+          command = "${pkgs.fcitx5}/bin/fcitx5 -d"; # 使用 -d 选项在后台运行
+          always = false; # false 表示仅在 i3 首次启动时运行，不是每次重新加载时
+          notification = false; # 不显示通知
+        }
+       # 自动启动flameshot
         {
           command = "${pkgs.flameshot}/bin/flameshot";
           notification = false;
@@ -166,10 +173,9 @@ home.file.".local/bin/lock-screen.sh" = {
         # 重新加载/重启 i3
         "${config.xsession.windowManager.i3.config.modifier}+Shift+c" = "reload";
         "${config.xsession.windowManager.i3.config.modifier}+Shift+r" = "restart";
+        # rofi
+        "${config.xsession.windowManager.i3.config.modifier}+d" = "exec ${pkgs.bash}/bin/bash $HOME/.local/bin/toggle-rofi";
 
-        # 绑定按键到脚本(rofi)
-# 绑定按键到脚本(rofi)
-"${config.xsession.windowManager.i3.config.modifier}+d" = "exec rofi -show drun -theme ~/.config/rofi/rofikeyhint.rasi";
         # 亮度控制
         "XF86MonBrightnessUp" = "exec brightnessctl set +10%";
         "XF86MonBrightnessDown" = "exec brightnessctl set 10%-";
