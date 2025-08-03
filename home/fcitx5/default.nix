@@ -13,10 +13,12 @@
   };
   home.file = {
   ".config/fcitx5/conf/classicui.conf".source = ./classicui.conf;
-  ".local/share/fcitx5/themes/Nord/theme.conf".text = import ./theme.nix;
+  ".local/share/fcitx5/themes/Nord/theme.conf".text = builtins.readFile ./theme.conf; # 直接读取文件内容
+  # 或者
+  # ".local/share/fcitx5/themes/Nord/theme.conf".source = ./theme.conf;
   ".local/bin/fcitx5-toggle.sh" = {
     source = ./fcitx5-toggle.sh;
     executable = true;
   };
-};
+ };
 }
