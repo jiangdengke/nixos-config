@@ -65,7 +65,7 @@ home.file.".local/bin/lock-screen.sh" = {
       modifier = "Mod4";
       
       # 终端
-      terminal = "kitty";
+      terminal = "alacritty";
       
       # 窗口样式
       gaps = {

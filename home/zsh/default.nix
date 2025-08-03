@@ -118,6 +118,7 @@
         "z"
       ];
       # 不设置主题，因为使用 Starship
+      theme = "robbyrussell";  # 一个单行提示符主题
     };
     
     # 环境变量
