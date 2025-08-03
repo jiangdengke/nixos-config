@@ -1,0 +1,83 @@
+/*
+ * 自定义 Rofi 主题，左侧显示应用图标
+ */
+
+configuration {
+  display-drun: "应用";
+  display-window: "窗口";
+  drun-display-format: "{name}";
+  font: "Source Han Sans CN 12";
+  modi: "window,run,drun";
+  show-icons: true;
+}
+
+* {
+  bg: #282c34;
+  bg-alt: #444b58;
+  fg: #FFFFFF;
+  fg-alt: #787c99;
+  
+  border: 0;
+  margin: 0;
+  padding: 0;
+  spacing: 0;
+}
+
+window {
+  width: 45%;
+  background-color: @bg;
+}
+
+element {
+  padding: 8 12;
+  background-color: transparent;
+  text-color: @fg-alt;
+}
+
+element selected {
+  text-color: @fg;
+  background-color: @bg-alt;
+}
+
+element-text {
+  background-color: transparent;
+  text-color: inherit;
+  vertical-align: 0.5;
+}
+
+element-icon {
+  size: 32;           /* 图标大小 */
+  padding: 0 10 0 0;  /* 右侧留出空间，与文本分隔 */
+  background-color: transparent;
+}
+
+entry {
+  padding: 12;
+  background-color: @bg-alt;
+  text-color: @fg;
+}
+
+inputbar {
+  children: [entry];
+  background-color: @bg;
+}
+
+listview {
+  background-color: @bg;
+  columns: 1;         /* 一列显示 */
+  lines: 10;          /* 显示10个条目 */
+}
+
+mainbox {
+  children: [inputbar, listview];
+  background-color: @bg;
+}
+
+/* 隐藏滚动条 */
+scrollbar {
+  width: 0;
+  handle-width: 0;
+  background-color: @bg-alt;
+  handle-color: @fg-alt;
+  padding: 0;
+}

@@ -7,9 +7,9 @@
 #    ./fcitx5       # 中文输入法配置
     ./programs
     ./zsh
-    ./kitty
     ./fastfetch
     ./alacritty
+    ./rofi
   ];
 
   # 用户基本信息

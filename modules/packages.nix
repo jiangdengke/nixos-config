@@ -17,7 +17,6 @@
     rofi
     variety
     picom
-    kitty
     lxappearance
     
     vlc

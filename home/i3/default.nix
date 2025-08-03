@@ -167,7 +167,9 @@ home.file.".local/bin/lock-screen.sh" = {
         # 重新加载/重启 i3
         "${config.xsession.windowManager.i3.config.modifier}+Shift+c" = "reload";
         "${config.xsession.windowManager.i3.config.modifier}+Shift+r" = "restart";
-        
+
+        # 绑定按键到脚本(rofi)
+        "${config.xsession.windowManager.i3.config.modifier}+d" = "exec toggle-rofi";
         # 亮度控制
         "XF86MonBrightnessUp" = "exec brightnessctl set +10%";
         "XF86MonBrightnessDown" = "exec brightnessctl set 10%-";
