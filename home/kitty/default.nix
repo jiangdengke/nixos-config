@@ -3,26 +3,28 @@
 {
   programs.kitty = {
     enable = true;
+    package = pkgs.kitty;
     
-    # 基础设置
+    # 字体设置
+    font = {
+      name = "JetBrainsMono Nerd Font";
+      size = 12;
+      # 无需指定包，我们将在 home.packages 中安装
+    };
+    
+    # 主题设置 - Tokyo Night
+    # 可以使用 themeFile 来使用预设主题，这里我们使用自定义设置
     settings = {
       # 窗口设置
       hide_window_decorations = "yes";
-      window_padding_width = "10";
+      window_padding_width = 10;
       placement_strategy = "center";
       resize_in_steps = "yes";
       
       # 终端滚动和历史
       scrollback_lines = 10000;
       scrollback_pager = "less --chop-long-lines --RAW-CONTROL-CHARS +INPUT_LINE_NUMBER";
-      wheel_scroll_multiplier = "5.0";
-      
-      # 字体设置 - 选择支持中文的字体
-      font_family = "JetBrainsMono Nerd Font";
-      bold_font = "auto";
-      italic_font = "auto";
-      bold_italic_font = "auto";
-      font_size = 12;
+      wheel_scroll_multiplier = 5.0;
       
       # 为中文选择额外的字体
       symbol_map = "U+4E00-U+9FFF Noto Sans CJK SC";  # 中文字符范围
@@ -33,15 +35,15 @@
       
       # 终端铃声
       enable_audio_bell = "no";
-      visual_bell_duration = "0.1";
+      visual_bell_duration = 0.1;
       window_alert_on_bell = "yes";
       
       # 光标设置
       cursor_shape = "beam";
-      cursor_blink_interval = "0.5";
+      cursor_blink_interval = 0.5;
       
       # 鼠标设置
-      mouse_hide_wait = "3.0";
+      mouse_hide_wait = 3.0;
       copy_on_select = "clipboard";
       
       # 性能设置
@@ -55,7 +57,7 @@
       tab_powerline_style = "slanted";
       active_tab_font_style = "bold";
       
-      # 配色方案 - 使用流行的 Tokyo Night
+      # Tokyo Night 主题配色方案
       foreground = "#c0caf5";
       background = "#1a1b26";
       selection_foreground = "#1a1b26";
@@ -92,6 +94,11 @@
       # 白
       color7 = "#a9b1d6";
       color15 = "#c0caf5";
+      
+      # 中文输入相关
+      allow_remote_control = "yes";
+      listen_on = "unix:/tmp/kitty";
+      term = "xterm-256color";
     };
     
     # 自定义快捷键
@@ -115,35 +122,68 @@
       "ctrl+shift+f" = "show_scrollback";
     };
     
-    # 额外配置
+    # 环境变量 - 设置中文输入相关环境变量
+    environment = {
+      "GLFW_IM_MODULE" = "ibus";
+      "GTK_IM_MODULE" = "fcitx5";
+      "QT_IM_MODULE" = "fcitx5";
+      "XMODIFIERS" = "@im=fcitx5";
+    };
+    
+    # Shell 集成
+    shellIntegration = {
+      enableBashIntegration = true;
+      enableZshIntegration = true;
+      enableFishIntegration = true;
+      mode = "enabled"; # 启用全功能模式
+    };
+    
+    # Git 集成
+    enableGitIntegration = true;
+    
+    # 附加配置 - 任何其他未被上述选项覆盖的配置
     extraConfig = ''
-      # 允许符号链接支持 (对某些输入法可能有帮助)
-      allow_remote_control yes
-      listen_on unix:/tmp/kitty
-      
-      # Shell 集成
-      shell_integration enabled
-      
       # 改善中文显示和输入
-      term xterm-256color
+      adjust_line_height 0
+      adjust_column_width 0
+      box_drawing_scale 0.001, 1, 1.5, 2
     '';
   };
   
-  # 确保中文输入法在终端中工作
-  home.sessionVariables = {
-    GLFW_IM_MODULE = "ibus"; # 对某些系统可能有帮助
-    GTK_IM_MODULE = "fcitx5"; # 如果使用 fcitx5
-    QT_IM_MODULE = "fcitx5";  # 如果使用 fcitx5
-    XMODIFIERS = "@im=fcitx5"; # 如果使用 fcitx5
-    # 如果使用 ibus，请相应修改
-  };
-  
-  # 安装需要的字体
-  fonts.fontconfig.enable = true;
+  # 安装必要的字体
   home.packages = with pkgs; [
-    (nerdfonts.override { fonts = [ "JetBrainsMono" ]; })
+    nerd-fonts.jetbrains-mono
     noto-fonts
-    noto-fonts-cjk
+    noto-fonts-cjk-sans
     noto-fonts-emoji
   ];
+  
+  # 创建优化的启动脚本
+  home.file.".local/bin/kitty-fcitx5.sh" = {
+    executable = true;
+    text = ''
+      #!/bin/sh
+      export GLFW_IM_MODULE=ibus
+      export GTK_IM_MODULE=fcitx5
+      export QT_IM_MODULE=fcitx5
+      export XMODIFIERS=@im=fcitx5
+      exec kitty "$@"
+    '';
+  };
+  
+  # 创建桌面快捷方式
+  xdg.desktopEntries.kitty-fcitx5 = {
+    name = "Kitty Terminal (中文优化)";
+    genericName = "Terminal Emulator";
+    comment = "A fast, feature-rich, GPU based terminal with Chinese input support";
+    exec = "${config.home.homeDirectory}/.local/bin/kitty-fcitx5.sh";
+    icon = "kitty";
+    categories = [ "System" "TerminalEmulator" ];
+    terminal = false;
+  };
+  
+  # 配置 i3 快捷键以使用优化的启动脚本
+  xsession.windowManager.i3.config.keybindings = lib.mkOptionDefault {
+    "${config.xsession.windowManager.i3.config.modifier}+Return" = "exec --no-startup-id ${config.home.homeDirectory}/.local/bin/kitty-fcitx5.sh";
+  };
 }

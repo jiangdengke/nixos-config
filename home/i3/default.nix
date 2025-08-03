@@ -34,7 +34,12 @@
         border = 1;
         titlebar = false;
       };
-      
+      bars = [
+        {
+          position = "top";  # 将状态栏位置设置为顶部
+        }
+      ];
+       
       # 自动启动应用
       startup = [
         {

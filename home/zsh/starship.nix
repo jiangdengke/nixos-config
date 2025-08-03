@@ -4,11 +4,11 @@
   # Starship 配置
   programs.starship = {
     enable = true;
+    enableZshIntegration = true;
     
     # Starship 设置
     settings = {
       # 添加空行
-      add_newline = true;
       
       # 全局设置
       format = "$all$fill$cmd_duration$line_break$character";
