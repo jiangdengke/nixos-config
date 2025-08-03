@@ -8,6 +8,7 @@
     ./programs
     ./zsh
     ./kitty
+    ./fastfetch
   ];
 
   # 用户基本信息
@@ -20,8 +21,8 @@
 
   # 基础环境变量
   home.sessionVariables = {
-    EDITOR = "vim";
-    VISUAL = "vim";
+    EDITOR = "nvim";
+    VISUAL = "nvim";
     LANG = "zh_CN.UTF-8";
     LC_CTYPE = "zh_CN.UTF-8";
     PATH = "$PATH:$HOME/bin:$HOME/.local/bin:$HOME/go/bin";

@@ -20,6 +20,7 @@
     kitty
     lxappearance
     
+    vlc
     # 网络工具
     networkmanager
     networkmanagerapplet
@@ -30,5 +31,7 @@
     # 通讯应用
     qq
     wechat-uos
+    # dev
+jetbrains.idea-ultimate
   ];
 }

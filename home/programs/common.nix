@@ -50,18 +50,6 @@
     # bat 是 cat 命令的增强版本，带有语法高亮
     bat = {
       enable = true;
-      config = {
-        pager = "less -FR";         # 使用 less 作为分页器，保持颜色和允许控制字符
-        theme = "catppuccin-mocha"; # 使用 Catppuccin Mocha 主题
-      };
-      themes = {
-        # 配置 Catppuccin Mocha 主题
-        # https://raw.githubusercontent.com/catppuccin/bat/main/Catppuccin-mocha.tmTheme
-        catppuccin-mocha = {
-          src = catppuccin-bat;         # 使用外部引入的 catppuccin-bat 源
-          file = "Catppuccin-mocha.tmTheme"; # 指定主题文件
-        };
-      };
     };
 
     btop.enable = true;    # 启用 btop，是 htop 和 nmon 的现代替代品

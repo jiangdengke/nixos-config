@@ -1,42 +1,52 @@
-{ config, pkgs, ... }:
+{ config, lib, pkgs, ... }:
 
 {
-  # i3status 配置
   programs.i3status = {
     enable = true;
     
-    # 常规设置
     general = {
-      output_format = "i3bar";
       colors = true;
       interval = 5;
     };
     
-    # 直接使用模块位置而不是 order 列表
     modules = {
+      # First disable ALL default modules to avoid duplicates
+      "ipv6".enable = false;
+      "disk /".enable = true;
+      "load".enable = false;
+      "memory".enable = true;
+      "cpu_temperature 0".enable = false;
+      "ethernet _first_".enable = false;
+      "wireless _first_".enable = true;
+      "battery all".enable = false;
+      "tztime local".enable = true;
+      
+      # Now add ONLY the modules you want, with positions
       "cpu_usage" = {
-        position = 1;  # 第一个位置
+        position = 1;
         settings = {
           format = "CPU: %usage";
         };
       };
       
       "memory" = {
-        position = 2;  # 第二个位置
+        position = 2;
         settings = {
           format = "RAM: %used | %available";
+          threshold_degraded = "1G";
+          format_degraded = "MEMORY < %available";
         };
       };
       
       "disk /" = {
-        position = 3;  # 第三个位置
+        position = 3;
         settings = {
           format = "Disk: %avail";
         };
       };
       
       "wireless _first_" = {
-        position = 4;  # 第四个位置
+        position = 4;
         settings = {
           format_up = "WiFi: %essid %quality";
           format_down = "WiFi: down";
@@ -44,7 +54,7 @@
       };
       
       "battery 0" = {
-        position = 5;  # 第五个位置
+        position = 5;
         settings = {
           format = "Bat: %status %percentage";
           last_full_capacity = true;
@@ -52,7 +62,7 @@
       };
       
       "tztime local" = {
-        position = 6;  # 第六个位置
+        position = 6;
         settings = {
           format = "%Y-%m-%d %H:%M:%S";
         };

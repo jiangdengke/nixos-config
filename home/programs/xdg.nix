@@ -1,4 +1,4 @@
-{config, ...}: let
+{config,pkgs, ...}: let
   browser = ["firefox.desktop"];
 
   # XDG MIME types
@@ -17,9 +17,9 @@
     "x-scheme-handler/https" = browser;
     "x-scheme-handler/unknown" = browser;
 
-    "audio/*" = ["mpv.desktop"];
-    "video/*" = ["mpv.desktop"];
-    "image/*" = ["imv.desktop"];
+    "audio/*" = ["vlc.desktop"];
+    "video/*" = ["vlc.desktop"];
+    "image/*" = ["feh.desktop"];
     "application/json" = browser;
     "application/pdf" = ["org.pwmt.zathura.desktop.desktop"];
     "x-scheme-handler/discord" = ["discordcanary.desktop"];

@@ -7,6 +7,51 @@
     ./picom.nix
   ];
   
+# 创建一个漂亮的锁屏脚本
+home.file.".local/bin/lock-screen.sh" = {
+  executable = true;
+  text = ''
+    #!/bin/sh
+    
+    # 截取屏幕并应用模糊效果
+    TMPBG="/tmp/screen.png"
+    scrot "$TMPBG"
+    convert "$TMPBG" -scale 10% -scale 1000% "$TMPBG"
+    
+    # 锁屏
+    i3lock-color \
+      --image="$TMPBG" \
+      --ring-width=20 \
+      --inside-color=00000000 \
+      --ring-color=ffffffcc \
+      --insidever-color=00000000 \
+      --ringver-color=6272a4ff \
+      --insidewrong-color=00000000 \
+      --ringwrong-color=ff5555ff \
+      --line-color=00000000 \
+      --separator-color=00000000 \
+      --keyhl-color=50fa7bff \
+      --bshl-color=ff5555ff \
+      --verif-color=6272a4ff \
+      --wrong-color=ff5555ff \
+      --layout-color=ffffffff \
+      --time-color=ffffffff \
+      --date-color=ffffffff \
+      --greeter-color=ffffffff \
+      --verif-text="验证中..." \
+      --wrong-text="验证失败!" \
+      --noinput-text="没有输入" \
+      --lock-text="锁定中..." \
+      --lockfailed-text="锁定失败！" \
+      --time-str="%H:%M:%S" \
+      --date-str="%Y-%m-%d 星期%a" \
+      --greeter-text="欢迎回来，jdk" \
+      -f
+    
+    # 删除临时文件
+    rm "$TMPBG"
+  '';
+};
   # i3 窗口管理器配置
   xsession.windowManager.i3 = {
     enable = true;
@@ -37,11 +82,19 @@
       bars = [
         {
           position = "top";  # 将状态栏位置设置为顶部
+          statusCommand = "${pkgs.i3status}/bin/i3status";  # 添加这一行
         }
+
       ];
        
       # 自动启动应用
       startup = [
+  # 禁用屏幕保护和屏幕熄灭
+  {
+    command = "${pkgs.xorg.xset}/bin/xset s off -dpms";
+    always = true;
+    notification = false;
+  }
         {
           command = "${pkgs.flameshot}/bin/flameshot";
           notification = false;
@@ -107,6 +160,10 @@
         "${config.xsession.windowManager.i3.config.modifier}+Shift+8" = "move container to workspace number 8";
         "${config.xsession.windowManager.i3.config.modifier}+Shift+9" = "move container to workspace number 9";
         
+        # 添加锁屏快捷键 (Mod+l)
+
+        "${config.xsession.windowManager.i3.config.modifier}+Shift+l" = "exec --no-startup-id $HOME/.local/bin/lock-screen.sh";
+
         # 重新加载/重启 i3
         "${config.xsession.windowManager.i3.config.modifier}+Shift+c" = "reload";
         "${config.xsession.windowManager.i3.config.modifier}+Shift+r" = "restart";
@@ -152,6 +209,10 @@
 
   # 确保需要的软件包已安装
   home.packages = with pkgs; [
+      i3lock-color
+  xautolock
+  scrot  # 用于截图
+  imagemagick  # 用于处理图片
     i3status
     feh         # 设置壁纸
     dunst       # 通知守护程序
