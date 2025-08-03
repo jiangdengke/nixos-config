@@ -168,7 +168,8 @@ home.file.".local/bin/lock-screen.sh" = {
         "${config.xsession.windowManager.i3.config.modifier}+Shift+r" = "restart";
 
         # 绑定按键到脚本(rofi)
-        "${config.xsession.windowManager.i3.config.modifier}+d" = "exec rofi";
+# 绑定按键到脚本(rofi)
+"${config.xsession.windowManager.i3.config.modifier}+d" = "exec rofi -show drun -theme ~/.config/rofi/rofikeyhint.rasi";
         # 亮度控制
         "XF86MonBrightnessUp" = "exec brightnessctl set +10%";
         "XF86MonBrightnessDown" = "exec brightnessctl set 10%-";
