@@ -1,8 +1,10 @@
-{config,pkgs, ...}: let
+{config, ...}: let
   browser = ["firefox.desktop"];
+  fileManager = ["org.kde.dolphin.desktop"];  # Dolphin 的正确桌面文件名称
 
   # XDG MIME types
   associations = {
+    # 浏览器相关的文件类型关联
     "application/x-extension-htm" = browser;
     "application/x-extension-html" = browser;
     "application/x-extension-shtml" = browser;
@@ -17,9 +19,14 @@
     "x-scheme-handler/https" = browser;
     "x-scheme-handler/unknown" = browser;
 
-    "audio/*" = ["vlc.desktop"];
-    "video/*" = ["vlc.desktop"];
-    "image/*" = ["feh.desktop"];
+    # 多媒体文件类型关联 - 已修改为使用VLC和feh
+    "audio/*" = ["vlc.desktop"];           # 所有音频文件使用VLC打开
+    "video/*" = ["vlc.desktop"];           # 所有视频文件使用VLC打开
+    "image/*" = ["feh.desktop"];           # 所有图片文件使用feh打开
+       # 文件管理器关联 - Dolphin
+    "inode/directory" = fileManager;       # 目录使用Dolphin打开
+    "application/x-gnome-saved-search" = fileManager; 
+    # 其他文件类型关联
     "application/json" = browser;
     "application/pdf" = ["org.pwmt.zathura.desktop.desktop"];
     "x-scheme-handler/discord" = ["discordcanary.desktop"];

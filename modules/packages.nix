@@ -21,6 +21,7 @@
     lxappearance
     
     vlc
+kdePackages.dolphin
     # 网络工具
     networkmanager
     networkmanagerapplet

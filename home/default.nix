@@ -9,6 +9,7 @@
     ./zsh
     ./kitty
     ./fastfetch
+    ./alacritty
   ];
 
   # 用户基本信息
