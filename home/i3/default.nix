@@ -125,7 +125,6 @@ home.file.".local/bin/lock-screen.sh" = {
         # 基本操作
         "${config.xsession.windowManager.i3.config.modifier}+Return" = "exec ${config.xsession.windowManager.i3.config.terminal}";
         "${config.xsession.windowManager.i3.config.modifier}+Shift+q" = "kill";
-        "${config.xsession.windowManager.i3.config.modifier}+d" = "exec rofi -show drun";
         # 使用 vim 风格的 hjkl 键在窗口之间导航
         "${config.xsession.windowManager.i3.config.modifier}+h" = "focus left";
         "${config.xsession.windowManager.i3.config.modifier}+j" = "focus down";
@@ -169,7 +168,7 @@ home.file.".local/bin/lock-screen.sh" = {
         "${config.xsession.windowManager.i3.config.modifier}+Shift+r" = "restart";
 
         # 绑定按键到脚本(rofi)
-        "${config.xsession.windowManager.i3.config.modifier}+d" = "exec toggle-rofi";
+        "${config.xsession.windowManager.i3.config.modifier}+d" = "exec rofi";
         # 亮度控制
         "XF86MonBrightnessUp" = "exec brightnessctl set +10%";
         "XF86MonBrightnessDown" = "exec brightnessctl set 10%-";
