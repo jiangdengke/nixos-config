@@ -3,7 +3,8 @@
 {
   # 导入 i3status 配置
   imports = [
-    ./i3status.nix
+    ./polybar.nix
+   # ./i3status.nix
     ./picom.nix
   ];
   
@@ -79,16 +80,15 @@ home.file.".local/bin/lock-screen.sh" = {
         border = 1;
         titlebar = false;
       };
-      bars = [
-        {
-          position = "top";  # 将状态栏位置设置为顶部
-          statusCommand = "${pkgs.i3blocks}/bin/i3blocks";  # 添加这一行
-        }
-
-      ];
+      bars = [];
        
       # 自动启动应用
       startup = [
+      {
+      command = "systemctl --user restart polybar";
+      always = true;
+      notification = false;
+    }
   # 禁用屏幕保护和屏幕熄灭
   {
     command = "${pkgs.xorg.xset}/bin/xset s off -dpms";
