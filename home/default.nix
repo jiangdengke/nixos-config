@@ -10,6 +10,7 @@
     ./fastfetch
     ./alacritty
     ./rofi
+    ./yazi
   ];
 
   # 用户基本信息

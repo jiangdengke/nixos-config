@@ -20,6 +20,7 @@
     
     vlc
 kdePackages.dolphin
+kdePackages.dolphin-plugins
     # 网络工具
     networkmanager
     networkmanagerapplet

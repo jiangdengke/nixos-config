@@ -1,5 +1,5 @@
 subscription {
-  "https://sst.julvpi.de/share/sub/%E6%82%A0%E5%85%94?token=Qsj6YGDPHzdUFzXUjdZj"
+"https://jsjc.cfd/api/v1/client/subscribe?token=25e812edbe2366a423868f8fd79e736b"
 }
 node {
 }
