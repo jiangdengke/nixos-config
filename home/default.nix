@@ -11,6 +11,7 @@
     ./alacritty
     ./rofi
     ./yazi
+    ./nvim
   ];
 
   # 用户基本信息
@@ -19,6 +20,7 @@
   
   # 启用 home-manager
   programs.home-manager.enable = true;
+
 
 
   # 基础环境变量
