@@ -6,7 +6,6 @@
     # 基础工具
     wget
     git
-    neovim
     xclip
     
     # 桌面环境

@@ -17,7 +17,6 @@
   # 核心系统配置
   nix.settings = {
     experimental-features = [ "nix-command" "flakes" ];
-    substituters = ["https://mirrors.cernet.edu.cn/nix-channels/store"];
   };
   home-manager.backupFileExtension = "backup";
   # 使用libinput禁用触控板
