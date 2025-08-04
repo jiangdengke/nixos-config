@@ -1,106 +1,258 @@
-{ config, pkgs, ... }:
-
 {
-  programs.yazi.theme = {
-    # 颜色配置
-    color = {
-      # 主要元素颜色
-      foreground = { active = "#E4E4E4"; inactive = "#BBBBBB"; };
-      background = { active = "#282C34"; inactive = "#1E222A"; };
-      selection = { active = "#393F4A"; inactive = "#2C313C"; };
-      
-      # 界面元素颜色
-      directory = { active = "#61AFEF"; inactive = "#528BFF"; };
-      regular = "#ABB2BF";
-      executable = "#98C379";
-      symlink = "#E5C07B";
-      broken = "#E06C75";
-      
-      # 特殊文件类型颜色
-      image = "#C678DD";
-      video = "#D19A66";
-      audio = "#56B6C2";
-      archive = "#D19A66";
-      document = "#56B6C2";
-      
-      # 状态栏和标签栏颜色
-      tab = { active = "#61AFEF"; inactive = "#ABB2BF"; };
-      status = { 
-        primary = "#61AFEF";
-        secondary = "#98C379"; 
-        tertiary = "#E5C07B";
-      };
-      border = { active = "#61AFEF"; inactive = "#528BFF"; preview = "#98C379"; };
-      
-      # 预览区域颜色
-      preview = { 
-        directory = "#61AFEF";
-        regular = "#ABB2BF"; 
-      };
-      
-      # 高亮颜色
-      hovered = {
-        fg = "#FFFFFF";
-        bg = "#3E4452";
-      };
-      
-      # 修改状态颜色
-      copied = { fg = "#98C379"; bg = "#3E4452"; };
-      cut = { fg = "#E06C75"; bg = "#3E4452"; };
-      
-      # 命令行颜色
-      command = {
-        fg = "#E4E4E4";
-        bg = "#282C34";
-      };
-      
-      # 错误信息颜色
-      error = {
-        fg = "#E06C75";
-        bg = "#282C34";
-      };
-      
-      # 警告信息颜色
-      warning = {
-        fg = "#E5C07B";
-        bg = "#282C34";
-      };
-      
-      # 信息提示颜色
-      info = {
-        fg = "#61AFEF";
-        bg = "#282C34";
-      };
+  completion = {
+    border = {
+      fg = "#81A1C1";
     };
-    
-    # 预览语法高亮主题
-    syntax = {
-      comment = "#5C6370";
-      constant = "#D19A66";
-      string = "#98C379";
-      character = "#98C379";
-      number = "#D19A66";
-      boolean = "#D19A66";
-      float = "#D19A66";
-      identifier = "#E06C75";
-      function = "#61AFEF";
-      statement = "#C678DD";
-      conditional = "#C678DD";
-      repeat = "#C678DD";
-      label = "#E5C07B";
-      operator = "#56B6C2";
-      keyword = "#C678DD";
-      exception = "#C678DD";
-      preproc = "#E5C07B";
-      type = "#E5C07B";
-      structure = "#E5C07B";
-      typedef = "#E5C07B";
-      namespace = "#E06C75";
-      preprocessor = "#E5C07B";
-      special = "#56B6C2";
-      error = "#E06C75";
-      todo = "#E5C07B";
-      variable = "#ABB2BF";
+  };
+  confirm = {
+    border = {
+      fg = "#81A1C1";
+    };
+    btn_labels = [
+      "  [Y]es  "
+      "  (N)o  "
+    ];
+    btn_no = { };
+    btn_yes = {
+      reversed = true;
+    };
+    title = {
+      fg = "#81A1C1";
+    };
+  };
+  filetype = {
+    rules = [
+      {
+        fg = "#EBCB8B";
+        mime = "image/*";
+      }
+      {
+        fg = "#B48EAD";
+        mime = "{audio,video}/*";
+      }
+      {
+        fg = "#BF616A";
+        mime = "application/{zip,rar,7z*,tar,gzip,xz,zstd,bzip*,lzma,compress,archive,cpio,arj,xar,ms-cab*}";
+      }
+      {
+        fg = "#81A1C1";
+        mime = "application/{pdf,doc,rtf}";
+      }
+      {
+        bg = "#BF616A";
+        is = "orphan";
+        name = "*";
+      }
+      {
+        fg = "#A3BE8C";
+        is = "exec";
+        name = "*";
+      }
+      {
+        bg = "#BF616A";
+        is = "dummy";
+        name = "*";
+      }
+      {
+        bg = "#BF616A";
+        is = "dummy";
+        name = "*/";
+      }
+      {
+        fg = "#81A1C1";
+        name = "*/";
+      }
+    ];
+  };
+  flavor = {
+    dark = "";
+    light = "";
+  };
+  help = {
+    footer = {
+      bg = "#ECEFF4";
+      fg = "#3B4252";
+    };
+    on = {
+      fg = "#81A1C1";
+    };
+    run = {
+      fg = "#B48EAD";
+    };
+  };
+  input = {
+    border = {
+      fg = "#81A1C1";
+    };
+    selected = {
+      reversed = true;
+    };
+  };
+  mgr = {
+    border_style = {
+      fg = "#4C566A";
+    };
+    border_symbol = "│";
+    count_copied = {
+      bg = "#A3BE8C";
+      fg = "#ECEFF4";
+    };
+    count_cut = {
+      bg = "#BF616A";
+      fg = "#ECEFF4";
+    };
+    count_selected = {
+      bg = "#EBCB8B";
+      fg = "#ECEFF4";
+    };
+    cwd = {
+      fg = "#81A1C1";
+    };
+    find_keyword = {
+      bold = true;
+      fg = "#EBCB8B";
+      italic = true;
+      underline = true;
+    };
+    find_position = {
+      bg = "reset";
+      bold = true;
+      fg = "#B48EAD";
+      italic = true;
+    };
+    hovered = {
+      reversed = true;
+    };
+    marker_copied = {
+      bg = "#A3BE8C";
+      fg = "#A3BE8C";
+    };
+    marker_cut = {
+      bg = "#BF616A";
+      fg = "#BF616A";
+    };
+    marker_marked = {
+      bg = "#81A1C1";
+      fg = "#81A1C1";
+    };
+    marker_selected = {
+      bg = "#EBCB8B";
+      fg = "#EBCB8B";
+    };
+    preview_hovered = {
+      underline = true;
+    };
+    syntect_theme = "";
+    tab_active = {
+      reversed = true;
+    };
+    tab_width = 1;
+  };
+  mode = {
+    normal_alt = {
+      bg = "#4C566A";
+      fg = "#81A1C1";
+    };
+    normal_main = {
+      bg = "#81A1C1";
+      bold = true;
+    };
+    select_alt = {
+      bg = "#4C566A";
+      fg = "#BF616A";
+    };
+    select_main = {
+      bg = "#BF616A";
+      bold = true;
+    };
+    unset_alt = {
+      bg = "#4C566A";
+      fg = "#BF616A";
+    };
+    unset_main = {
+      bg = "#BF616A";
+      bold = true;
+    };
+  };
+  notify = {
+    icon_error = "";
+    icon_info = "";
+    icon_warn = "";
+    title_error = {
+      fg = "#BF616A";
+    };
+    title_info = {
+      fg = "#A3BE8C";
+    };
+    title_warn = {
+      fg = "#EBCB8B";
+    };
+  };
+  pick = {
+    active = {
+      bold = true;
+      fg = "#B48EAD";
+    };
+    border = {
+      fg = "#81A1C1";
+    };
+  };
+  status = {
+    perm_exec = {
+      fg = "#81A1C1";
+    };
+    perm_read = {
+      fg = "#EBCB8B";
+    };
+    perm_sep = {
+      fg = "#3B4252";
+    };
+    perm_type = {
+      fg = "#A3BE8C";
+    };
+    perm_write = {
+      fg = "#BF616A";
+    };
+    progress_error = {
+      bg = "#2E3440";
+      fg = "#BF616A";
+    };
+    progress_label = {
+      bold = true;
+    };
+    progress_normal = {
+      bg = "#2E3440";
+      fg = "#81A1C1";
+    };
+    separator_close = "";
+    separator_open = "";
+  };
+  tasks = {
+    border = {
+      fg = "#81A1C1";
+    };
+    hovered = {
+      fg = "#B48EAD";
+      underline = true;
+    };
+  };
+  which = {
+    cand = {
+      fg = "#81A1C1";
+    };
+    cols = 3;
+    desc = {
+      fg = "#B48EAD";
+    };
+    mask = {
+      bg = "#2E3440";
+    };
+    rest = {
+      fg = "#3B4252";
+    };
+    separator = "  ";
+    separator_style = {
+      fg = "#3B4252";
     };
   };
 }
