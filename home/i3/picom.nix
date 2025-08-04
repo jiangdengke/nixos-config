@@ -30,10 +30,10 @@
     # 高级设置 - 使用 settings 字段
     settings = {
       # 模糊效果
-#      blur = {
-#        method = "dual_kawase";
-#        strength = 5;
-#      };
+      blur = {
+        method = "dual_kawase";
+        strength = 5;
+      };
       
       # 窗口圆角
       corner-radius = 10;

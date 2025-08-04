@@ -1,0 +1,14 @@
+#!/usr/bin/env bash
+MEM=$(free -h | awk '/^Mem:/ {print $3 "/" $2}')
+PERC=$(free | awk '/^Mem:/ {print $3*100/$2}' | cut -d. -f1)
+echo "$MEM"
+echo "$MEM"
+
+# 颜色提示
+if [[ $PERC -gt 80 ]]; then
+  echo "#BF616A" # 红色
+elif [[ $PERC -gt 50 ]]; then
+  echo "#EBCB8B" # 黄色
+else
+  echo "#A3BE8C" # 绿色
+fi

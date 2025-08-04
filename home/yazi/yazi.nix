@@ -94,7 +94,7 @@
         block = true;
         desc = "$EDITOR";
         for = "unix";
-        run = "\${EDITOR:-vi} \"$@\"";
+        run = "\${EDITOR:-nvim} \"$@\"";
       }
     ];
     extract = [

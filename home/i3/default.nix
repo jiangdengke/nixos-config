@@ -3,7 +3,8 @@
 {
   # 导入 i3status 配置
   imports = [
-    ./i3status.nix
+    #./i3status.nix
+    ./i3blocks.nix
     ./picom.nix
   ];
   

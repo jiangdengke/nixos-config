@@ -1,0 +1,21 @@
+#!/usr/bin/env bash
+SSID=$(iwgetid -r)
+
+if [[ -z "$SSID" ]]; then
+  echo "睊" # 断开图标
+  echo "睊"
+  echo "#BF616A" # 红色
+else
+  QUALITY=$(grep wlan0 /proc/net/wireless | awk '{print int($3 * 100 / 70)}')
+  echo "$SSID ($QUALITY%)"
+  echo "$SSID"
+  
+  # 颜色提示
+  if [[ $QUALITY -lt 30 ]]; then
+    echo "#BF616A" # 红色
+  elif [[ $QUALITY -lt 60 ]]; then
+    echo "#EBCB8B" # 黄色
+  else
+    echo "#A3BE8C" # 绿色
+  fi
+fi

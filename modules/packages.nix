@@ -33,6 +33,9 @@ kdePackages.dolphin-plugins
     wechat-uos
     # dev
 jetbrains.idea-ultimate
+jetbrains.pycharm-professional
+jetbrains.goland
+jetbrains.webstorm
     vscode
   ];
 }
