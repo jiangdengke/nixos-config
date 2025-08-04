@@ -11,7 +11,6 @@
     
     # 桌面环境
     firefox
-    i3status
     i3-gaps
     rofi
     variety
