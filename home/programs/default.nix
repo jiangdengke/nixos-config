@@ -5,7 +5,8 @@
   imports = [
     ./common.nix   # 常用软件包
     ./git.nix      # Git 配置
-#    ./media.nix    # 媒体软件配置
+    ./media.nix    # 媒体软件配置
     ./xdg.nix      # XDG 配置
+    ./copyq.nix
   ];
 }

@@ -88,6 +88,11 @@ home.file.".local/bin/lock-screen.sh" = {
        
       # 自动启动应用
       startup = [
+      {
+          command = "${pkgs.copyq}/bin/copyq";
+          notification = false;
+          always = false;
+        }
   # 禁用屏幕保护和屏幕熄灭
   {
     command = "${pkgs.xorg.xset}/bin/xset s off -dpms";
@@ -165,6 +170,8 @@ home.file.".local/bin/lock-screen.sh" = {
         "${config.xsession.windowManager.i3.config.modifier}+Shift+8" = "move container to workspace number 8";
         "${config.xsession.windowManager.i3.config.modifier}+Shift+9" = "move container to workspace number 9";
         
+	        # 使用mod+v来显示/隐藏CopyQ的主界面
+        "${config.xsession.windowManager.i3.config.modifier}+v" = "exec ${pkgs.copyq}/bin/copyq toggle";
         # 添加锁屏快捷键 (Mod+l)
 
         "${config.xsession.windowManager.i3.config.modifier}+Shift+l" = "exec --no-startup-id $HOME/.local/bin/lock-screen.sh";
