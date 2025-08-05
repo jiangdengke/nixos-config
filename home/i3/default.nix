@@ -3,7 +3,7 @@
 {
   # 导入 i3status 配置
   imports = [
-    ./i3status.nix
+    ./i3status-rust.nix
     ./picom.nix
   ];
 
@@ -81,11 +81,15 @@
       };
       bars = [
         {
-          position = "top"; # 将状态栏位置设置为顶部
-          statusCommand = "${pkgs.i3status}/bin/i3status"; # 添加这一行
+          position = "top";
+          statusCommand = "${pkgs.i3status-rust}/bin/i3status-rs ~/.config/i3status-rust/config-default.toml";
+          fonts = {
+            names = [ "DejaVu Sans Mono", "FontAwesome6Free" ];
+            size = 9.0;
+          };
+          # 其他 bar 配置...
         }
       ];
-
       # 自动启动应用
       startup = [
         # 蓝牙托盘图标
@@ -263,7 +267,6 @@
     xautolock
     scrot # 用于截图
     imagemagick # 用于处理图片
-    i3status
     feh # 设置壁纸
     dunst # 通知守护程序
     rofi # 应用启动器
