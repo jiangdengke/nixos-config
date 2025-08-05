@@ -12,6 +12,7 @@
     ../modules/packages.nix
     ../modules/dae
     ../modules/users.nix
+    ../modules/bluetooth-audio.nix
   ];
 
   # 核心系统配置

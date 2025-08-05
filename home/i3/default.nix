@@ -88,6 +88,17 @@
 
       # 自动启动应用
       startup = [
+        # 蓝牙托盘图标
+        {
+          command = "blueman-applet";
+          notification = false;
+        }
+
+        # 音量托盘图标
+        {
+          command = "pasystray";
+          notification = false;
+        }
         # 禁用屏幕保护和屏幕熄灭
         {
           command = "${pkgs.xorg.xset}/bin/xset s off -dpms";
@@ -197,6 +208,15 @@
         # 直接调用贴图功能的快捷键（将最近的截图固定到屏幕）
         "Ctrl+Shift+1" = "exec --no-startup-id ${pkgs.flameshot}/bin/flameshot gui --pin";
 
+        # 音量控制键绑定
+        "XF86AudioRaiseVolume" = "exec --no-startup-id pamixer --increase 5";
+        "XF86AudioLowerVolume" = "exec --no-startup-id pamixer --decrease 5";
+        "XF86AudioMute" = "exec --no-startup-id pamixer --toggle-mute";
+        # 媒体控制
+        "XF86AudioPlay" = "exec --no-startup-id playerctl play-pause";
+        "XF86AudioNext" = "exec --no-startup-id playerctl next";
+        "XF86AudioPrev" = "exec --no-startup-id playerctl previous";
+
       };
 
       # 浮动窗口规则 - 让 Flameshot 的贴图窗口自动浮动
@@ -251,6 +271,13 @@
     brightnessctl # 亮度控制
     networkmanager_dmenu # 网络管理
     picom # 窗口合成器 (透明效果)
+    # 音频控制界面
+    pavucontrol
+    pasystray
+
+    # 额外音频和媒体工具
+    pamixer
+    playerctl
   ];
 
 }
