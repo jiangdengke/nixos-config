@@ -1,12 +1,10 @@
 { config, pkgs, ... }:
 
 {
-  # 导入 i3status 配置
   imports = [
-    #./i3status-rust.nix
+    ./i3status.nix
     ./picom.nix
   ];
-  home.file.".config/i3status-rust/config-default.toml".source = ./i3status-rust-config.toml;
   # 创建一个漂亮的锁屏脚本
   home.file.".local/bin/lock-screen.sh" = {
     executable = true;
@@ -79,14 +77,14 @@
         border = 1;
         titlebar = false;
       };
-      bars = [ ];
+      bars = [
+        {
+          position = "top"; # 将状态栏位置设置为顶部
+          statusCommand = "${pkgs.i3status}/bin/i3status"; # 添加这一行
+        }
+      ];
       # 自动启动应用
       startup = [
-        {
-          command = "${pkgs.waybar}/bin/waybar";
-          always = true;
-          notification = false;
-        }
         # 蓝牙托盘图标
         {
           command = "blueman-applet";
@@ -258,6 +256,7 @@
 
   # 确保需要的软件包已安装
   home.packages = with pkgs; [
+    i3status
     i3lock-color
     xautolock
     scrot # 用于截图
