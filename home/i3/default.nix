@@ -186,7 +186,7 @@
         "${config.xsession.windowManager.i3.config.modifier}+d" =
           "exec ${pkgs.bash}/bin/bash $HOME/.local/bin/toggle-rofi";
         # 全屏切换
-        "${config.services.xserver.windowManager.i3.config.modifier}+f" = "fullscreen toggle";
+        "${config.xsession.windowManager.i3.config.modifier}+f" = "fullscreen toggle";
 
         # 亮度控制
         "XF86MonBrightnessUp" = "exec brightnessctl set +10%";

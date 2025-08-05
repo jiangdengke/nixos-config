@@ -22,7 +22,4 @@
 
   # 安装 powerlevel10k 推荐的字体
   fonts.fontconfig.enable = true;
-  home.packages = with pkgs; [
-    (nerdfonts.override { fonts = [ "Meslo" ]; })
-  ];
 }
