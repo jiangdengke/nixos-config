@@ -3,7 +3,7 @@
 {
   # 导入 i3status 配置
   imports = [
-    ./i3status-rust.nix
+    #./i3status-rust.nix
     ./picom.nix
   ];
   home.file.".config/i3status-rust/config-default.toml".source = ./i3status-rust-config.toml;
@@ -79,22 +79,14 @@
         border = 1;
         titlebar = false;
       };
-      bars = [
-        {
-          position = "top";
-          statusCommand = "${pkgs.i3status-rust}/bin/i3status-rs ~/.config/i3status-rust/config-default.toml";
-          fonts = {
-            names = [
-              "DejaVu Sans Mono"
-              "FontAwesome6Free"
-            ];
-            size = 9.0;
-          };
-          # 其他 bar 配置...
-        }
-      ];
+      bars = [ ];
       # 自动启动应用
       startup = [
+        {
+          command = "${pkgs.waybar}/bin/waybar";
+          always = true;
+          notification = false;
+        }
         # 蓝牙托盘图标
         {
           command = "blueman-applet";
