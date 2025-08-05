@@ -6,7 +6,7 @@
     ./i3status-rust.nix
     ./picom.nix
   ];
-
+  home.file.".config/i3status-rust/config-default.toml".source = ./i3status-rust-config.toml;
   # 创建一个漂亮的锁屏脚本
   home.file.".local/bin/lock-screen.sh" = {
     executable = true;
@@ -84,7 +84,10 @@
           position = "top";
           statusCommand = "${pkgs.i3status-rust}/bin/i3status-rs ~/.config/i3status-rust/config-default.toml";
           fonts = {
-            names = [ "DejaVu Sans Mono", "FontAwesome6Free" ];
+            names = [
+              "DejaVu Sans Mono"
+              "FontAwesome6Free"
+            ];
             size = 9.0;
           };
           # 其他 bar 配置...

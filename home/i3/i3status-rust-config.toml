@@ -1,0 +1,52 @@
+[theme]
+name = "modern"
+
+[icons]
+name = "awesome6"
+
+[[block]]
+block = "cpu"
+interval = 1
+format = " $icon $utilization "
+
+[[block]]
+block = "memory"
+format = " $icon $mem_used_percents "
+interval = 5
+
+[[block]]
+block = "disk_space"
+path = "/"
+info_type = "available"
+alert_unit = "GB"
+interval = 60
+warning = 20
+alert = 10
+format = " $icon $available "
+
+[[block]]
+block = "net"
+format = " $icon {$signal_strength $ssid|Wired} "
+interval = 5
+
+[[block]]
+block = "bluetooth"
+mac = ""
+format = " $icon {$name|NONE} "
+format_unavailable = " $icon Off "
+
+[[block]]
+block = "sound"
+format = " $icon $volume "
+step_width = 5
+on_click = "pavucontrol"
+
+[[block]]
+block = "battery"
+format = " $icon $percentage {$time |}"
+interval = 10
+
+[[block]]
+block = "time"
+interval = 1
+format = " $icon $timestamp.datetime(f:'%Y-%m-%d %H:%M:%S') "
