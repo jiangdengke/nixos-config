@@ -1,14 +1,19 @@
-{ config, lib, pkgs, ... }:
+{
+  config,
+  lib,
+  pkgs,
+  ...
+}:
 
 {
   programs.i3status = {
     enable = true;
-    
+
     general = {
       colors = true;
       interval = 5;
     };
-    
+
     modules = {
       # First disable ALL default modules to avoid duplicates
       "ipv6".enable = false;
@@ -20,7 +25,7 @@
       "wireless _first_".enable = true;
       "battery all".enable = false;
       "tztime local".enable = true;
-      
+
       # Now add ONLY the modules you want, with positions
       "cpu_usage" = {
         position = 1;
@@ -28,7 +33,7 @@
           format = "CPU: %usage";
         };
       };
-      
+
       "memory" = {
         position = 2;
         settings = {
@@ -37,14 +42,14 @@
           format_degraded = "MEMORY < %available";
         };
       };
-      
+
       "disk /" = {
         position = 3;
         settings = {
           format = "Disk: %avail";
         };
       };
-      
+
       "wireless _first_" = {
         position = 4;
         settings = {
@@ -52,7 +57,7 @@
           format_down = "WiFi: down";
         };
       };
-      
+
       "battery 0" = {
         position = 5;
         settings = {
@@ -60,7 +65,7 @@
           last_full_capacity = true;
         };
       };
-      
+
       "tztime local" = {
         position = 6;
         settings = {

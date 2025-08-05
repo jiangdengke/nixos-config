@@ -1,13 +1,13 @@
 { config, pkgs, ... }:
 
 {
-  # 导入 Starship 配置
-  imports = [ ./starship.nix ];
-  
+  # 导入 powerlevel10k 配置，替代 starship
+  imports = [ ./powerlevel10k.nix ];
+
   # ZSH 配置
   programs.zsh = {
     enable = true;
-    
+
     # 历史设置
     history = {
       size = 10000;
@@ -17,7 +17,7 @@
       extended = true;
       save = 10000;
     };
-    
+
     # ZSH 初始化脚本
     initContent = ''
       # 自定义配置
@@ -28,33 +28,34 @@
       setopt HIST_IGNORE_DUPS     # 不记录重复命令
       setopt HIST_IGNORE_SPACE    # 不记录以空格开头的命令
       setopt SHARE_HISTORY        # 会话间共享历史
-      
+
       # 自动建议配置
       ZSH_AUTOSUGGEST_STRATEGY=(history completion)
       ZSH_AUTOSUGGEST_HIGHLIGHT_STYLE="fg=#8a8a8a"
-      
+
+      # 加载 powerlevel10k
+      source ${pkgs.zsh-powerlevel10k}/share/zsh-powerlevel10k/powerlevel10k.zsh-theme
+      [[ -f ~/.p10k.zsh ]] && source ~/.p10k.zsh
+
       # 添加自定义函数
       function mkcd() {
         mkdir -p "$1" && cd "$1"
       }
-      
-      # 确保 Starship 在最后初始化
-      eval "$(starship init zsh)"
     '';
-    
+
     # 常用别名
     shellAliases = {
       # 文件操作
-      ls = "eza";                            # 使用 eza 替代 ls
-      l = "eza -l --icons --git";            # 长格式，带图标和 Git 信息
-      la = "eza -la --icons --git";          # 长格式，显示隐藏文件
-      lt = "eza -T --icons --git-ignore";    # 树形显示
-      cat = "bat";                           # 使用 bat 替代 cat
-      
+      ls = "eza"; # 使用 eza 替代 ls
+      l = "eza -l --icons --git"; # 长格式，带图标和 Git 信息
+      la = "eza -la --icons --git"; # 长格式，显示隐藏文件
+      lt = "eza -T --icons --git-ignore"; # 树形显示
+      cat = "bat"; # 使用 bat 替代 cat
+
       # 系统操作
-      update = "sudo nixos-rebuild switch";  # 更新 NixOS
-      hmupdate = "home-manager switch";      # 更新 Home Manager 配置
-      
+      update = "sudo nixos-rebuild switch"; # 更新 NixOS
+      hmupdate = "home-manager switch"; # 更新 Home Manager 配置
+
       # Git 别名
       g = "git";
       ga = "git add";
@@ -64,17 +65,17 @@
       gp = "git push";
       gl = "git pull";
       glog = "git log --oneline --decorate --graph";
-      
+
       # 导航
       ".." = "cd ..";
       "..." = "cd ../..";
       "...." = "cd ../../..";
-      
+
       # 快速打开和编辑配置文件
       zshrc = "$EDITOR $HOME/.config/nixpkgs/home/zsh/default.nix";
       nixconf = "$EDITOR $HOME/.config/nixpkgs/configuration.nix";
     };
-    
+
     # 插件配置
     plugins = [
       {
@@ -105,8 +106,8 @@
         };
       }
     ];
-    
-    # Oh My ZSH 配置 (可选，如果想用 Oh My ZSH)
+
+    # Oh My ZSH 配置
     oh-my-zsh = {
       enable = true;
       plugins = [
@@ -117,10 +118,10 @@
         "command-not-found"
         "z"
       ];
-      # 不设置主题，因为使用 Starship
-      theme = "robbyrussell";  # 一个单行提示符主题
+      # 不再需要 robbyrussell 主题
+      theme = "";
     };
-    
+
     # 环境变量
     sessionVariables = {
       EDITOR = "vim"; # 或者 nvim，如果您使用 Neovim
@@ -129,15 +130,15 @@
       MANPAGER = "sh -c 'col -bx | bat -l man -p'"; # 使用 bat 显示 man 页面
     };
   };
-  
+
   # 安装必要的包
   home.packages = with pkgs; [
-    eza       # 现代化的 ls 替代品
-    bat       # cat 的替代品，带有语法高亮
-    fd        # find 的替代品
-    ripgrep   # grep 的替代品
-    zoxide    # z 命令的智能版本
-    fzf       # 模糊查找工具
-    jq        # JSON 处理工具
+    eza # 现代化的 ls 替代品
+    bat # cat 的替代品，带有语法高亮
+    fd # find 的替代品
+    ripgrep # grep 的替代品
+    zoxide # z 命令的智能版本
+    fzf # 模糊查找工具
+    jq # JSON 处理工具
   ];
 }

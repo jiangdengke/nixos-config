@@ -1,12 +1,10 @@
 -- 格式化工具
 return {
 	"stevearc/conform.nvim",
-	-- 从mason中加载格式化器
-	dependencies = { "mason.nvim" },
+	-- 我们将使用系统安装的工具
 	lazy = true,
-	cmd = { "ConformInfo" }, -- 使用命令时加载
+	cmd = { "ConformInfo" },
 	keys = {
-		-- 添加格式化快捷键
 		{
 			"<leader>f",
 			function()
@@ -16,7 +14,6 @@ return {
 			desc = "格式化文件",
 		},
 	},
-	-- 主要配置
 	opts = {
 		-- 配置格式化器
 		formatters_by_ft = {
@@ -27,27 +24,38 @@ return {
 			json = { "prettier" },
 			yaml = { "prettier" },
 			markdown = { "prettier" },
+			-- 使用正确的 Nix 格式化器
+			nix = { "nixfmt-rfc-style" },
 		},
 
 		-- 保存时自动格式化
-		-- format_on_save = {
-		-- 	timeout_ms = 500,
-		-- 	lsp_fallback = true,
-		-- 	async = false,
-		-- },
+		format_on_save = {
+			timeout_ms = 2000, -- 增加超时时间
+			lsp_fallback = true,
+			async = false,
+		},
 
-		-- 格式化器配置
+		-- 明确指定格式化器命令路径
 		formatters = {
-			-- 这里可以自定义每个格式化器的配置
+			-- 使用系统安装的二进制文件
+			stylua = {
+				command = "stylua",
+			},
+			["nixfmt-rfc-style"] = {
+				command = "nixfmt", -- 命令名称是 nixfmt，即使包名是 nixfmt-rfc-style
+			},
 			prettier = {
-				-- 优先使用项目局部配置
+				command = "prettier",
 				prepend_args = { "--config-precedence", "prefer-file" },
+			},
+			taplo = {
+				command = "taplo",
 			},
 		},
 
 		-- 默认格式化配置
 		default_format_opts = {
-			timeout_ms = 1000,
+			timeout_ms = 2000,
 			quiet = false,
 			lsp_format = "fallback",
 		},
@@ -57,10 +65,9 @@ return {
 
 		-- 通知设置
 		notify_on_error = true,
-		notify_no_formatters = true,
+		notify_no_formatters = false,
 	},
 	init = function()
-		-- 可以在这里添加自动命令
 		vim.o.formatexpr = "v:lua.require'conform'.formatexpr()"
 	end,
 }
