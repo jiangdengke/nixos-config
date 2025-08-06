@@ -41,6 +41,8 @@
       function mkcd() {
         mkdir -p "$1" && cd "$1"
       }
+            # 确保 home-manager 在 PATH 中
+      export PATH="$HOME/.nix-profile/bin:$PATH"
     '';
 
     # 常用别名

@@ -85,17 +85,6 @@
       ];
       # 自动启动应用
       startup = [
-        # 蓝牙托盘图标
-        {
-          command = "blueman-applet";
-          notification = false;
-        }
-
-        # 音量托盘图标
-        {
-          command = "pasystray";
-          notification = false;
-        }
         # 禁用屏幕保护和屏幕熄灭
         {
           command = "${pkgs.xorg.xset}/bin/xset s off -dpms";
@@ -205,14 +194,6 @@
         # 直接调用贴图功能的快捷键（将最近的截图固定到屏幕）
         "Ctrl+Shift+1" = "exec --no-startup-id ${pkgs.flameshot}/bin/flameshot gui --pin";
 
-        # 音量控制键绑定
-        "XF86AudioRaiseVolume" = "exec --no-startup-id pamixer --increase 5";
-        "XF86AudioLowerVolume" = "exec --no-startup-id pamixer --decrease 5";
-        "XF86AudioMute" = "exec --no-startup-id pamixer --toggle-mute";
-        # 媒体控制
-        "XF86AudioPlay" = "exec --no-startup-id playerctl play-pause";
-        "XF86AudioNext" = "exec --no-startup-id playerctl next";
-        "XF86AudioPrev" = "exec --no-startup-id playerctl previous";
 
       };
 
@@ -254,27 +235,34 @@
     "Xft.dpi" = 140;
   };
 
-  # 确保需要的软件包已安装
   home.packages = with pkgs; [
-    i3status
-    i3lock-color
-    xautolock
-    scrot # 用于截图
-    imagemagick # 用于处理图片
-    feh # 设置壁纸
-    dunst # 通知守护程序
-    rofi # 应用启动器
-    flameshot # 截图工具
-    brightnessctl # 亮度控制
-    networkmanager_dmenu # 网络管理
-    picom # 窗口合成器 (透明效果)
-    # 音频控制界面
-    pavucontrol
-    pasystray
 
-    # 额外音频和媒体工具
-    pamixer
-    playerctl
-  ];
+  # 蓝牙控制工具
+
+  # i3wm 相关工具
+  i3status          # i3wm 的状态栏工具，显示系统信息（CPU、内存等）
+  i3lock-color      # i3 锁屏工具，支持彩色背景、图像等功能
+  xautolock         # 自动锁屏工具，可以定时锁定屏幕
+  scrot             # 截图工具，用于截图功能
+  flameshot         # 高级截图工具，支持编辑和截图界面
+  brightnessctl     # 控制显示器亮度的工具
+  
+  # 图像处理和桌面环境工具
+  imagemagick       # 图片处理工具，可用于转换、编辑图像
+  feh               # 设置壁纸工具，可以用命令行设置壁纸
+  
+  # 通知和应用启动器
+  dunst             # 通知守护程序，显示系统通知
+  rofi              # 应用启动器和窗口切换器，类似于 `dmenu`
+  
+  # 网络管理工具
+  networkmanager_dmenu  # 网络管理工具，使用 dmenu 选择网络
+  
+  # 窗口合成器
+  picom             # 窗口合成器，用于实现窗口透明、阴影等效果
+
+];
+
+
 
 }
