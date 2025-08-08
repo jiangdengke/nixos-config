@@ -3,6 +3,7 @@
 {
   # 导入所有子模块
   imports = [
+  ./dev
   ./gtk
   ./hyprland
   ./waybar

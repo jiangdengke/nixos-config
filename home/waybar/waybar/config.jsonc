@@ -9,7 +9,7 @@
   "gtk-layer-shell": true,   // 使用 gtk-layer-shell（Wayland）
 
   // ===== 模块布局 =====
-  "modules-left":   ["custom/l_end","clock","custom/r_end","custom/l_end","cpu","memory","custom/gpu","custom/r_end","custom/padd"],
+  "modules-left":   ["custom/l_end","clock","custom/r_end","custom/l_end","cpu","memory","custom/r_end","custom/padd"],
   "modules-center": ["custom/padd","custom/l_end","hyprland/workspaces","hyprland/window","custom/r_end","custom/padd"],
   "modules-right":  ["custom/padd","custom/l_end","tray","backlight","pulseaudio","battery","custom/r_end"],
 
@@ -38,6 +38,7 @@
   },
 
   // ===== 亮度 =====
+
   "backlight": {
     "device": "intel_backlight",
     "format": "{icon} {percent}%",
@@ -131,15 +132,6 @@
     "format": "  {usage}%"
   },
 
-  // ===== GPU（自定义脚本）=====
-  "custom/gpu": {
-    "exec": "~/.config/waybar/scripts/gpuinfo.sh", // ← 去掉了原来的前导空格
-    "return-type": "json",
-    "format": " {}",
-    "interval": 5,
-    "tooltip": true,
-    "max-length": 1000
-  },
 
   // ===== 若需网络模块，建议这样修：=====
   // "network": {

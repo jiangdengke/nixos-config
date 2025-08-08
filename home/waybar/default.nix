@@ -1,6 +1,7 @@
 {config, pkgs, ...}:
 {
 
+  home.packages = [ pkgs.brightnessctl ];
 
     home.file.".config/waybar" = {
   # 指向当前 default.nix 同级的 waybar 目录
