@@ -1,22 +1,44 @@
 { config, pkgs, ... }:
 let
-  wp = "${config.home.homeDirectory}/Pictures/Wallpapers/timg.jpg";
+  wpDir = "${config.home.homeDirectory}/Pictures/Wallpapers";
+  swwwRandom = pkgs.writeShellApplication {
+    name = "swww-random";
+    runtimeInputs = [ pkgs.swww pkgs.findutils pkgs.gawk pkgs.coreutils ];
+    text = builtins.readFile ./swww-random.sh;  # ← 同级脚本
+  };
 in {
-  # 1) 启用 swww 的 HM 模块（仅起 daemon）
-  services.swww = {
-    enable = true;
-    package = pkgs.swww;  # 不写也行，默认就是 pkgs.swww
+  services.swww.enable = true;
+
+  home.packages = [ swwwRandom ];
+
+  systemd.user.services."swww-random" = {
+    Unit.Description = "Randomize wallpaper with swww";
+    Service = {
+      Type = "oneshot";
+      Environment = [
+        "SWWW_DURATION=1"
+        "SWWW_FPS=60"
+        "SWWW_TRANSITION=any"
+        "SWWW_PER_OUTPUT=0"   # 1 = 多屏各自随机
+      ];
+      ExecStart = "${swwwRandom}/bin/swww-random ${wpDir}";
+    };
+    Install.WantedBy = [ "default.target" ];
   };
 
-  # 2) 如果你用 Home Manager 管理 Hyprland，把设壁纸放到 exec-once
-  wayland.windowManager.hyprland = {
-    enable = true;
-    settings = {
-      exec-once = [
-        # 稍等半秒，确保 compositor 就绪，再切壁纸（有些机器不等也行）
-        "${pkgs.bash}/bin/bash -lc 'sleep 0.5; ${pkgs.swww}/bin/swww img ${wp} --transition-type any --transition-duration 1 --transition-fps 60'"
-      ];
+  systemd.user.timers."swww-random" = {
+    Unit.Description = "Timer for swww-random";
+    Timer = {
+      OnBootSec = "2m";
+      OnUnitActiveSec = "30m";
+      Unit = "swww-random.service";
     };
+    Install.WantedBy = [ "timers.target" ];
   };
+
+  # 进桌面先换一次（可选）
+  wayland.windowManager.hyprland.settings.exec-once = [
+    "${swwwRandom}/bin/swww-random ${wpDir}"
+  ];
 }
 

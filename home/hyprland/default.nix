@@ -1,6 +1,9 @@
 {config, pkgs, ... }:
 
 {
+ imports = [
+ ./swww
+ ];
   wayland.windowManager.hyprland = {
     enable = true;
     package = pkgs.hyprland;
