@@ -3,7 +3,6 @@
 {
   # 导入所有子模块
   imports = [
-  ./flameshot
   ./hyprland
   ./waybar
     ./fcitx5 # 中文输入法配置

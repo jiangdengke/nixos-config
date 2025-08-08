@@ -19,10 +19,12 @@
   nix.settings = {
     experimental-features = [ "nix-command" "flakes" ];
   };
-  services.displayManager.gdm.enable = true;  # 启用 Hyprland
-programs.hyprland.enable = true;
+  #services.displayManager.gdm.enable = true;
+  #programs.hyprland.enable = true;
 
-  home-manager.backupFileExtension = "";
+ services.getty.autologinUser = "jdk";
+
+  #home-manager.backupFileExtension = "";
   # 使用libinput禁用触控板
   services.libinput = {
     enable = true;

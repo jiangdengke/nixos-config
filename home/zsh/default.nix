@@ -8,6 +8,12 @@
   programs.zsh = {
     enable = true;
 
+    # 登录到 tty1 且尚未在 Wayland 会话时，启动 Hyprland
+     profileExtra = ''
+      if [[ -z $WAYLAND_DISPLAY && "$(tty)" == "/dev/tty1" ]]; then
+        exec Hyprland
+      fi
+    '';
     # 历史设置
     history = {
       size = 10000;
