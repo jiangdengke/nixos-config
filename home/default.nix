@@ -3,6 +3,7 @@
 {
   # 导入所有子模块
   imports = [
+  ./gtk
   ./hyprland
   ./waybar
     ./fcitx5 # 中文输入法配置

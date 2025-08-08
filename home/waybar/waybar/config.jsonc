@@ -1,447 +1,165 @@
 {
+  // ===== Bar 基本属性 =====
+  "layer": "top",            // 显示层级：top/overlay/bottom
+  "position": "top",         // 顶部
+  "mode": "dock",            // ← 修正：字段是 mode（不是 mod）
+  "height": 28,              // ★ Waybar 高度（像素）。不写则由字体/CSS决定
+  "exclusive": true,         // 为 bar 预留空间（避免窗口遮挡）
+  "passthrough": false,      // 鼠标事件是否透传到底下窗口
+  "gtk-layer-shell": true,   // 使用 gtk-layer-shell（Wayland）
 
-  "layer": "top",
-  "position": "top",
-  "mod": "dock",
-  "height": 28,
-  "exclusive": true,
-  "passthrough": false,
-  "gtk-layer-shell": true,
-  
-  "modules-left":   ["custom/l_end","clock","custom/r_end","custom/l_end","cpu", "memory", "custom/gpu","custom/r_end","custom/padd"],
+  // ===== 模块布局 =====
+  "modules-left":   ["custom/l_end","clock","custom/r_end","custom/l_end","cpu","memory","custom/gpu","custom/r_end","custom/padd"],
   "modules-center": ["custom/padd","custom/l_end","hyprland/workspaces","hyprland/window","custom/r_end","custom/padd"],
-  "modules-right":  ["custom/padd","custom/l_end","tray", "backlight", "pulseaudio","battery","custom/r_end"],
+  "modules-right":  ["custom/padd","custom/l_end","tray","backlight","pulseaudio","battery","custom/r_end"],
+
+  // ===== Hyprland 工作区与窗口标题 =====
   "hyprland/workspaces": {
-    "disable-scroll": true,
-    "all-outputs": true,
-    "on-click": "activate",
-    // "format": "{icon}",
-    "persistent_workspaces": {
-      "1": [],
-      "2": [],
-      "3": [],
-      "4": [],
-      "5": [],
-      "6": [],
-      "7": [],
-      "8": [],
-      "9": [],
-      "10": []
+    "disable-scroll": true,   // 滚轮不切工作区
+    "all-outputs": true,      // 在所有输出上显示
+    "on-click": "activate",   // 点击激活
+    // "format": "{icon}",     // 可自定义图标显示
+    "persistent_workspaces": { // 固定显示 1-10 号工作区
+      "1": [], "2": [], "3": [], "4": [], "5": [],
+      "6": [], "7": [], "8": [], "9": [], "10": []
     }
   },
-"hyprland/window": {
-        "format": "  {}",
-        "separate-outputs": true,
-        "max-length": 1000
-    },
+  "hyprland/window": {
+    "format": "  {}",        // ★ 把 Arch() 换成 NixOS()；需要 Nerd Font 才能显示
+    "separate-outputs": true,
+    "max-length": 1000
+  },
+
+  // ===== 托盘 =====
   "tray": {
     "icon-size": 15,
     "spacing": 10,
-    "reverse-direction": true,
+    "reverse-direction": true // 从右向左排列
   },
-  "backlight":{
+
+  // ===== 亮度 =====
+  "backlight": {
     "device": "intel_backlight",
     "format": "{icon} {percent}%",
     "format-icons": ["󰃞","󰃟","󰃠"],
     "on-scroll-up": "brightnessctl set 1%+",
     "on-scroll-down": "brightnessctl set 1%-",
-    "min-length": 6 
+    "min-length": 6
   },
-  //"custom/button": {
-  //  "format": "󰣇",
-  //  "interval": "once",
-  //  "on-click": "sleep 0.1 && ~/.config/waybar/scripts/launcher.sh",
-  //  "tooltip": false
-  //},
+
+  // ===== 电池 =====
   "battery": {
-    "states": {
-      "good": 95,
-      "warning": 30,
-      "critical": 20
-    },
+    "states": { "good": 95, "warning": 30, "critical": 20 },
     "format": "{icon} {capacity}%",
     "format-charging": " {capacity}%",
     "format-plugged": " {capacity}%",
     "format-alt": "{time} {icon}",
-    "format-icons": ["󰂎", "󰁺", "󰁻", "󰁼", "󰁽", "󰁾", "󰁿", "󰂀", "󰂁", "󰂂", "󰁹"]
+    "format-icons": ["󰂎","󰁺","󰁻","󰁼","󰁽","󰁾","󰁿","󰂀","󰂁","󰂂","󰁹"]
   },
-    "clock": {
-        "format": "{:%I:%M %p}",
-        "rotate": 0,
-        "format-alt": "{:%R 󰃭 %d·%m·%y}",
-        "tooltip-format": "<span>{calendar}</span>",
-        "calendar": {
-            "mode": "month",
-            "mode-mon-col": 3,
-            "on-scroll": 1,
-            "on-click-right": "mode",
-            "format": {
-                "months": "<span color='#ffead3'><b>{}</b></span>",
-                "weekdays": "<span color='#ffcc66'><b>{}</b></span>",
-                "today": "<span color='#ff6699'><b>{}</b></span>"
-            }
-        },
-        "actions": {
-            "on-click-right": "mode",
-            "on-click-forward": "tz_up",
-            "on-click-backward": "tz_down",
-            "on-scroll-up": "shift_up",
-            "on-scroll-down": "shift_down"
-        }
+
+  // ===== 时钟（点击右键切换模式、滚轮切换时区/周）=====
+  "clock": {
+    "format": "{:%I:%M %p}",
+    "rotate": 0,
+    "format-alt": "{:%R 󰃭 %d·%m·%y}",
+    "tooltip-format": "<span>{calendar}</span>",
+    "calendar": {
+      "mode": "month",
+      "mode-mon-col": 3,
+      "on-scroll": 1,
+      "on-click-right": "mode",
+      "format": {
+        "months":   "<span color='#ffead3'><b>{}</b></span>",
+        "weekdays": "<span color='#ffcc66'><b>{}</b></span>",
+        "today":    "<span color='#ff6699'><b>{}</b></span>"
+      }
     },
+    "actions": {
+      "on-click-right": "mode",
+      "on-click-forward": "tz_up",
+      "on-click-backward": "tz_down",
+      "on-scroll-up": "shift_up",
+      "on-scroll-down": "shift_down"
+    }
+  },
 
-  //"network": {
-  //    // "interface": "wlp2*", // (Optional) To force the use of this interface
-  //    "format-wifi": "󰤨 {essid}",
-  //    "format-ethernet": "󱘖 Wired",
-  //    "tooltip-format": "󱘖 {ipaddr}  {bandwidthUpBytes}  {bandwidthDownBytes}",
-  //    "format-linked": "󱘖 {ifname} (No IP)",
-  //    "format-disconnected": " 式字符串的语法问题，导致 Waybar 无法正确解析。具体问题在于将图标字符包含在大括号 {} 内，这会导致 invaliDisconnected",
-  //    "format-alt": "󰤨 {signalStrength}%",
-  //    "interval": 5
-  //},
-
+  // ===== 音量 =====
   "pulseaudio": {
-        "format": "{icon} {volume}",
-        "rotate": 0,
-        "format-muted": "婢",
-        "on-click": "pavucontrol -t 3",
-        "on-click-middle": "~/.config/waybar/scripts/volumecontrol.sh -o m",
-        "on-scroll-up": "~/.config/waybar/scripts/volumecontrol.sh -o i",
-        "on-scroll-down": "~/.config/waybar/scripts/volumecontrol.sh -o d",
-        "tooltip-format": "{icon} {desc} // {volume}%",
-        "scroll-step": 5,
-        "format-icons": {
-            "headphone": "",
-            "hands-free": "",
-            "headset": "",
-            "phone": "",
-            "portable": "",
-            "car": "",
-            "default": ["", "", ""]
-        }
-    },
+    "format": "{icon} {volume}",
+    "rotate": 0,
+    "format-muted": "婢",
+    "on-click": "pavucontrol -t 3",
+    "on-click-middle": "~/.config/waybar/scripts/volumecontrol.sh -o m",
+    "on-scroll-up": "~/.config/waybar/scripts/volumecontrol.sh -o i",
+    "on-scroll-down": "~/.config/waybar/scripts/volumecontrol.sh -o d",
+    "tooltip-format": "{icon} {desc} // {volume}%",
+    "scroll-step": 5,
+    "format-icons": {
+      "headphone": "",
+      "hands-free": "",
+      "headset": "",
+      "phone": "",
+      "portable": "",
+      "car": "",
+      "default": ["","",""]
+    }
+  },
 
-    // "pulseaudio#microphone": {
-    //     "format": "{format_source}",
-    //     "rotate": 0,
-    //     "format-source": "",
-    //     "format-source-muted": "",
-    //     "on-click": "pavucontrol -t 4",
-    //     "on-click-middle": "~/.config/waybar/scripts/volumecontrol.sh -i m",
-    //     "on-scroll-up": "~/.config/waybar/scripts/volumecontrol.sh -i i",
-    //     "on-scroll-down": "~/.config/waybar/scripts/volumecontrol.sh -i d",
-    //     "tooltip-format": "{format_source} {source_desc} // {source_volume}%",
-    //     "scroll-step": 5
-    // },
+  // // 可选：麦克风模块
+  // "pulseaudio#microphone": {
+  //   "format": "{format_source}",
+  //   "format-source": "",
+  //   "format-source-muted": "",
+  //   "on-click": "pavucontrol -t 4",
+  //   "on-click-middle": "~/.config/waybar/scripts/volumecontrol.sh -i m",
+  //   "on-scroll-up": "~/.config/waybar/scripts/volumecontrol.sh -i i",
+  //   "on-scroll-down": "~/.config/waybar/scripts/volumecontrol.sh -i d",
+  //   "tooltip-format": "{format_source} {source_desc} // {source_volume}%",
+  //   "scroll-step": 5
+  // },
 
- "memory": {
+  // ===== 内存 / CPU =====
+  "memory": {
     "interval": 1,
     "format": "  {}%",
     "format-alt": "  {used}GB",
     "tooltip": true,
-    "tooltip-format": "Memory - {used:0.1f}GB used",
+    "tooltip-format": "Memory - {used:0.1f}GB used"
   },
   "cpu": {
     "interval": 1,
-    "format": "  {usage}%",
+    "format": "  {usage}%"
   },
+
+  // ===== GPU（自定义脚本）=====
   "custom/gpu": {
-    "exec": " ~/.config/waybar/scripts/gpuinfo.sh",
+    "exec": "~/.config/waybar/scripts/gpuinfo.sh", // ← 去掉了原来的前导空格
     "return-type": "json",
     "format": " {}",
-    "interval": 5, // once every 5 seconds
+    "interval": 5,
     "tooltip": true,
     "max-length": 1000
   },
-  //"custom/power": {
-  //  "format": "⏻",
-  //  "on-click": "~/.config/waybar/scripts/logoutlaunch.sh"
-  //},
 
-  "custom/l_end": {
-        "format": " ",
-        "interval" : "once",
-        "tooltip": false
-    },
+  // ===== 若需网络模块，建议这样修：=====
+  // "network": {
+  //   // "interface": "wlp2*",                        // 可限定网卡
+  //   "format-wifi": "󰤨 {essid}",
+  //   "format-ethernet": "󱘖 Wired",
+  //   "tooltip-format": "󱘖 {ipaddr}  {bandwidthUpBytes}  {bandwidthDownBytes}",
+  //   "format-linked": "󱘖 {ifname} (No IP)",
+  //   "format-disconnected": " Disconnected",       // ← 原来一段中文误粘导致 JSON 破坏
+  //   "format-alt": "󰤨 {signalStrength}%",
+  //   "interval": 5
+  // },
 
-    "custom/r_end": {
-        "format": " ",
-        "interval" : "once",
-        "tooltip": false
-    },
-
-    "custom/sl_end": {
-        "format": " ",
-        "interval" : "once",
-        "tooltip": false
-    },
-
-    "custom/sr_end": {
-        "format": " ",
-        "interval" : "once",
-        "tooltip": false
-    },
-
-    "custom/rl_end": {
-        "format": " ",
-        "interval" : "once",
-        "tooltip": false
-    },
-
-    "custom/rr_end": {
-        "format": " ",
-        "interval" : "once",
-        "tooltip": false
-    },
-
-    "custom/padd": {
-        "format": "  ",
-        "interval" : "once",
-        "tooltip": false
-    }
+  // ===== 纯填充的“空白”模块们 =====
+  "custom/l_end": { "format": " ", "interval": "once", "tooltip": false },
+  "custom/r_end": { "format": " ", "interval": "once", "tooltip": false },
+  "custom/sl_end": { "format": " ", "interval": "once", "tooltip": false },
+  "custom/sr_end": { "format": " ", "interval": "once", "tooltip": false },
+  "custom/rl_end": { "format": " ", "interval": "once", "tooltip": false },
+  "custom/rr_end": { "format": " ", "interval": "once", "tooltip": false },
+  "custom/padd":  { "format": "  ", "interval": "once", "tooltip": false }
 }
-
-
-
-
-// positions generated based on config.ctl //
-
-	"modules-left": ["custom/padd","","custom/padd"],
-	"modules-center": ["custom/padd","","custom/padd"],
-	"modules-right": ["custom/padd","","custom/padd"],
-
-
-// sourced from modules based on config.ctl //
-
-
-
-// positions generated based on config.ctl //
-
-	"modules-left": ["custom/padd","","custom/padd"],
-	"modules-center": ["custom/padd","","custom/padd"],
-	"modules-right": ["custom/padd","","custom/padd"],
-
-
-// sourced from modules based on config.ctl //
-
-
-
-// positions generated based on config.ctl //
-
-	"modules-left": ["custom/padd","","custom/padd"],
-	"modules-center": ["custom/padd","","custom/padd"],
-	"modules-right": ["custom/padd","","custom/padd"],
-
-
-// sourced from modules based on config.ctl //
-
-
-
-// positions generated based on config.ctl //
-
-	"modules-left": ["custom/padd","","custom/padd"],
-	"modules-center": ["custom/padd","","custom/padd"],
-	"modules-right": ["custom/padd","","custom/padd"],
-
-
-// sourced from modules based on config.ctl //
-
-
-
-// positions generated based on config.ctl //
-
-	"modules-left": ["custom/padd","","custom/padd"],
-	"modules-center": ["custom/padd","","custom/padd"],
-	"modules-right": ["custom/padd","","custom/padd"],
-
-
-// sourced from modules based on config.ctl //
-
-
-
-// positions generated based on config.ctl //
-
-	"modules-left": ["custom/padd","","custom/padd"],
-	"modules-center": ["custom/padd","","custom/padd"],
-	"modules-right": ["custom/padd","","custom/padd"],
-
-
-// sourced from modules based on config.ctl //
-
-
-
-// positions generated based on config.ctl //
-
-	"modules-left": ["custom/padd","","custom/padd"],
-	"modules-center": ["custom/padd","","custom/padd"],
-	"modules-right": ["custom/padd","","custom/padd"],
-
-
-// sourced from modules based on config.ctl //
-
-
-
-// positions generated based on config.ctl //
-
-	"modules-left": ["custom/padd","","custom/padd"],
-	"modules-center": ["custom/padd","","custom/padd"],
-	"modules-right": ["custom/padd","","custom/padd"],
-
-
-// sourced from modules based on config.ctl //
-
-
-
-// positions generated based on config.ctl //
-
-	"modules-left": ["custom/padd","","custom/padd"],
-	"modules-center": ["custom/padd","","custom/padd"],
-	"modules-right": ["custom/padd","","custom/padd"],
-
-
-// sourced from modules based on config.ctl //
-
-
-
-// positions generated based on config.ctl //
-
-	"modules-left": ["custom/padd","","custom/padd"],
-	"modules-center": ["custom/padd","","custom/padd"],
-	"modules-right": ["custom/padd","","custom/padd"],
-
-
-// sourced from modules based on config.ctl //
-
-
-
-// positions generated based on config.ctl //
-
-	"modules-left": ["custom/padd","","custom/padd"],
-	"modules-center": ["custom/padd","","custom/padd"],
-	"modules-right": ["custom/padd","","custom/padd"],
-
-
-// sourced from modules based on config.ctl //
-
-
-
-// positions generated based on config.ctl //
-
-	"modules-left": ["custom/padd","","custom/padd"],
-	"modules-center": ["custom/padd","","custom/padd"],
-	"modules-right": ["custom/padd","","custom/padd"],
-
-
-// sourced from modules based on config.ctl //
-
-
-
-// positions generated based on config.ctl //
-
-	"modules-left": ["custom/padd","","custom/padd"],
-	"modules-center": ["custom/padd","","custom/padd"],
-	"modules-right": ["custom/padd","","custom/padd"],
-
-
-// sourced from modules based on config.ctl //
-
-
-
-// positions generated based on config.ctl //
-
-	"modules-left": ["custom/padd","","custom/padd"],
-	"modules-center": ["custom/padd","","custom/padd"],
-	"modules-right": ["custom/padd","","custom/padd"],
-
-
-// sourced from modules based on config.ctl //
-
-
-
-// positions generated based on config.ctl //
-
-	"modules-left": ["custom/padd","","custom/padd"],
-	"modules-center": ["custom/padd","","custom/padd"],
-	"modules-right": ["custom/padd","","custom/padd"],
-
-
-// sourced from modules based on config.ctl //
-
-
-
-// positions generated based on config.ctl //
-
-	"modules-left": ["custom/padd","","custom/padd"],
-	"modules-center": ["custom/padd","","custom/padd"],
-	"modules-right": ["custom/padd","","custom/padd"],
-
-
-// sourced from modules based on config.ctl //
-
-
-
-// positions generated based on config.ctl //
-
-	"modules-left": ["custom/padd","","custom/padd"],
-	"modules-center": ["custom/padd","","custom/padd"],
-	"modules-right": ["custom/padd","","custom/padd"],
-
-
-// sourced from modules based on config.ctl //
-
-
-
-// positions generated based on config.ctl //
-
-	"modules-left": ["custom/padd","","custom/padd"],
-	"modules-center": ["custom/padd","","custom/padd"],
-	"modules-right": ["custom/padd","","custom/padd"],
-
-
-// sourced from modules based on config.ctl //
-
-
-
-// positions generated based on config.ctl //
-
-	"modules-left": ["custom/padd","","custom/padd"],
-	"modules-center": ["custom/padd","","custom/padd"],
-	"modules-right": ["custom/padd","","custom/padd"],
-
-
-// sourced from modules based on config.ctl //
-
-
-
-// positions generated based on config.ctl //
-
-	"modules-left": ["custom/padd","","custom/padd"],
-	"modules-center": ["custom/padd","","custom/padd"],
-	"modules-right": ["custom/padd","","custom/padd"],
-
-
-// sourced from modules based on config.ctl //
-
-
-
-// positions generated based on config.ctl //
-
-	"modules-left": ["custom/padd","","custom/padd"],
-	"modules-center": ["custom/padd","","custom/padd"],
-	"modules-right": ["custom/padd","","custom/padd"],
-
-
-// sourced from modules based on config.ctl //
-
-
-
-// positions generated based on config.ctl //
-
-	"modules-left": ["custom/padd","","custom/padd"],
-	"modules-center": ["custom/padd","","custom/padd"],
-	"modules-right": ["custom/padd","","custom/padd"],
-
-
-// sourced from modules based on config.ctl //
 

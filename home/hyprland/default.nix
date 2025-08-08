@@ -19,7 +19,7 @@
 
 ################        显示器 设置        ################
 # monitor 格式：<输出设备>,<分辨率>,<刷新率>,<旋转>
-monitor = DP-1, 1920x1080@144, 0x0, 0.75
+monitor = , preferred, auto, 1.25
 
 xwayland {
     force_zero_scaling = true
