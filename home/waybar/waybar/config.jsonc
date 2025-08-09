@@ -11,7 +11,7 @@
   // ===== 模块布局 =====
   "modules-left":   ["custom/l_end","clock","custom/r_end","custom/l_end","cpu","memory","custom/r_end","custom/padd"],
   "modules-center": ["custom/padd","custom/l_end","hyprland/workspaces","hyprland/window","custom/r_end","custom/padd"],
-  "modules-right":  ["custom/padd","custom/l_end","tray","bluetooth","backlight","pulseaudio", "battery","custom/r_end"],
+  "modules-right":  ["custom/padd","custom/l_end","tray","bluetooth","backlight","battery","custom/r_end"],
 
   // ===== Hyprland 工作区与窗口标题 =====
   "hyprland/workspaces": {
@@ -94,41 +94,8 @@
   "on-click": "~/.config/waybar/scripts/bluetooth-menu.sh"
 },
 
-  "pulseaudio": {
-    "format": "{icon}{volume}% {format_source}",
-    "format-bluetooth": "{icon} {volume}% {format_source}",
-    "format-bluetooth-muted": "   {volume}% {format_source}",
-    "format-muted": "  {format_source}",
-    "format-source": " ",
-    "format-source-muted": " ",
-    "format-icons": {
-      "headphone": " ",
-      "hands-free": " ",
-      "headset": " ",
-      "phone": " ",
-      "portable": " ",
-      "car": " ",
-      "default": [" ", " ", " "],
-    },
-    "tooltip-format": "{desc}, {volume}%",
-    "on-click": "swayosd-client --output-volume mute-toggle",
-    "on-click-right": "swayosd-client --input-volume mute-toggle",
-    "on-click-middle": "pypr toggle volume",
-    "on-scroll-up": "swayosd-client --output-volume +1",
-    "on-scroll-down": "swayosd-client --output-volume -1",
-  },
-  // ===== 音量 =====
-"pulseaudio#microphone": {
-  "format": "{format_source}",             // 用包装好的 source 格式
-  "format-source": " {volume}%",          // ✅ 用 {volume}，不是 {source_volume}
-  "format-source-muted": "",
-  "tooltip-format": "{desc} — {volume}%",  // ✅ 用 {desc}，不是 {source_desc}
-  "on-click": "pavucontrol -t 4",
-  "on-click-middle": "wpctl set-mute @DEFAULT_AUDIO_SOURCE@ toggle",
-  "on-scroll-up":  "wpctl set-volume @DEFAULT_AUDIO_SOURCE@ 5%+",
-  "on-scroll-down":"wpctl set-volume @DEFAULT_AUDIO_SOURCE@ 5%-",
-  "scroll-step": 5
-},
+ // ===== 音量 =====
+
 
 
   // // 可选：麦克风模块
