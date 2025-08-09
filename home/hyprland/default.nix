@@ -150,6 +150,7 @@ device {
 ############    快捷键 绑定    ############
 $mainMod = SUPER  # 主修饰键（Windows/Command 键）
 # 基本操作
+bind = CTRL, 1, exec, ${bash} -lc '~/.config/hypr/shot-menu.sh'
 bind = $mainMod, RETURN, fullscreen, 0
 
 bind  = $mainMod, D, exec, pkill -x rofi || /home/jdk/.local/bin/toggle-rofi.sh;  # 打开/关闭 rofi
@@ -220,6 +221,10 @@ bindl = ,XF86AudioPrev,      exec, playerctl previous     # 上一首
 ############    窗口 与 工作区 规则    ############
 # 示例：指定程序在特定工作区或浮动/圆角设置
 # windowrule = float,class:^(kitty)$,title:^(kitty)$
+windowrulev2 = float, class:^(imv)$
+windowrulev2 = pin,   class:^(imv)$
+windowrulev2 = move 60 60, class:^(imv)$
+windowrulev2 = size 640 360, class:^(imv)$
 
 # 忽略所有程序的最大化请求
 windowrule = suppressevent maximize, class:.*
