@@ -11,7 +11,7 @@
   // ===== 模块布局 =====
   "modules-left":   ["custom/l_end","clock","custom/r_end","custom/l_end","cpu","memory","custom/r_end","custom/padd"],
   "modules-center": ["custom/padd","custom/l_end","hyprland/workspaces","hyprland/window","custom/r_end","custom/padd"],
-  "modules-right":  ["custom/padd","custom/l_end","tray","backlight","pulseaudio","pulseaudio#microphone", "battery","custom/r_end"],
+  "modules-right":  ["custom/padd","custom/l_end","tray","bluetooth","backlight","pulseaudio", "battery","custom/r_end"],
 
   // ===== Hyprland 工作区与窗口标题 =====
   "hyprland/workspaces": {
@@ -84,6 +84,19 @@
     }
   },
 
+  "bluetooth": {
+    "format": "",
+    "format-disabled": "",
+    "format-connected": " {num_connections}",
+    "format-connected-battery": "{icon} {num_connections}",
+    "format-icons": ["󰥇", "󰤾", "󰤿", "󰥀", "󰥁", "󰥂", "󰥃", "󰥄", "󰥅", "󰥆", "󰥈"],
+    "tooltip-format": "{controller_alias}\n{num_connections} connected",
+    "tooltip-format-connected": "{controller_alias}\n{num_connections} connected\n\n{device_enumerate}",
+    "tooltip-format-enumerate-connected": "{device_alias}",
+    "tooltip-format-enumerate-connected-battery": "{device_alias}\t{icon} {device_battery_percentage}%",
+    "on-click": "~/.config/waybar/scripts/bluetooth-menu.sh",
+    "on-click-right": "pypr toggle bluetooth"
+  },
   "pulseaudio": {
     "format": "{icon}{volume}% {format_source}",
     "format-bluetooth": "{icon} {volume}% {format_source}",
