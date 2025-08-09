@@ -4,7 +4,7 @@
   home.packages = [
   pkgs.brightnessctl 
   pkgs.pavucontrol
-  pkgs.swayosd
+  pkgs.bluez pkgs.rofi-wayland pkgs.libnotify pkgs.util-linux
   ];
 # 让 swayosd 的 server 常驻（否则 client 只能改音量，不会有 OSD）
   systemd.user.services.swayosd = {
