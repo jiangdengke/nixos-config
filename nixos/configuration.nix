@@ -11,7 +11,6 @@
     ../modules/packages.nix
     ../modules/dae
     ../modules/users.nix
-    ../modules/bluetooth-audio.nix
     ../modules/hyprland
     ../modules/prime-offload-amd-nvidia.nix
   ];
