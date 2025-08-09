@@ -23,6 +23,10 @@
   #services.displayManager.gdm.enable = true;
   #programs.hyprland.enable = true;
 
+hardware.bluetooth.enable = true;
+hardware.bluetooth.powerOnBoot = true;
+services.blueman.enable = true;   # 提供 blueman-mechanism
+
  services.getty.autologinUser = "jdk";
 
   #home-manager.backupFileExtension = "";
