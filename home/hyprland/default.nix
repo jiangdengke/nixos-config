@@ -150,6 +150,8 @@ device {
 ############    快捷键 绑定    ############
 $mainMod = SUPER  # 主修饰键（Windows/Command 键）
 # 基本操作
+bind = $mainMod, RETURN, fullscreen, 0
+
 bind  = $mainMod, D, exec, pkill -x rofi || /home/jdk/.local/bin/toggle-rofi.sh;  # 打开/关闭 rofi
 bind  = $mainMod, Q, exec, $terminal
 bind  = $mainMod, C, killactive,

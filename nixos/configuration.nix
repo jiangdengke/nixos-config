@@ -13,6 +13,7 @@
     ../modules/users.nix
     ../modules/bluetooth-audio.nix
     ../modules/hyprland
+    ../modules/prime-offload-amd-nvidia.nix
   ];
 
   # 核心系统配置
