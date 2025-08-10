@@ -37,6 +37,7 @@ $menu         = wofi --show drun  # 应用启动器
 # exec-once = $terminal
 # exec-once = nm-applet &
 # exec-once = firefox
+exec-once = waybar
 
 ############    环境变量 设置    ############
 # 设置光标大小

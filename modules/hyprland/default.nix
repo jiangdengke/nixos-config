@@ -8,8 +8,7 @@ programs.xwayland.enable = true;
     xwayland.enable = true;
   };
   programs.waybar = {
-    enable = true;
+    enable = false;
     package = pkgs.waybar;
-    systemd.target = "graphical-session.target";
   };
 }

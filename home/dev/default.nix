@@ -1,7 +1,7 @@
 { pkgs, ... }: 
 {
-    home.packages = [ 
-         pkgs.uv 
-         pkgs.python314
-    ]; 
+    imports = [
+     ./go.nix
+     ./python.nix
+    ];
 }

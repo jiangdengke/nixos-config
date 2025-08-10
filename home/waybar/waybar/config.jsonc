@@ -11,7 +11,7 @@
   // ===== 模块布局 =====
   "modules-left":   ["custom/l_end","clock","custom/r_end","custom/l_end","cpu","memory","custom/r_end","custom/padd"],
   "modules-center": ["custom/padd","custom/l_end","hyprland/workspaces","hyprland/window","custom/r_end","custom/padd"],
-  "modules-right":  ["custom/padd","custom/l_end","tray","bluetooth","backlight","battery","custom/r_end"],
+  "modules-right":  ["custom/padd","custom/l_end","tray","backlight","bluetooth","pulseaudio","battery","custom/r_end"],
 
   // ===== Hyprland 工作区与窗口标题 =====
   "hyprland/workspaces": {
@@ -91,7 +91,22 @@
   "tooltip-format": "{controller_alias}\n{num_connections} connected",
   "tooltip-format-connected": "{controller_alias}\n{num_connections} connected\n\n{device_enumerate}",
   "tooltip-format-enumerate-connected": "{device_alias}",
-  "on-click": "~/.config/waybar/scripts/bluetooth-menu.sh"
+  "on-click": "blueman-manager",                 // ← 左键弹出这个界面
+  "on-click-right": "bluetoothctl power toggle"  // 右键开/关（可选）
+},
+
+"pulseaudio": {
+  "format": "{icon} {volume}%",
+  "format-muted": "  muted",
+  "format-bluetooth": "{icon} {volume}%",
+  "tooltip-format": "{desc} — {volume}%",
+  "scroll-step": 5,
+"on-click":        "pavucontrol -t 3",
+"on-click-middle": "wpctl set-mute @DEFAULT_AUDIO_SINK@ toggle",
+"on-scroll-up":    "wpctl set-volume @DEFAULT_AUDIO_SINK@ 5%+",
+"on-scroll-down":  "wpctl set-volume @DEFAULT_AUDIO_SINK@ 5%-",
+
+  "format-icons": { "default": ["","",""] }
 },
 
  // ===== 音量 =====

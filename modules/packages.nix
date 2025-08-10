@@ -43,6 +43,7 @@
     # 开发工具
     jetbrains.idea-ultimate # IntelliJ IDEA Ultimate 版本，功能强大的 Java 开发工具
     jetbrains.pycharm-professional
+    jetbrains.goland
     cherry-studio # Cherry Studio，集成开发环境 (IDE)
     vscode # Visual Studio Code，轻量级代码编辑器
     termius
