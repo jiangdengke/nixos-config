@@ -19,6 +19,7 @@
     # 桌面环境
     firefox # 流行的网页浏览器
     vlc
+    qbittorrent
 
     kdePackages.dolphin # KDE 的文件管理器 Dolphin
     kdePackages.dolphin-plugins # Dolphin 文件管理器插件（如集成网络共享等）
