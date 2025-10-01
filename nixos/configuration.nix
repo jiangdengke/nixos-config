@@ -14,6 +14,7 @@
     ../modules/users.nix
     ../modules/niri
     ../modules/nix-ld.nix
+    ../modules/noctalia
   ];
 
   # 核心系统配置

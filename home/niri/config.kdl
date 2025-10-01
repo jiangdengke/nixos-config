@@ -1,5 +1,4 @@
-// 在启动 niri 时自动运行 Waybar 状态栏。
-spawn-at-startup "waybar"
+// Noctalia 由 systemd 服务管理，无需额外在此启动。
 spawn-at-startup "fcitx5 -d"
 
 input {
@@ -280,7 +279,7 @@ binds {
 
     // 推荐的程序启动快捷键：终端、应用启动器、屏幕锁。
     Mod+Return hotkey-overlay-title="Open a Terminal (Mod+Enter): ghostty" { spawn "ghostty"; } // 打开 Ghostty 终端
-    Mod+D hotkey-overlay-title="Run an Application: rofi" { spawn "toggle-rofi.sh"; } // 启动 Rofi 应用菜单
+    Mod+D hotkey-overlay-title="Run an Application Launcher" { spawn "noctalia-shell" "ipc" "call" "launcher" "toggle"; } // 打开 Noctalia 启动器
     Super+Alt+L hotkey-overlay-title="Lock the Screen: swaylock" { spawn "swaylock"; } // 调用 swaylock 锁屏
 
     // 也可以调用 shell，例如需要管道或多条命令时。

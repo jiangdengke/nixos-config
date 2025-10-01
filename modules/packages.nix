@@ -12,7 +12,6 @@
     wget # 命令行下载工具
     git # Git 版本控制工具
     wl-clipboard
-    waybar
     # Niri 由单独模块启用，无需重复安装
 
     xdg-desktop-portal-gtk

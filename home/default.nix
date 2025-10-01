@@ -7,13 +7,12 @@
     ./dev
     ./gtk
     ./niri
-    ./waybar
     ./fcitx5 # 中文输入法配置
     ./programs
     ./zsh
     ./fastfetch
     ./ghostty
-    ./rofi
+    ./noctalia
     ./yazi
     ./nvim
   ];
