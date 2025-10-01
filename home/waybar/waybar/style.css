@@ -1,0 +1,117 @@
+@import 'colors-waybar.css';
+
+* {
+  border: none;
+  border-radius: 0px;
+  font-family: "JetBrainsMono Nerd Font";
+  font-weight: bold;
+  font-size: 14px;
+  min-height: 10px;
+  transition: all 0.25s ease;
+}
+
+window#waybar {
+  margin: 12px 24px 0px;
+  padding: 0;
+  background: transparent;
+  border: none;
+  box-shadow: none;
+  color: @foreground;
+}
+
+tooltip {
+    background: linear-gradient(135deg,
+                alpha(@background, 0.92) 0%,
+                alpha(@color3, 0.18) 100%);
+    color: @foreground;
+    border-radius: 12px;
+    border: 1px solid alpha(@color3, 0.35);
+    box-shadow: 0 14px 30px alpha(@color3, 0.25);
+}
+
+#niri-workspaces button {
+    box-shadow: none;
+	text-shadow: none;
+    padding: 4px 10px;
+    border-radius: 12px;
+    margin: 2px 4px;
+    color: @foreground;
+    background: linear-gradient(135deg,
+                alpha(@color1, 0.32),
+                alpha(@color2, 0.36));
+}
+
+#niri-workspaces button.active {
+    background: linear-gradient(135deg,
+                alpha(@color4, 0.85),
+                alpha(@color6, 0.85));
+    color: @background;
+    box-shadow: 0 8px 18px alpha(@color4, 0.35);
+    margin-top: 1px;
+    margin-bottom: 3px;
+}
+
+#niri-workspaces button:hover {
+    background: linear-gradient(135deg,
+                alpha(@color3, 0.65),
+                alpha(@color5, 0.65));
+    color: @background;
+    box-shadow: 0 8px 20px alpha(@color3, 0.32);
+}
+
+window#waybar .modules-left,
+window#waybar .modules-center,
+window#waybar .modules-right {
+    background: linear-gradient(135deg,
+                alpha(@background, 0.82) 0%,
+                alpha(@color4, 0.32) 45%,
+                alpha(@color6, 0.36) 100%);
+    border-radius: 20px;
+    border: 1px solid alpha(@color4, 0.28);
+    box-shadow: 0 16px 34px alpha(@color4, 0.25);
+    padding: 6px 16px;
+    margin: 0 14px;
+}
+
+window#waybar .modules-left > *,
+window#waybar .modules-center > *,
+window#waybar .modules-right > * {
+    background: transparent;
+    border: none;
+    box-shadow: none;
+    margin: 0 6px;
+    padding: 0 4px;
+    color: @foreground;
+}
+
+window#waybar .modules-left > *:first-child,
+window#waybar .modules-center > *:first-child,
+window#waybar .modules-right > *:first-child {
+    margin-left: 0;
+}
+
+window#waybar .modules-left > *:last-child,
+window#waybar .modules-center > *:last-child,
+window#waybar .modules-right > *:last-child {
+    margin-right: 0;
+}
+
+#clock,
+#cpu,
+#memory,
+#tray,
+#backlight,
+#bluetooth,
+#custom-pipewire,
+#battery,
+#niri-window {
+    padding: 0 6px;
+}
+
+#custom-pipewire.normal {
+    color: @foreground;
+}
+
+#custom-pipewire.muted {
+    color: @color8;
+}
