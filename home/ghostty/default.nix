@@ -12,7 +12,7 @@ in
       "theme" = "nord";
       "background" = "#1f2332";
       "foreground" = "#e5e9f0";
-      "background-opacity" = 0.92;
+      "background-opacity" = 0.9;
       "cursor-style" = "bar";
       "cursor-color" = "#88c0d0";
       "cursor-text" = "#2e3440";

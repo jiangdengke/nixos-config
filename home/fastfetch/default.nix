@@ -5,27 +5,123 @@
     enable = true;
     package = pkgs.fastfetch;
 
-    # 这就是写入 $XDG_CONFIG_HOME/fastfetch/config.jsonc 的内容
     settings = {
-      # 简洁的模块顺序（带 Nerd Font 图标；不想要图标就删掉 key 里的小图标）
-      modules = [
-        { type = "os";       key = "  OS"; }
-        { type = "kernel";   key = "  Kernel"; }
-        { type = "uptime";   key = "󰍛  Uptime"; }
-        { type = "packages"; key = "  Packages"; }
-        { type = "shell";    key = "  Shell"; }
-        { type = "wm";       key = "  WM"; }
-        { type = "display";  key = "󱂬  Display"; }
-        { type = "cpu";      key = "  CPU"; }
-        { type = "gpu";      key = "󰢮  GPU"; }
-        { type = "memory";   key = "  Memory"; }
-        { type = "disk";     key = "  Disk"; folders = [ "/" ]; }
-        { type = "battery";  key = "  Battery"; }
-        { type = "colors"; }
-      ];
+      "$schema" = "https://github.com/fastfetch-cli/fastfetch/raw/dev/doc/json_schema.json";
 
-      # 可选：小号 NixOS logo（安全起见默认先不设；如需可解开下面注释）
-      # logo = { source = "nixos_small"; };
+      logo = {
+        type = "small";
+      };
+
+      display = {
+        separator = " 󱐋 ";
+        key = {
+          type = "icon";
+          width = 14;
+        };
+        percent = {
+          type = 2;
+        };
+      };
+
+      modules = [
+        {
+          type = "title";
+          key = "  Profile";
+          keyColor = "38;5;183";
+          format = "{user-name}@{host-name}";
+        }
+        "separator"
+        {
+          type = "os";
+          key = "  System";
+          keyColor = "38;5;147";
+        }
+        {
+          type = "kernel";
+          key = "  Kernel";
+          keyColor = "38;5;111";
+        }
+        {
+          type = "packages";
+          key = "  Packages";
+          keyColor = "38;5;147";
+        }
+        {
+          type = "shell";
+          key = "  Shell";
+          keyColor = "38;5;183";
+        }
+        {
+          type = "wm";
+          key = "  WM";
+          keyColor = "38;5;147";
+        }
+        {
+          type = "de";
+          key = "󰧨  Session";
+          keyColor = "38;5;147";
+        }
+        {
+          type = "uptime";
+          key = "󰅐  Uptime";
+          keyColor = "38;5;111";
+        }
+        "break"
+        {
+          type = "cpu";
+          key = "  CPU";
+          keyColor = "38;5;110";
+        }
+        {
+          type = "gpu";
+          key = "󰢮  GPU";
+          keyColor = "38;5;183";
+        }
+        {
+          type = "memory";
+          key = "  Memory";
+          keyColor = "38;5;147";
+        }
+        {
+          type = "disk";
+          key = "  Disk";
+          keyColor = "38;5;111";
+          folders = [ "/" ];
+        }
+        {
+          type = "battery";
+          key = "  Battery";
+          keyColor = "38;5;183";
+        }
+        "break"
+        {
+          type = "media";
+          key = "󰝚  Media";
+          keyColor = "38;5;147";
+        }
+        {
+          type = "localip";
+          key = "󰣺  LAN";
+          keyColor = "38;5;111";
+          compact = true;
+        }
+        {
+          type = "wifi";
+          key = "  Wi-Fi";
+          keyColor = "38;5;147";
+          format = "{ssid}";
+        }
+        {
+          type = "locale";
+          key = "󰕣  Locale";
+          keyColor = "38;5;183";
+        }
+        {
+          type = "colors";
+          paddingLeft = 2;
+          symbol = "circle";
+        }
+      ];
     };
   };
 }
