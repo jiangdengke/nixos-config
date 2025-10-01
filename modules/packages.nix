@@ -40,6 +40,7 @@
 
     # 通讯应用
     qq # 腾讯 QQ，聊天工具
+    wechat-uos
 
     # 开发工具
     vscode # Visual Studio Code，轻量级代码编辑器
