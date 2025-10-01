@@ -12,6 +12,8 @@
         --ozone-platform-hint=auto "$@"
     '')
 
+    codex
+    claude-code
     # 归档工具
     zip       # 创建 ZIP 压缩文件
     unzip     # 解压 ZIP 压缩文件
