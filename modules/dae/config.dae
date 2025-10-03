@@ -1,6 +1,6 @@
 subscription {
-"https://jsjc.cfd/api/v1/client/subscribe?token=********************************"
-a:"https://xbox.crvesoft.top/s/********************************&types=vless"
+"https://jsjc.cfd/api/v1/client/subscribe?token=25e812edbe2366a423868f8fd79e736b"
+a:"https://xbox.crvesoft.top/s/2e8cc2c2c4c8f0399b4c28f09b01414f&types=vless"
 }
 node {
 }
