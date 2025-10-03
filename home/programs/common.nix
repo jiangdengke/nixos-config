@@ -1,19 +1,11 @@
 {
   lib,
   pkgs,
+  catppuccin-bat,  # 引入 Catppuccin 主题作为外部依赖
   ...
 }: {
-  # 该模块仅使用 home-manager 提供的软件包与程序，无需额外外部依赖
   # 用户级软件包安装
   home.packages = with pkgs; [
-    (writeShellScriptBin "google-chrome-stable" ''
-      exec ${google-chrome}/bin/google-chrome-stable \
-        --enable-features=WaylandWindowDecorations \
-        --ozone-platform-hint=auto "$@"
-    '')
-
-    codex
-    claude-code
     # 归档工具
     zip       # 创建 ZIP 压缩文件
     unzip     # 解压 ZIP 压缩文件
@@ -33,6 +25,9 @@
 
     # 云原生工具
     docker-compose # Docker 容器编排工具
+
+    codex
+    claude-code
 
     # Node.js 开发环境
     nodejs         # Node.js JavaScript 运行环境

@@ -1,4 +1,3 @@
-# 管理 Zsh 与 powerlevel10k 的 Home Manager 配置
 { config, pkgs, ... }:
 
 {
@@ -9,6 +8,12 @@
   programs.zsh = {
     enable = true;
 
+    # 登录到 tty1 且尚未在 Wayland 会话时，启动 niri
+     profileExtra = ''
+      if [[ -z $WAYLAND_DISPLAY && "$(tty)" == "/dev/tty1" ]]; then
+        exec niri --session
+      fi
+    '';
     # 历史设置
     history = {
       size = 10000;
@@ -42,16 +47,6 @@
       function mkcd() {
         mkdir -p "$1" && cd "$1"
       }
-      function proxy_on() {
-        export all_proxy="socks5h://127.0.0.1:12345"
-        export http_proxy="http://127.0.0.1:12345"
-        export https_proxy="$http_proxy"
-        echo "CLI 代理已开启"
-      }
-      function proxy_off() {
-        unset all_proxy http_proxy https_proxy
-        echo "CLI 代理已关闭"
-      }
             # 确保 home-manager 在 PATH 中
       export PATH="$HOME/.nix-profile/bin:$PATH"
     '';
@@ -68,7 +63,6 @@
       # 系统操作
       update = "sudo nixos-rebuild switch"; # 更新 NixOS
       hmupdate = "home-manager switch"; # 更新 Home Manager 配置
-      qq = "env -u NIXOS_OZONE_WL -u ELECTRON_ENABLE_WAYLAND command qq";
 
       # Git 别名
       g = "git";
@@ -136,8 +130,10 @@
       theme = "";
     };
 
-    # 环境变量（避免与全局 EDITOR/VISUAL 冲突）
+    # 环境变量
     sessionVariables = {
+      EDITOR = "vim"; # 或者 nvim，如果您使用 Neovim
+      VISUAL = "code"; # 或您喜欢的图形编辑器
       PAGER = "less -R";
       MANPAGER = "sh -c 'col -bx | bat -l man -p'"; # 使用 bat 显示 man 页面
     };
@@ -145,9 +141,12 @@
 
   # 安装必要的包
   home.packages = with pkgs; [
-    # 仅保留其它模块未提供的工具，避免重复安装
+    eza # 现代化的 ls 替代品
+    bat # cat 的替代品，带有语法高亮
     fd # find 的替代品
+    ripgrep # grep 的替代品
     zoxide # z 命令的智能版本
     fzf # 模糊查找工具
+    jq # JSON 处理工具
   ];
 }

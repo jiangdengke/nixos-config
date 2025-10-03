@@ -1,4 +1,4 @@
-# 定义 GTK 与 Qt 主题相关的 Home Manager 配置
+# home/modules/gtk.nix
 { pkgs, lib, ... }:
 
 {
@@ -8,7 +8,7 @@
     gruvbox-kvantum
     adw-gtk3                 # GTK 主题示例
     papirus-icon-theme       # 图标主题示例
-    bibata-cursors           # 光标主题示例
+    capitaine-cursors        # 光标主题
     hicolor-icon-theme       # 你原来就有，保留
   ];
 
@@ -30,9 +30,14 @@
 
     # 光标主题
     cursorTheme = {
-      package = pkgs.bibata-cursors;
-      name    = "Bibata-Modern-Ice";
+      package = pkgs.capitaine-cursors;
+      name    = "capitaine-cursors";
       size    = 24;
+    };
+
+    font = {
+      package = pkgs.jetbrains-mono;
+      name = "JetBrains Mono 11";
     };
   };
 
@@ -43,16 +48,9 @@
     style.name = "kvantum";   # 或 "Fusion"
   };
 
-  dconf.settings = {
-    "org/gnome/desktop/interface" = {
-      # 让 xdg-desktop-portal-gnome 读取暗色偏好
-      color-scheme = "prefer-dark";
-    };
-  };
-
-  # Wayland 会话中让光标主题立即生效的环境变量
+  # Wayland 下让光标主题立即生效的环境变量
   home.sessionVariables = {
-    XCURSOR_THEME   = "Bibata-Modern-Ice";
+    XCURSOR_THEME   = "capitaine-cursors";
     XCURSOR_SIZE    = "24";
   };
 

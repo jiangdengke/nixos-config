@@ -1,0 +1,143 @@
+/**
+ * 现代风格 Rofi 主题
+ * 设计：深色背景，圆角边框，左侧图标
+ */
+
+configuration {
+    display-drun: "应用";
+    display-window: "窗口";
+    display-combi: "组合";
+    display-run: "运行";
+    display-ssh: "SSH";
+    drun-display-format: "{name}";
+    font: "JetBrains Mono 13";
+    modi: "window,run,drun,combi,ssh";
+    show-icons: true;
+    icon-theme: "Papirus";
+}
+
+* {
+    /* 颜色变量 */
+    background:     #282c34ee;
+    background-alt: #383c44;
+    foreground:     #d8dee9;
+    selected:       #5294e2;
+    active:         #98c379;
+    urgent:         #e06c75;
+    
+    /* 全局设置 */
+    border: 0;
+    margin: 0;
+    padding: 0;
+    spacing: 0;
+}
+
+window {
+    background-color: @background;
+    border-radius: 12px;
+    width: 45%;
+    transparency: "real";
+    location: center;
+    x-offset: 0;
+    y-offset: 0;
+}
+
+mainbox {
+    background-color: transparent;
+    children: [inputbar, listview];
+    padding: 12px;
+}
+
+inputbar {
+    background-color: @background-alt;
+    border-radius: 8px;
+    children: [prompt, entry];
+    margin: 4px 0 12px;
+}
+
+prompt {
+    background-color: @selected;
+    border-radius: 8px 0 0 8px;
+    padding: 12px;
+    text-color: @background;
+    font: "JetBrains Mono Bold 13";
+}
+
+entry {
+    background-color: @background-alt;
+    border-radius: 0 8px 8px 0;
+    cursor: text;
+    padding: 12px;
+    text-color: @foreground;
+}
+
+listview {
+    background-color: transparent;
+    cycle: false;
+    margin: 0 0 0 0;
+    scrollbar: true;
+    dynamic: true;
+    lines: 10;
+}
+
+scrollbar {
+    background-color: @background-alt;
+    border-radius: 8px;
+    handle-color: @selected;
+    handle-width: 5px;
+    margin: 0 0 0 10px;
+    padding: 0;
+}
+
+element {
+    background-color: transparent;
+    border-radius: 8px;
+    cursor: pointer;
+    padding: 8px;
+    text-color: @foreground;
+}
+
+element normal.normal,
+element alternate.normal {
+    background-color: transparent;
+    text-color: @foreground;
+}
+
+element normal.urgent,
+element alternate.urgent {
+    background-color: @urgent;
+    text-color: @foreground;
+}
+
+element normal.active,
+element alternate.active {
+    background-color: @active;
+    text-color: @background;
+}
+
+element selected {
+    background-color: @selected;
+    text-color: @background;
+}
+
+element-icon {
+    background-color: transparent;
+    size: 32px;
+    margin: 0 10px 0 0;
+}
+
+element-text {
+    background-color: transparent;
+    highlight: none;
+    text-color: inherit;
+    vertical-align: 0.5;
+}
+
+error-message {
+    background-color: @urgent;
+    border-radius: 8px;
+    padding: 12px;
+    text-color: @foreground;
+}
+
+/* 自定义内容结束 */

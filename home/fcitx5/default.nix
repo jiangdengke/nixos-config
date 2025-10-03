@@ -1,16 +1,28 @@
-{ lib, pkgs, ... }:
-let
-  classicUiConfig = builtins.readFile ./classicui.conf;
-in
+{ pkgs, lib, ... }:
 {
-  # 系统层已启用 fcitx5，这里仅下发主题配置
-  xdg.configFile."fcitx5/conf/classicui.conf" = {
-    force = true;
-    text = lib.mkForce classicUiConfig;
+  i18n.inputMethod = {
+    enable = true;
+    type = "fcitx5";
+    fcitx5.fcitx5-with-addons = pkgs.fcitx5-with-addons;
+    fcitx5.addons = with pkgs; [
+      fcitx5-rime
+      fcitx5-chinese-addons
+      fcitx5-table-extra
+      fcitx5-pinyin-moegirl
+      fcitx5-pinyin-zhwiki
+    ];
   };
-
-  xdg.dataFile."fcitx5/themes/macOS-light" = {
-    source = ./macOS-light;
-    recursive = true;
+  home.sessionVariables = {
+    GTK_IM_MODULE = "fcitx";
+    QT_IM_MODULE = "fcitx";
+    XMODIFIERS = "@im=fcitx";
+    SDL_IM_MODULE = "fcitx";
+    GLFW_IM_MODULE = lib.mkForce "fcitx";
+  };
+  home.file = {
+    ".config/fcitx5/conf/classicui.conf".source = ./classicui.conf;
+    ".local/share/fcitx5/themes/Nord/theme.conf".text = builtins.readFile ./theme.conf; # 直接读取文件内容
+    # 或者
+    # ".local/share/fcitx5/themes/Nord/theme.conf".source = ./theme.conf;
   };
 }
