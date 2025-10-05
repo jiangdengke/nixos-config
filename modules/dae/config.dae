@@ -1,6 +1,10 @@
 subscription {
-"https://jsjc.cfd/api/v1/client/subscribe?token=25e812edbe2366a423868f8fd79e736b"
+b:"https://jsjc.cfd/api/v1/client/subscribe?token=25e812edbe2366a423868f8fd79e736b"
 a:"https://xbox.crvesoft.top/s/2e8cc2c2c4c8f0399b4c28f09b01414f&types=vless"
+f:"https://xbox.crvesoft.top/s/2e8cc2c2c4c8f0399b4c28f09b01414f"
+c:"http://59.138.63.214:20153/sub/f1w0k3i85xkr4zx1"
+d:"http://59.138.63.214:20153/sub/d9hkj8rwdeagsnbw"
+e:"http://59.138.63.214:20153/sub/xv20fosldp2kwq2h"
 }
 node {
 }

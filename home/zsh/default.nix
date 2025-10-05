@@ -9,7 +9,7 @@
     enable = true;
 
     # 登录到 tty1 且尚未在 Wayland 会话时，启动 niri
-     profileExtra = ''
+    profileExtra = ''
       if [[ -z $WAYLAND_DISPLAY && "$(tty)" == "/dev/tty1" ]]; then
         exec niri --session
       fi
@@ -23,33 +23,6 @@
       extended = true;
       save = 10000;
     };
-
-    # ZSH 初始化脚本
-    initContent = ''
-      # 自定义配置
-      setopt AUTO_CD              # 自动切换目录
-      setopt EXTENDED_HISTORY     # 记录命令时间戳
-      setopt HIST_EXPIRE_DUPS_FIRST # 首先删除重复历史
-      setopt HIST_FIND_NO_DUPS    # 查找历史时忽略重复
-      setopt HIST_IGNORE_DUPS     # 不记录重复命令
-      setopt HIST_IGNORE_SPACE    # 不记录以空格开头的命令
-      setopt SHARE_HISTORY        # 会话间共享历史
-
-      # 自动建议配置
-      ZSH_AUTOSUGGEST_STRATEGY=(history completion)
-      ZSH_AUTOSUGGEST_HIGHLIGHT_STYLE="fg=#8a8a8a"
-
-      # 加载 powerlevel10k
-      source ${pkgs.zsh-powerlevel10k}/share/zsh-powerlevel10k/powerlevel10k.zsh-theme
-      [[ -f ~/.p10k.zsh ]] && source ~/.p10k.zsh
-
-      # 添加自定义函数
-      function mkcd() {
-        mkdir -p "$1" && cd "$1"
-      }
-            # 确保 home-manager 在 PATH 中
-      export PATH="$HOME/.nix-profile/bin:$PATH"
-    '';
 
     # 常用别名
     shellAliases = {
@@ -80,7 +53,7 @@
       "...." = "cd ../../..";
 
       # 快速打开和编辑配置文件
-      zshrc = "$EDITOR $HOME/.config/nixpkgs/home/zsh/default.nix";
+      zshrc = "$EDITOR $HOME/.zshrc";
       nixconf = "$EDITOR $HOME/.config/nixpkgs/configuration.nix";
     };
 
@@ -137,6 +110,14 @@
       PAGER = "less -R";
       MANPAGER = "sh -c 'col -bx | bat -l man -p'"; # 使用 bat 显示 man 页面
     };
+  };
+
+  home.file.".zshrc" = {
+    source = pkgs.substituteAll {
+      src = ./zshrc.zsh;
+      p10kTheme = "${pkgs.zsh-powerlevel10k}/share/zsh-powerlevel10k/powerlevel10k.zsh-theme";
+    };
+    force = true;
   };
 
   # 安装必要的包
