@@ -1,5 +1,11 @@
 { config, pkgs, ... }:
 
+let
+  zshrcExtra = builtins.replaceStrings
+    [ "@p10kTheme@" ]
+    [ "${pkgs.zsh-powerlevel10k}/share/zsh-powerlevel10k/powerlevel10k.zsh-theme" ]
+    (builtins.readFile ./zshrc.zsh);
+in
 {
   # 导入 powerlevel10k 配置，替代 starship
   imports = [ ./powerlevel10k.nix ];
@@ -14,6 +20,7 @@
         exec niri --session
       fi
     '';
+
     # 历史设置
     history = {
       size = 10000;
@@ -88,6 +95,9 @@
       }
     ];
 
+    # 用户补充配置
+    initContent = zshrcExtra;
+
     # Oh My ZSH 配置
     oh-my-zsh = {
       enable = true;
@@ -110,14 +120,6 @@
       PAGER = "less -R";
       MANPAGER = "sh -c 'col -bx | bat -l man -p'"; # 使用 bat 显示 man 页面
     };
-  };
-
-  home.file.".zshrc" = {
-    source = pkgs.substituteAll {
-      src = ./zshrc.zsh;
-      p10kTheme = "${pkgs.zsh-powerlevel10k}/share/zsh-powerlevel10k/powerlevel10k.zsh-theme";
-    };
-    force = true;
   };
 
   # 安装必要的包
