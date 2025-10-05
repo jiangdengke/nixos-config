@@ -23,7 +23,7 @@
 
     kdePackages.dolphin # KDE 的文件管理器 Dolphin
     kdePackages.dolphin-plugins # Dolphin 文件管理器插件（如集成网络共享等）
-    nautilus  # GNOME Files 文件管理器
+    nautilus  GNOME Files 文件管理器
     libva-utils
 
     # 网络工具
