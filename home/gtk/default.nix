@@ -51,10 +51,11 @@
   # Wayland 下让光标主题立即生效的环境变量
   home.sessionVariables = {
     XCURSOR_THEME   = "capitaine-cursors";
-    XCURSOR_SIZE    = "24";
+    XCURSOR_SIZE    = "28";
   };
 
-  #（可选）避免 HM 激活时提示“会覆盖现有 GTK 配置文件”
-  #home-manager.backupFileExtension = "backup";
+  # 强制覆盖已有 GTK 配置文件
+  xdg.configFile."gtk-4.0/gtk.css".force = true;
+  xdg.configFile."gtk-4.0/settings.ini".force = true;
 }
 
