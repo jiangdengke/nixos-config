@@ -21,3 +21,5 @@ mkcd() {
 
 # === Environment ===
 export PATH="$HOME/.nix-profile/bin:$PATH"
+export ANTHROPIC_BASE_URL="https://www.88code.org/api"
+export ANTHROPIC_AUTH_TOKEN="88_12d9277bbd33440e432294d1f80b11bced198002f85ddee298baeb89d7d69dff"

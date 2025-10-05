@@ -18,6 +18,19 @@
   # 核心系统配置
   nix.settings = {
     experimental-features = [ "nix-command" "flakes" ];
+    substituters = [
+      "https://mirrors.tuna.tsinghua.edu.cn/nix-channels/store"
+      "https://cache.nixos.org/"
+    ];
+    trusted-public-keys = [
+      "cache.nixos.org-1:6NCHdD59X431o0gWypbMrAURkbJ16Zpm4U4naySO3W4="
+    ];
+  };
+
+  nix.gc = {
+    automatic = true;
+    dates = "weekly";
+    options = "--delete-older-than 7d";
   };
 
   nixpkgs.overlays = [
