@@ -10,6 +10,7 @@
       # 简洁的模块顺序（带 Nerd Font 图标；不想要图标就删掉 key 里的小图标）
       modules = [
         { type = "os";       key = "  OS"; }
+        { type = "host";     key = "󰌢  Host"; }
         { type = "kernel";   key = "  Kernel"; }
         { type = "uptime";   key = "󰍛  Uptime"; }
         { type = "packages"; key = "  Packages"; }
@@ -17,10 +18,13 @@
         { type = "wm";       key = "  WM"; }
         { type = "display";  key = "󱂬  Display"; }
         { type = "cpu";      key = "  CPU"; }
+        { type = "temperature"; key = "  Temp"; }
         { type = "gpu";      key = "󰢮  GPU"; }
         { type = "memory";   key = "  Memory"; }
         { type = "disk";     key = "  Disk"; folders = [ "/" ]; }
         { type = "battery";  key = "  Battery"; }
+        { type = "localip";  key = "󰩟  LAN IP"; }
+        { type = "publicip"; key = "󰖟  WAN IP"; }
         { type = "colors"; }
       ];
 

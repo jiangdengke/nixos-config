@@ -27,7 +27,7 @@ input {
 
 layout {
     // 每个窗口外侧留 16 像素空隙
-    gaps 16
+    gaps 3
 
     // 切换窗口时不居中当前列
     center-focused-column "never"
@@ -44,7 +44,7 @@ layout {
 
     focus-ring {
         // 焦点窗口显示 4 像素蓝色边框
-        width 4
+        width 2
         active-color "#7fc8ff"
         inactive-color "#505050"
     }
@@ -70,9 +70,10 @@ layout {
     struts { }
 }
 
-// 开机自动启动 waybar 和 fcitx5
+// 开机自动启动 waybar、fcitx5 和壁纸脚本
 spawn-at-startup "waybar"
 spawn-at-startup "fcitx5"
+spawn-at-startup "sh" "-c" "~/.local/bin/swaybg-random.sh \"$HOME\"/Pictures/Wallpapers"
 
 // 启动时会弹出常用快捷键提示，如不需要可在此处改成 skip-at-startup
 hotkey-overlay { }
