@@ -23,8 +23,6 @@
         { type = "memory";   key = "  Memory"; }
         { type = "disk";     key = "  Disk"; folders = [ "/" ]; }
         { type = "battery";  key = "  Battery"; }
-        { type = "localip";  key = "󰩟  LAN IP"; }
-        { type = "publicip"; key = "󰖟  WAN IP"; }
         { type = "colors"; }
       ];
 

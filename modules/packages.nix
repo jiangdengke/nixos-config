@@ -43,5 +43,6 @@
     # 通讯应用
     qq # 腾讯 QQ，聊天工具
     wechat-uos
+    wemeet
   ];
 }

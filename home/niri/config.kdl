@@ -256,16 +256,24 @@ binds {
     Mod+F { maximize-column; }
     Mod+Shift+F { fullscreen-window; }
     Mod+Ctrl+F { expand-column-to-available-width; }
-    Mod+C { center-column; }
-    Mod+Ctrl+C { center-visible-columns; }
+    // 当前列或所有列居中的快捷键
+    // 让当前列居中显示
+    Mod+Ctrl+C hotkey-overlay-title="Center Column" { center-column; }
+    // 让所有可见列居中
+    Mod+Ctrl+Shift+C hotkey-overlay-title="Center Visible Columns" { center-visible-columns; }
     Mod+Minus { set-column-width "-10%"; }
     Mod+Equal { set-column-width "+10%"; }
     Mod+Shift+Minus { set-window-height "-10%"; }
     Mod+Shift+Equal { set-window-height "+10%"; }
 
     // 浮动、标签页以及布局切换
-    Mod+V       { toggle-window-floating; }
-    Mod+Shift+V { switch-focus-between-floating-and-tiling; }
+    // 切换浮动/平铺以及打开剪贴板历史
+    // 切换当前窗口平铺或浮动
+    Mod+C       hotkey-overlay-title="Toggle Floating" { toggle-window-floating; }
+    // 在浮动窗口和平铺窗口之间切换焦点
+    Mod+Shift+C hotkey-overlay-title="Focus Floating/Tiling" { switch-focus-between-floating-and-tiling; }
+    // 打开剪贴板历史菜单
+    Mod+V       hotkey-overlay-title="Clipboard History: cliphist" { spawn "~/.local/bin/cliphist-rofi.sh"; }
     Mod+W { toggle-column-tabbed-display; }
     // 如需把 Mod+Space/Shift+Space 作为布局切换，可改为：
     // 改法：Mod+Space { switch-layout "next"; }
