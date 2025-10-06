@@ -74,6 +74,7 @@ layout {
 spawn-at-startup "waybar"
 spawn-at-startup "fcitx5"
 spawn-at-startup "sh" "-c" "~/.local/bin/swaybg-random.sh \"$HOME\"/Pictures/Wallpapers"
+spawn-at-startup "~/.local/bin/cliphist-daemon.sh"
 
 // 启动时会弹出常用快捷键提示，如不需要可在此处改成 skip-at-startup
 hotkey-overlay { }
