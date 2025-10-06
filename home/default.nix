@@ -5,7 +5,6 @@
   imports = [
     ./dev
     ./gtk
-    ./cliphist
     ./niri
     ./waybar
     ./fcitx5 # 中文输入法配置
