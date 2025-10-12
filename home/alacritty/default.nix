@@ -9,7 +9,7 @@ in
   programs.alacritty = {
     enable = true;
     settings = {
-      window.opacity = 0.50;
+      window.opacity = 0.80;
       window.dynamic_padding = true;
       window.padding = {
         x = 5;
