@@ -80,7 +80,11 @@
   };
 
   nixpkgs.config.allowUnfree = true;
-  environment.variables.EDITOR = "nvim";
+  environment.variables = {
+    EDITOR = "nvim";
+    XCURSOR_THEME = "Bibata-Modern-Ice";
+    XCURSOR_SIZE = "24";
+  };
 
   # 时区设置
   time.timeZone = "Asia/Shanghai";

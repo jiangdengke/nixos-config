@@ -16,6 +16,11 @@ input {
     }
 }
 
+cursor {
+    xcursor-theme "Bibata-Modern-Ice"
+    xcursor-size 24
+}
+
 // 如需单独配置显示器，可取消注释下方示例（目前保持注释，不会生效）
 /-output "eDP-1" {
     // 设定 1920×1080@120Hz、缩放 2、保持默认方向与位置

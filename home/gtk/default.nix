@@ -8,7 +8,7 @@
     gruvbox-kvantum
     adw-gtk3                 # GTK 主题示例
     papirus-icon-theme       # 图标主题示例
-    capitaine-cursors        # 光标主题
+    bibata-cursors           # 光标主题
     hicolor-icon-theme       # 你原来就有，保留
   ];
 
@@ -30,8 +30,8 @@
 
     # 光标主题
     cursorTheme = {
-      package = pkgs.capitaine-cursors;
-      name    = "capitaine-cursors";
+      package = pkgs.bibata-cursors;
+      name    = "Bibata-Modern-Ice";
       size    = 24;
     };
 
@@ -50,12 +50,19 @@
 
   # Wayland 下让光标主题立即生效的环境变量
   home.sessionVariables = {
-    XCURSOR_THEME   = "capitaine-cursors";
-    XCURSOR_SIZE    = "28";
+    XCURSOR_THEME   = "Bibata-Modern-Ice";
+    XCURSOR_SIZE    = "24";
+  };
+
+  home.pointerCursor = {
+    name = "Bibata-Modern-Ice";
+    package = pkgs.bibata-cursors;
+    size = 24;
+    gtk.enable = true;
+    x11.enable = true;
   };
 
   # 强制覆盖已有 GTK 配置文件
   xdg.configFile."gtk-4.0/gtk.css".force = true;
   xdg.configFile."gtk-4.0/settings.ini".force = true;
 }
-
