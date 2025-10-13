@@ -104,6 +104,12 @@ window-rule {
     open-floating true
 }
 
+// Ghostty 终端透明度设置
+window-rule {
+    match app-id="com.mitchellh.ghostty"
+    opacity 0.6
+}
+
 // 示例：阻止两个密码管理器被截图（保留注释，想用时去掉 /-）
 /-window-rule {
     match app-id=r#"^org\.keepassxc\.KeePassXC$"#
