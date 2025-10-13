@@ -37,13 +37,15 @@
         }
         {
           type = "os";
-          key = "  󰣇 OS";
+          key = "   OS";
           keyColor = "cyan";
+          format = "{2}";
         }
         {
           type = "kernel";
           key = "   Kernel";
           keyColor = "cyan";
+          format = "{2}";
         }
         {
           type = "packages";
@@ -59,6 +61,7 @@
           type = "wm";
           key = "  󱗃 WM";
           keyColor = "yellow";
+          format = "{2}";
         }
         {
           type = "terminal";
@@ -83,11 +86,13 @@
           type = "cpu";
           key = "   CPU";
           keyColor = "blue";
+          format = "{1} @ {7}";
         }
         {
           type = "gpu";
           key = "  󰊴 GPU";
           keyColor = "blue";
+          format = "{1} {2}";
         }
         {
           type = "memory";

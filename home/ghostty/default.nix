@@ -1,45 +1,51 @@
-{ pkgs, config, ... }:
+{ pkgs, ... }:
 
 {
-  # 直接写配置文件而不是用 programs.ghostty
-  home.file.".config/ghostty/config".text = ''
-    # 字体配置
-    font-family = JetBrainsMono Nerd Font
-    font-size = 11
+  programs.ghostty = {
+    enable = true;
+    package = pkgs.ghostty;
 
-    # 窗口配置
-    window-padding-x = 5
-    window-padding-y = 5
-    window-padding-balance = true
+    settings = {
+      # 字体配置
+      font-family = "JetBrainsMono Nerd Font";
+      font-size = 11;
 
-    # 透明度设置
-    background-opacity = 0.8
-    background-blur-radius = 20
+      # 窗口配置
+      window-padding-x = 5;
+      window-padding-y = 5;
+      window-padding-balance = true;
 
-    # 滚动历史
-    scrollback-limit = 10000
+      # 透明度设置
+      background-opacity = 0.6;
+      background-blur-radius = 20;
 
-    # 主题配色
-    theme = Catppuccin Mocha
+      # 滚动历史
+      scrollback-limit = 10000;
 
-    # 光标
-    cursor-style = block
-    cursor-style-blink = false
+      # 主题配色
+      theme = "Catppuccin Mocha";
 
-    # 窗口装饰
-    window-decoration = true
+      # 光标
+      cursor-style = "block";
+      cursor-style-blink = false;
 
-    # 性能优化
-    copy-on-select = false
+      # 窗口装饰
+      window-decoration = true;
 
-    # Shell 集成
-    shell-integration = true
-    shell-integration-features = cursor,sudo,title
-  '';
+      # 性能优化
+      copy-on-select = false;
 
-  # 确保 ghostty 已安装
+      # Shell 集成
+      shell-integration = true;
+      shell-integration-features = "cursor,sudo,title";
+    };
+
+    # 启用 Zsh 集成
+    enableZshIntegration = true;
+  };
+
+  # 确保字体包已安装
   home.packages = with pkgs; [
-    ghostty
     nerd-fonts.jetbrains-mono
     noto-fonts
     noto-fonts-cjk-sans
