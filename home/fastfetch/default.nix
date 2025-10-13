@@ -5,77 +5,93 @@
     enable = true;
     package = pkgs.fastfetch;
 
-    # 这就是写入 $XDG_CONFIG_HOME/fastfetch/config.jsonc 的内容
     settings = {
       logo = {
-        source = "nixos"; # 指定用哪种logo；"auto" 默认自动识别，"none" 则不显示
-        type = "kitty"; # "ascii" | "kitty" | "sixel" | "iterm" | "auto"
+        source = "nixos";
+        type = "auto";
         padding = {
           left = 2;
-          right = 1;
-        }; # 左右留白
-        height = 10;
+          right = 4;
+        };
+        height = 12;
+        color = {
+          "1" = "cyan";
+          "2" = "blue";
+        };
       };
-      # 简洁的模块顺序（带 Nerd Font 图标；不想要图标就删掉 key 里的小图标）
+
+      display = {
+        separator = " ";
+        color = {
+          keys = "cyan";
+          title = "blue";
+        };
+      };
+
       modules = [
         {
-          type = "os";
-          key = "  OS";
+          type = "title";
+          format = "{user-name-colored}@{host-name-colored}";
         }
+        { type = "separator"; }
         {
-          type = "host";
-          key = "󰌢  Host";
+          type = "os";
+          key = " OS      ";
+          keyColor = "blue";
         }
         {
           type = "kernel";
-          key = "  Kernel";
-        }
-        {
-          type = "uptime";
-          key = "󰍛  Uptime";
+          key = " Kernel  ";
+          keyColor = "cyan";
         }
         {
           type = "packages";
-          key = "  Packages";
+          key = " Packages";
+          keyColor = "magenta";
         }
         {
           type = "shell";
-          key = "  Shell";
+          key = " Shell   ";
+          keyColor = "yellow";
         }
         {
           type = "wm";
-          key = "  WM";
+          key = " WM      ";
+          keyColor = "blue";
         }
         {
-          type = "display";
-          key = "󱂬  Display";
+          type = "terminal";
+          key = " Terminal";
+          keyColor = "green";
         }
+        { type = "break"; }
         {
           type = "cpu";
-          key = "  CPU";
-        }
-        {
-          type = "temperature";
-          key = "  Temp";
+          key = " CPU     ";
+          keyColor = "red";
         }
         {
           type = "gpu";
-          key = "󰢮  GPU";
+          key = " GPU     ";
+          keyColor = "yellow";
         }
         {
           type = "memory";
-          key = "  Memory";
+          key = " Memory  ";
+          keyColor = "cyan";
         }
         {
           type = "disk";
-          key = "  Disk";
+          key = " Disk    ";
+          keyColor = "magenta";
           folders = [ "/" ];
         }
+        { type = "break"; }
         {
-          type = "battery";
-          key = "  Battery";
+          type = "colors";
+          paddingLeft = 2;
+          symbol = "circle";
         }
-        { type = "colors"; }
       ];
     };
   };
