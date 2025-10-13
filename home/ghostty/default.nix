@@ -2,9 +2,17 @@
 
 {
   programs.ghostty = {
+    # 启用 Ghostty
     enable = true;
     package = pkgs.ghostty;
 
+    # 启用 Zsh 集成（自动配置 shell integration）
+    enableZshIntegration = true;
+
+    # 为 bat 安装语法高亮（默认启用）
+    installBatSyntax = true;
+
+    # Ghostty 配置
     settings = {
       # 字体配置
       font-family = "JetBrainsMono Nerd Font";
@@ -34,14 +42,7 @@
 
       # 性能优化
       copy-on-select = false;
-
-      # Shell 集成
-      shell-integration = true;
-      shell-integration-features = "cursor,sudo,title";
     };
-
-    # 启用 Zsh 集成
-    enableZshIntegration = true;
   };
 
   # 确保字体包已安装
