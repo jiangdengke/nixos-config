@@ -13,7 +13,7 @@
           left = 2;
           right = 4;
         };
-        height = 12;
+        height = 14;
         color = {
           "1" = "cyan";
           "2" = "blue";
@@ -21,72 +21,95 @@
       };
 
       display = {
-        separator = " ";
-        color = {
-          keys = "cyan";
-          title = "blue";
-        };
+        separator = " : ";
       };
 
       modules = [
         {
           type = "title";
-          format = "{user-name-colored}@{host-name-colored}";
+          key = "  ";
+          keyColor = "blue";
+          format = "{user-name}@{host-name}";
         }
-        { type = "separator"; }
+        {
+          type = "custom";
+          format = "┌────────────────────────────────────────────┐";
+        }
         {
           type = "os";
-          key = " OS      ";
-          keyColor = "blue";
+          key = "  󰣇 OS";
+          keyColor = "cyan";
         }
         {
           type = "kernel";
-          key = " Kernel  ";
+          key = "   Kernel";
           keyColor = "cyan";
         }
         {
           type = "packages";
-          key = " Packages";
-          keyColor = "magenta";
+          key = "  󰏗 Packages";
+          keyColor = "green";
         }
         {
           type = "shell";
-          key = " Shell   ";
+          key = "   Shell";
           keyColor = "yellow";
         }
         {
           type = "wm";
-          key = " WM      ";
-          keyColor = "blue";
-        }
-        {
-          type = "terminal";
-          key = " Terminal";
-          keyColor = "green";
-        }
-        { type = "break"; }
-        {
-          type = "cpu";
-          key = " CPU     ";
-          keyColor = "red";
-        }
-        {
-          type = "gpu";
-          key = " GPU     ";
+          key = "  󱗃 WM";
           keyColor = "yellow";
         }
         {
+          type = "terminal";
+          key = "   Terminal";
+          keyColor = "yellow";
+        }
+        {
+          type = "display";
+          key = "  󰍹 Display";
+          keyColor = "green";
+        }
+        {
+          type = "custom";
+          format = "└────────────────────────────────────────────┘";
+        }
+        "break"
+        {
+          type = "custom";
+          format = "┌────────────────────────────────────────────┐";
+        }
+        {
+          type = "cpu";
+          key = "   CPU";
+          keyColor = "blue";
+        }
+        {
+          type = "gpu";
+          key = "  󰊴 GPU";
+          keyColor = "blue";
+        }
+        {
           type = "memory";
-          key = " Memory  ";
-          keyColor = "cyan";
+          key = "   Memory";
+          keyColor = "magenta";
         }
         {
           type = "disk";
-          key = " Disk    ";
+          key = "  󱦟 Disk";
           keyColor = "magenta";
           folders = [ "/" ];
         }
-        { type = "break"; }
+        {
+          type = "uptime";
+          key = "  󱫐 Uptime";
+          keyColor = "red";
+        }
+        {
+          type = "custom";
+          format = "└────────────────────────────────────────────┘";
+        }
+        "break"
         {
           type = "colors";
           paddingLeft = 2;

@@ -2,56 +2,74 @@
 { pkgs, lib, ... }:
 
 {
-  # 方便临时切换的 GUI 工具 + 常见主题包
+  # 主题包和工具
   home.packages = with pkgs; [
-    nwg-look                 # GTK 外观切换器
-    gruvbox-kvantum
-    adw-gtk3                 # GTK 主题示例
-    papirus-icon-theme       # 图标主题示例
-    bibata-cursors           # 光标主题
-    hicolor-icon-theme       # 你原来就有，保留
+    nwg-look
+    catppuccin-gtk
+    papirus-icon-theme
+    bibata-cursors
+    hicolor-icon-theme
   ];
 
-  # GTK 外观（长期生效以 HM 为准；nwg-look 只做临时预览）
+  # GTK 外观配置
   gtk = {
     enable = true;
 
-    # 窗口主题（你现在用 Adwaita 也行）
+    # 窗口主题 - Catppuccin Mocha (深色柔和风格)
     theme = {
-      package = pkgs.adw-gtk3;
-      name    = "adw-gtk3-dark";
+      package = pkgs.catppuccin-gtk.override {
+        accents = [ "teal" ];
+        variant = "mocha";
+      };
+      name = "Catppuccin-Mocha-Standard-Teal-Dark";
     };
 
-    # 图标主题（你原本是 Adwaita；这里示例 Papirus）
+    # 图标主题 - Papirus 深色
     iconTheme = {
       package = pkgs.papirus-icon-theme;
-      name    = "Papirus-Dark";
+      name = "Papirus-Dark";
     };
 
-    # 光标主题
+    # 光标主题 - Bibata 现代风格
     cursorTheme = {
       package = pkgs.bibata-cursors;
-      name    = "Bibata-Modern-Ice";
-      size    = 24;
+      name = "Bibata-Modern-Ice";
+      size = 24;
     };
 
+    # 字体
     font = {
-      package = pkgs.jetbrains-mono;
-      name = "JetBrains Mono 11";
+      package = pkgs.nerd-fonts.jetbrains-mono;
+      name = "JetBrainsMonoNL Nerd Font 11";
+    };
+
+    # GTK3 额外配置
+    gtk3.extraConfig = {
+      gtk-application-prefer-dark-theme = true;
+      gtk-button-images = true;
+      gtk-menu-images = true;
+      gtk-enable-animations = true;
+      gtk-primary-button-warps-slider = false;
+    };
+
+    # GTK4 额外配置
+    gtk4.extraConfig = {
+      gtk-application-prefer-dark-theme = true;
+      gtk-hint-font-metrics = true;
     };
   };
 
-  # Qt 应用的外观（可用 qt6ct 调整）
+  # Qt 应用的外观
   qt = {
     enable = true;
-    platformTheme.name = "qtct";   # 让 qt6ct 生效
-    style.name = "kvantum";   # 或 "Fusion"
+    platformTheme.name = "qtct";
+    style.name = "kvantum";
   };
 
-  # Wayland 下让光标主题立即生效的环境变量
+  # 光标主题环境变量
   home.sessionVariables = {
-    XCURSOR_THEME   = "Bibata-Modern-Ice";
-    XCURSOR_SIZE    = "24";
+    XCURSOR_THEME = "Bibata-Modern-Ice";
+    XCURSOR_SIZE = "24";
   };
 
   home.pointerCursor = {
@@ -62,7 +80,29 @@
     x11.enable = true;
   };
 
-  # 强制覆盖已有 GTK 配置文件
-  xdg.configFile."gtk-4.0/gtk.css".force = true;
-  xdg.configFile."gtk-4.0/settings.ini".force = true;
+  # GTK4 自定义样式
+  xdg.configFile."gtk-4.0/gtk.css" = {
+    force = true;
+    text = ''
+      /* 圆角窗口 */
+      window {
+        border-radius: 12px;
+      }
+
+      /* 按钮圆角 */
+      button {
+        border-radius: 8px;
+      }
+
+      /* 输入框圆角 */
+      entry {
+        border-radius: 8px;
+      }
+
+      /* 滚动条美化 */
+      scrollbar {
+        border-radius: 8px;
+      }
+    '';
+  };
 }

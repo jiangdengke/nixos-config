@@ -13,7 +13,7 @@
     ./programs
     ./zsh
     ./fastfetch
-    ./alacritty
+    ./ghostty
     ./rofi
     ./yazi
     ./nvim
