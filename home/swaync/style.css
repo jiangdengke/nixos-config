@@ -1,0 +1,178 @@
+/* swaync 样式配置 - 匹配 mako 主题风格 */
+
+* {
+  font-family: "JetBrainsMono Nerd Font";
+  font-size: 11pt;
+  font-weight: 400;
+}
+
+/* 通知窗口背景 */
+.notification {
+  background: #1e1e2edd;
+  border: 2px solid #9ccfd8;
+  border-radius: 12px;
+  margin: 8px;
+  padding: 0;
+}
+
+.notification-content {
+  background: transparent;
+  padding: 15px;
+  margin: 0;
+}
+
+/* 通知标题 */
+.summary {
+  color: #e0def4;
+  font-weight: 600;
+  font-size: 12pt;
+  margin-bottom: 5px;
+}
+
+/* 通知正文 */
+.body {
+  color: #e0def4;
+  font-size: 11pt;
+}
+
+/* 通知时间 */
+.time {
+  color: #6e6a86;
+  font-size: 9pt;
+  margin-top: 5px;
+}
+
+/* 紧急程度样式 */
+.low {
+  border-color: #6e6a86;
+}
+
+.normal {
+  border-color: #9ccfd8;
+}
+
+.critical {
+  border-color: #eb6f92;
+  background: #1e1e2edd;
+}
+
+.critical .summary,
+.critical .body {
+  color: #eb6f92;
+}
+
+/* 通知中心面板 */
+.control-center {
+  background: #1e1e2ef0;
+  border: 2px solid #9ccfd8;
+  border-radius: 12px;
+  margin: 10px;
+  padding: 10px;
+}
+
+/* 通知中心标题 */
+.control-center .notification-row {
+  margin: 5px 0;
+}
+
+/* DND 按钮 */
+.control-center-dnd {
+  background: #1e1e2e;
+  border: 2px solid #9ccfd8;
+  border-radius: 8px;
+  padding: 8px;
+  margin: 5px;
+  color: #e0def4;
+}
+
+.control-center-dnd:checked {
+  background: #eb6f92;
+  border-color: #eb6f92;
+  color: #1e1e2e;
+}
+
+/* 清除按钮 */
+.control-center-clear-all {
+  background: #1e1e2e;
+  border: 2px solid #9ccfd8;
+  border-radius: 8px;
+  padding: 8px;
+  margin: 5px;
+  color: #e0def4;
+}
+
+.control-center-clear-all:hover {
+  background: #9ccfd8;
+  color: #1e1e2e;
+}
+
+/* 通知图标 */
+.notification-default-action .notification-icon {
+  margin-right: 10px;
+}
+
+/* 关闭按钮 */
+.close-button {
+  background: #eb6f92;
+  color: #1e1e2e;
+  border-radius: 6px;
+  padding: 4px 8px;
+  margin: 5px;
+}
+
+.close-button:hover {
+  background: #f6c177;
+}
+
+/* 通知操作按钮 */
+.notification-action {
+  background: #9ccfd8;
+  color: #1e1e2e;
+  border-radius: 6px;
+  padding: 6px 12px;
+  margin: 3px;
+}
+
+.notification-action:hover {
+  background: #f6c177;
+}
+
+/* 滚动条 */
+.control-center scrollbar {
+  background: transparent;
+}
+
+.control-center scrollbar slider {
+  background: #6e6a86;
+  border-radius: 8px;
+}
+
+.control-center scrollbar slider:hover {
+  background: #9ccfd8;
+}
+
+/* Widget 标题 */
+.widget-title {
+  color: #e0def4;
+  font-size: 14pt;
+  font-weight: 600;
+  margin: 10px;
+}
+
+/* Widget 按钮 */
+.widget-dnd {
+  background: #1e1e2e;
+  border: 2px solid #9ccfd8;
+  border-radius: 8px;
+  padding: 10px;
+  margin: 5px;
+}
+
+.widget-dnd > switch {
+  background: #6e6a86;
+  border-radius: 12px;
+}
+
+.widget-dnd > switch:checked {
+  background: #eb6f92;
+}

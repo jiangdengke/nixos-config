@@ -1,55 +1,51 @@
 { pkgs, ... }:
 {
-  services.mako = {
+  # 禁用 mako，改用 swaync
+  services.mako.enable = false;
+
+  # 启用 swaync (Sway Notification Center)
+  services.swaync = {
     enable = true;
-    package = pkgs.mako;
     settings = {
-      # 位置和尺寸
-      anchor = "top-right";
-      width = 350;
-      height = 150;
-      margin = "15";
-      padding = "15";
+      # 通知行为
+      positionX = "right";
+      positionY = "top";
+      timeout = 5;
+      timeout-low = 3;
+      timeout-critical = 0;
 
-      # 样式
-      border-radius = 12;
-      border-size = 2;
-      font = "JetBrainsMono Nerd Font 11";
+      # 通知中心
+      control-center-margin-top = 10;
+      control-center-margin-bottom = 10;
+      control-center-margin-right = 10;
+      control-center-margin-left = 10;
+      control-center-width = 400;
+      control-center-height = 600;
 
-      # 配色 - 与 rofi 统一的柔和风格
-      background-color = "#1e1e2edd";
-      text-color = "#e0def4";
-      border-color = "#9ccfd8";
+      # 通知样式
+      notification-window-width = 400;
+      notification-icon-size = 48;
+      notification-body-image-height = 100;
+      notification-body-image-width = 200;
 
-      # 图标
-      max-icon-size = 48;
-      icon-location = "left";
+      # 键盘快捷键
+      keyboard-shortcuts = true;
+      image-visibility = "when-available";
+      transition-time = 200;
 
-      # 行为
-      default-timeout = 5000;
-      ignore-timeout = false;
+      # 勿扰模式
+      hide-on-clear = false;
+      hide-on-action = true;
+      script-fail-notify = true;
 
-      # 分组
-      group-by = "app-name";
-      max-visible = 3;
+      # 通知分组
+      widgets = [
+        "inhibitors"
+        "title"
+        "dnd"
+        "notifications"
+      ];
     };
-    extraConfig = ''
-      [urgency=low]
-      border-color=#6e6a86
-      background-color=#1e1e2edd
-
-      [urgency=normal]
-      border-color=#9ccfd8
-      background-color=#1e1e2edd
-
-      [urgency=high]
-      border-color=#eb6f92
-      background-color=#1e1e2edd
-      text-color=#eb6f92
-      default-timeout=0
-
-      [app-name="Spotify"]
-      border-color=#f6c177
-    '';
+    style = builtins.readFile ../swaync/style.css;
   };
 }

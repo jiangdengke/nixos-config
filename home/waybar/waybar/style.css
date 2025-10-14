@@ -90,6 +90,23 @@ tooltip.clock {
   padding-right: 4px;
 }
 
+#custom-notification {
+  min-width: 22px;
+}
+
+#custom-notification.notification {
+  color: #eb6f92;
+}
+
+#custom-notification.dnd-notification {
+  color: #f6c177;
+}
+
+#custom-notification.none,
+#custom-notification.dnd-none {
+  color: #6e6a86;
+}
+
 #workspaces,
 #tray {
   padding: 0px;

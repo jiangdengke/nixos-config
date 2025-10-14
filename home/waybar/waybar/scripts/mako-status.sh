@@ -1,13 +1,12 @@
 #!/usr/bin/env bash
 
 # 获取 mako 模式和通知数量
-mode=$(makoctl mode)
-count=$(makoctl list | jq -r '.data[0] | length')
-
-# 如果没有通知，设为 0
-if [ -z "$count" ] || [ "$count" == "null" ]; then
-    count=0
-fi
+mode=$(makoctl mode 2>/dev/null || echo "default")
+# 统计 "Notification" 开头的行数
+count=$(makoctl list 2>/dev/null | grep -c "^Notification" 2>/dev/null || echo "0")
+# 确保 count 是纯数字
+count=$(echo "$count" | tr -d '\n' | grep -o '[0-9]*' | head -1)
+[ -z "$count" ] && count=0
 
 # 根据模式和通知数量决定图标状态
 if [[ "$mode" == *"dnd"* ]]; then
@@ -26,7 +25,7 @@ fi
 
 # 输出 JSON 格式
 if [ "$count" -gt 0 ]; then
-    text="$count"
+    text=" $count"
 else
     text=""
 fi
