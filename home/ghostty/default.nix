@@ -25,7 +25,7 @@
       # 字体家族：JetBrainsMono Nerd Font（包含编程连字和图标）
       font-family = "JetBrainsMono Nerd Font";
       # 字体大小：8pt（可根据屏幕和喜好调整，范围通常 8-14）
-      font-size = 8;
+      font-size = 10;
 
       # --- 窗口内边距 ---
       # 左右内边距：5 像素（文字距离窗口左右边缘的距离）
@@ -38,7 +38,7 @@
       # --- 透明度和模糊 ---
       # 背景透明度：0.8（范围 0.0-1.0，0 完全透明，1 完全不透明）
       # 注意：需要 Niri 窗口管理器配合才能生效
-      background-opacity = 1;
+      background-opacity = 0.8;
       # 背景模糊半径：20 像素（毛玻璃效果，需要合成器支持）
       background-blur-radius = 80;
 

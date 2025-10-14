@@ -156,11 +156,6 @@ animations {
         spring damping-ratio=1.0 stiffness=800 epsilon=0.0001
     }
 
-    // 窗口焦点变化：快速淡入淡出
-    window-focus-change {
-        duration-ms 150
-    }
-
     // 配置截图动画：快速淡入
     config-notification-open-close {
         spring damping-ratio=0.6 stiffness=1000 epsilon=0.001
@@ -185,7 +180,7 @@ window-rule {
 // Ghostty 终端透明度设置
 window-rule {
     match app-id="com.mitchellh.ghostty"
-    opacity 0.8
+    opacity 1.0
 }
 
 // 示例：阻止两个密码管理器被截图（保留注释，想用时去掉 /-）
