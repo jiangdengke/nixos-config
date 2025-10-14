@@ -37,13 +37,13 @@
         }
         {
           type = "os";
-          key = "   OS";
+          key = "  OS      ";
           keyColor = "cyan";
           format = "{2}";
         }
         {
           type = "kernel";
-          key = "   Kernel";
+          key = "  Kernel  ";
           keyColor = "cyan";
           format = "{2}";
         }
@@ -54,18 +54,18 @@
         }
         {
           type = "shell";
-          key = "   Shell";
+          key = "  Shell   ";
           keyColor = "yellow";
         }
         {
           type = "wm";
-          key = "  󱗃 WM";
+          key = "  󱗃 WM      ";
           keyColor = "yellow";
           format = "{2}";
         }
         {
           type = "terminal";
-          key = "   Terminal";
+          key = "  Terminal";
           keyColor = "yellow";
         }
         {
@@ -84,30 +84,30 @@
         }
         {
           type = "cpu";
-          key = "   CPU";
+          key = "  CPU     ";
           keyColor = "blue";
           format = "{1} @ {7}";
         }
         {
           type = "gpu";
-          key = "  󰊴 GPU";
+          key = "  󰊴 GPU     ";
           keyColor = "blue";
           format = "{1} {2}";
         }
         {
           type = "memory";
-          key = "   Memory";
+          key = "  Memory  ";
           keyColor = "magenta";
         }
         {
           type = "disk";
-          key = "  󱦟 Disk";
+          key = "  󱦟 Disk    ";
           keyColor = "magenta";
           folders = [ "/" ];
         }
         {
           type = "uptime";
-          key = "  󱫐 Uptime";
+          key = "  󱫐 Uptime  ";
           keyColor = "red";
         }
         {

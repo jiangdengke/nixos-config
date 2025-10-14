@@ -24,7 +24,7 @@
       window-padding-balance = true;
 
       # 透明度设置
-      background-opacity = 0.6;
+      background-opacity = 0.8;
       background-blur-radius = 20;
 
       # 滚动历史
