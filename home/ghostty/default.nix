@@ -38,9 +38,9 @@
       # --- 透明度和模糊 ---
       # 背景透明度：0.8（范围 0.0-1.0，0 完全透明，1 完全不透明）
       # 注意：需要 Niri 窗口管理器配合才能生效
-      background-opacity = 0.8;
+      background-opacity = 1;
       # 背景模糊半径：20 像素（毛玻璃效果，需要合成器支持）
-      background-blur-radius = 20;
+      background-blur-radius = 80;
 
       # --- 滚动缓冲区 ---
       # 滚动历史记录行数：10000 行（可向上滚动查看的历史输出）
@@ -63,7 +63,7 @@
 
       # --- 性能优化 ---
       # 选择时复制：关闭（true 为选中文字自动复制到剪贴板）
-      copy-on-select = false;
+      copy-on-select = true;
     };
   };
 
