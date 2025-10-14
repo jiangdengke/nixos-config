@@ -40,7 +40,7 @@
     # 字体
     font = {
       package = pkgs.nerd-fonts.jetbrains-mono;
-      name = "JetBrainsMonoNL Nerd Font 11";
+      name = "JetBrainsMono Nerd Font 11";
     };
 
     # GTK3 额外配置

@@ -21,5 +21,12 @@
   };
 
   # 安装 powerlevel10k 推荐的字体
-  fonts.fontconfig.enable = true;
+  fonts.fontconfig = {
+    enable = true;
+    defaultFonts = {
+      monospace = [ "JetBrainsMono Nerd Font Mono" ];
+      serif = [ "JetBrainsMono Nerd Font" ];
+      sansSerif = [ "JetBrainsMono Nerd Font" ];
+    };
+  };
 }

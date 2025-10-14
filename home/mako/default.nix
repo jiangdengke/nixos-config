@@ -14,7 +14,7 @@
       # 样式
       border-radius = 12;
       border-size = 2;
-      font = "JetBrainsMonoNL Nerd Font 11";
+      font = "JetBrainsMono Nerd Font 11";
 
       # 配色 - 与 rofi 统一的柔和风格
       background-color = "#1e1e2edd";

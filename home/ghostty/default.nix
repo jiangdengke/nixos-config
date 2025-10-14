@@ -24,6 +24,9 @@
       # --- 字体设置 ---
       # 字体家族：JetBrainsMono Nerd Font（包含编程连字和图标）
       font-family = "JetBrainsMono Nerd Font";
+      font-family-bold = "JetBrainsMono Nerd Font";
+      font-family-italic = "JetBrainsMono Nerd Font";
+      font-family-bold-italic = "JetBrainsMono Nerd Font";
       # 字体大小：8pt（可根据屏幕和喜好调整，范围通常 8-14）
       font-size = 10;
 
@@ -71,8 +74,5 @@
   # 确保所需字体已安装到系统
   home.packages = with pkgs; [
     nerd-fonts.jetbrains-mono  # JetBrainsMono Nerd Font（包含编程图标）
-    noto-fonts                  # Noto 字体（通用字体）
-    noto-fonts-cjk-sans        # Noto 中日韩字体（中文支持）
-    noto-fonts-emoji           # Noto Emoji（emoji 支持）
   ];
 }
