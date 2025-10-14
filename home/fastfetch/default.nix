@@ -21,10 +21,10 @@
       };
 
       display = {
-        separator = " ";
+        separator = ": ";
         key = {
           paddingLeft = 2;
-          width = 12;
+          width = 16;
         };
       };
 
@@ -32,9 +32,9 @@
       modules = [
         {
           type = "title";
-          key = "";
+          key = " User";
           keyColor = "blue";
-          format = " {user-name}@{host-name}";
+          format = "{user-name}@{host-name}";
         }
         {
           type = "custom";
@@ -42,47 +42,40 @@
         }
         {
           type = "os";
-          key = "NixOS:";
-          keyIcon = "";
+          key = " OS";
           keyColor = "cyan";
           format = "{2}";
         }
         {
           type = "kernel";
-          key = "Kernel:";
-          keyIcon = "";
+          key = " Kernel";
           keyColor = "cyan";
           format = "{2}";
         }
         {
           type = "packages";
-          key = "Packages:";
-          keyIcon = "";
+          key = " Packages";
           keyColor = "green";
         }
         {
           type = "shell";
-          key = "Shell:";
-          keyIcon = "";
+          key = " Shell";
           keyColor = "yellow";
         }
         {
           type = "wm";
-          key = "WM:";
-          keyIcon = "";
+          key = " WM";
           keyColor = "yellow";
           format = "{2}";
         }
         {
           type = "terminal";
-          key = "Terminal:";
-          keyIcon = "";
+          key = " Terminal";
           keyColor = "yellow";
         }
         {
           type = "display";
-          key = "Display:";
-          keyIcon = "󰍹";
+          key = "󰍹 Display";
           keyColor = "green";
         }
         {
@@ -96,35 +89,30 @@
         }
         {
           type = "cpu";
-          key = "CPU:";
-          keyIcon = "";
+          key = " CPU";
           keyColor = "blue";
           format = "{1} @ {7}";
         }
         {
           type = "gpu";
-          key = "GPU:";
-          keyIcon = "󰢮";
+          key = "󰢮 GPU";
           keyColor = "blue";
           format = "{1} {2}";
         }
         {
           type = "memory";
-          key = "Memory:";
-          keyIcon = "󰍛";
+          key = "󰍛 Memory";
           keyColor = "magenta";
         }
         {
           type = "disk";
-          key = "Disk:";
-          keyIcon = "󰋊";
+          key = "󰋊 Disk";
           keyColor = "magenta";
           folders = [ "/" ];
         }
         {
           type = "uptime";
-          key = "Uptime:";
-          keyIcon = "";
+          key = " Uptime";
           keyColor = "red";
         }
         {
