@@ -22,6 +22,10 @@
     xdg-utils      # freedesktop.org 实用工具，如 xdg-open
     graphviz       # 图形可视化工具，用于创建图表
 
+    # 剪贴板管理
+    wl-clipboard   # Wayland 剪贴板工具
+    cliphist       # 剪贴板历史记录管理器
+
 
     # 云原生工具
     docker-compose # Docker 容器编排工具
@@ -79,5 +83,39 @@
 
     # 自动挂载 USB 设备
     udiskie.enable = true;    # 启用 udiskie 服务，自动挂载和管理可移动存储设备
+  };
+
+  # cliphist 剪贴板历史服务
+  systemd.user.services.cliphist = {
+    Unit = {
+      Description = "Clipboard history service using cliphist";
+      PartOf = ["graphical-session.target"];
+      After = ["graphical-session.target"];
+    };
+    Service = {
+      Type = "simple";
+      ExecStart = "${pkgs.wl-clipboard}/bin/wl-paste --type text --watch ${pkgs.cliphist}/bin/cliphist store";
+      Restart = "on-failure";
+    };
+    Install = {
+      WantedBy = ["graphical-session.target"];
+    };
+  };
+
+  # 为图片剪贴板添加另一个服务
+  systemd.user.services.cliphist-images = {
+    Unit = {
+      Description = "Clipboard history service for images using cliphist";
+      PartOf = ["graphical-session.target"];
+      After = ["graphical-session.target"];
+    };
+    Service = {
+      Type = "simple";
+      ExecStart = "${pkgs.wl-clipboard}/bin/wl-paste --type image --watch ${pkgs.cliphist}/bin/cliphist store";
+      Restart = "on-failure";
+    };
+    Install = {
+      WantedBy = ["graphical-session.target"];
+    };
   };
 }

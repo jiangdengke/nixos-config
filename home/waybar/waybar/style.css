@@ -19,7 +19,15 @@ tooltip {
   color: @text;
   border-radius: 10px;
   border: 2px solid @accent;
-  padding: 8px 12px;
+  padding: 12px;
+  font-family: monospace;
+}
+
+/* 日历 tooltip 特殊样式 */
+tooltip.clock {
+  padding: 16px;
+  min-width: 280px;
+  font-family: "JetBrainsMono Nerd Font";
 }
 
 #workspaces button {
