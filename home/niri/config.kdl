@@ -132,7 +132,7 @@ binds {
     Mod+Shift+Slash { show-hotkey-overlay; }
     Mod+Return hotkey-overlay-title="Open a Terminal: ghostty" { spawn "ghostty"; }
     Mod+D hotkey-overlay-title="Run an Application: rofi" { spawn "~/.local/bin/toggle-rofi.sh"; }
-    Mod+V hotkey-overlay-title="Clipboard History: cliphist + rofi" { spawn "sh" "-c" "cliphist list | rofi -dmenu -display-columns 2 | cliphist decode | wl-copy"; }
+    Mod+V hotkey-overlay-title="Toggle Clipboard History: cliphist + rofi" { spawn "~/.local/bin/toggle-cliphist.sh"; }
     Super+Alt+L hotkey-overlay-title="Lock the Screen: swaylock" { spawn "swaylock"; }
     Super+Alt+S allow-when-locked=true hotkey-overlay-title=null { spawn "sh" "-c" "pkill orca || exec orca"; }
 
@@ -277,7 +277,7 @@ binds {
     Mod+Shift+Equal { set-window-height "+10%"; }
 
     // 浮动、标签页以及布局切换
-    Mod+V { toggle-window-floating; }
+    // Mod+V { toggle-window-floating; }  // 已改用于剪贴板历史
     Mod+Shift+V { switch-focus-between-floating-and-tiling; }
     Mod+W { toggle-column-tabbed-display; }
     // 如需把 Mod+Space/Shift+Space 作为布局切换，可改为：
