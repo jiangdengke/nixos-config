@@ -1,20 +1,21 @@
-@define-color foreground #8ddae9;
-@define-color background #0c0a14;
-@define-color cursor #8ddae9;
+/* Rose Pine 配色方案 - 与 rofi/mako 统一 */
+@define-color base #191724;
+@define-color surface #1f1d2e;
+@define-color overlay #26233a;
+@define-color muted #6e6a86;
+@define-color subtle #908caa;
+@define-color text #e0def4;
+@define-color love #eb6f92;
+@define-color gold #f6c177;
+@define-color rose #ebbcba;
+@define-color pine #31748f;
+@define-color foam #9ccfd8;
+@define-color iris #c4a7e7;
 
-@define-color color0 #0c0a14;
-@define-color color1 #5D59A9;
-@define-color color2 #A366B1;
-@define-color color3 #CF75B8;
-@define-color color4 #E478BA;
-@define-color color5 #AB44CB;
-@define-color color6 #DC57D3;
-@define-color color7 #8ddae9;
-@define-color color8 #6298a3;
-@define-color color9 #5D59A9;
-@define-color color10 #A366B1;
-@define-color color11 #CF75B8;
-@define-color color12 #E478BA;
-@define-color color13 #AB44CB;
-@define-color color14 #DC57D3;
-@define-color color15 #8ddae9;
+/* 主要颜色定义 */
+@define-color background alpha(#1e1e2e, 0.85);
+@define-color foreground #e0def4;
+@define-color accent #9ccfd8;
+@define-color urgent #eb6f92;
+@define-color warning #f6c177;
+@define-color success #31748f;
