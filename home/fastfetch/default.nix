@@ -31,16 +31,6 @@
 
       modules = [
         {
-          type = "title";
-          key = " User";
-          keyColor = "blue";
-          format = "{user-name}@{host-name}";
-        }
-        {
-          type = "custom";
-          format = "┌────────────────────────────────────────────────────────────────────────────────────────┐";
-        }
-        {
           type = "os";
           key = " OS";
           keyColor = "cyan";
@@ -106,11 +96,6 @@
           key = " Uptime";
           keyColor = "red";
         }
-        {
-          type = "custom";
-          format = "┌────────────────────────────────────────────────────────────────────────────────────────┐";
-          }
-        "break"
         {
           type = "colors";
           paddingLeft = 2;
