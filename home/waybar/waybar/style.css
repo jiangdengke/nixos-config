@@ -76,6 +76,7 @@ tooltip.clock {
 #window,
 #cpu,
 #memory,
+#custom-notification,
 #custom-l_end,
 #custom-r_end,
 #custom-sl_end,
@@ -88,10 +89,6 @@ tooltip.clock {
   margin: 3px 0px 3px 0px;
   padding-left: 4px;
   padding-right: 4px;
-}
-
-#custom-notification {
-  min-width: 22px;
 }
 
 #custom-notification.notification {
