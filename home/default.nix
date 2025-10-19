@@ -8,7 +8,7 @@
     ./niri
     ./waybar
     ./fcitx5 # 中文输入法配置
-    ./mako
+    ./swaync
     ./xwayland-satellite
     ./programs
     ./zsh

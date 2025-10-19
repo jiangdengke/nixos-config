@@ -19,8 +19,8 @@
       control-center-margin-bottom = 5;
       control-center-margin-right = 5;
       control-center-margin-left = 5;
-      control-center-width = 200;
-      control-center-height = 300;
+      control-center-width = 220;
+      control-center-height = 540;
 
       # 通知样式
       notification-window-width = 400;
