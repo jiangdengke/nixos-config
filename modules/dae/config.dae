@@ -1,5 +1,6 @@
 subscription {
-b:"https://dd.weyolo.com/aLp9kSjR7mXqPzWcVbH2/download/DMIT%E6%97%A5%E6%9C%AC%E4%B8%AD%E8%BD%AC%E8%B7%AF%E7%BA%BF"
+a:"hysteria2://8f43835e-10b3-4744-915c-cecb33ee7ff2@[2604:6600:2000:c::3f]:19027?security=tls&insecure=1&mport=45000-46000&sni=Miku.fjzJnsfzQnnh.CNKWjLYOvJJq.78IF6ImgZpai.com#GrjrbCafH23r%20hysteria2"
+b:"https://gucci.weyolo.com/s/3a09b408d2d7eaaa69d7173c25b4f77a"
 }
 node {
 }
