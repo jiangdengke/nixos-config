@@ -3,7 +3,7 @@
   "layer": "top",            // 显示层级：top/overlay/bottom
   "position": "top",         // 顶部
   "mode": "dock",            // ← 修正：字段是 mode（不是 mod）
-  "height": 28,              // ★ Waybar 高度（像素）。不写则由字体/CSS决定
+  "height": 32,              // ★ Waybar 高度（像素）。不写则由字体/CSS决定
   "exclusive": true,         // 为 bar 预留空间（避免窗口遮挡）
   "passthrough": false,      // 鼠标事件是否透传到底下窗口
   "gtk-layer-shell": true,   // 使用 gtk-layer-shell（Wayland）
@@ -11,7 +11,7 @@
   // ===== 模块布局 =====
   "modules-left":   ["custom/l_end","clock","custom/r_end","custom/l_end","cpu","memory","custom/r_end","custom/padd"],
   "modules-center": ["custom/padd","custom/l_end","niri/workspaces","niri/window","custom/r_end","custom/padd"],
-  "modules-right":  ["custom/padd","custom/l_end","tray","custom/notification","backlight","bluetooth","pulseaudio","battery","custom/r_end"],
+  "modules-right":  ["custom/padd","custom/l_end","tray","custom/notification","backlight","pulseaudio","battery","custom/r_end"],
 
   // ===== Niri 工作区与窗口标题 =====
   "niri/workspaces": {
@@ -84,17 +84,6 @@
     }
   },
 
-  "bluetooth": {
-  "format": "",
-  "format-disabled": "",
-  "format-connected": " {num_connections}",
-  "tooltip-format": "{controller_alias}\n{num_connections} connected",
-  "tooltip-format-connected": "{controller_alias}\n{num_connections} connected\n\n{device_enumerate}",
-  "tooltip-format-enumerate-connected": "{device_alias}",
-  "on-click": "blueman-manager",                 // ← 左键弹出这个界面
-  "on-click-right": "bluetoothctl power toggle"  // 右键开/关（可选）
-},
-
 "pulseaudio": {
   "format": "{icon} {volume}%",
   "format-muted": "  muted",
@@ -151,7 +140,7 @@
     },
     "return-type": "json",
     "exec-if": "which swaync-client",
-    "exec": "swaync-client -swb",
+    "exec": "~/.config/waybar/scripts/swaync-waybar.py",
     "on-click": "swaync-client -t -sw",
     "on-click-right": "swaync-client -d -sw",
     "escape": true

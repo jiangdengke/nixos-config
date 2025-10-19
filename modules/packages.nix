@@ -44,5 +44,7 @@
     qq # 腾讯 QQ，聊天工具
     wechat-uos
     wemeet
+
+    # 开发工具
   ];
 }

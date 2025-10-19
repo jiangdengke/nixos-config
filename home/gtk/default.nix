@@ -39,8 +39,8 @@
 
     # 字体
     font = {
-      package = pkgs.nerd-fonts.jetbrains-mono;
-      name = "JetBrainsMono Nerd Font 11";
+      package = pkgs.nerd-fonts.meslo-lg;
+      name = "MesloLGL Nerd Font 11";
     };
 
     # GTK3 额外配置

@@ -15,12 +15,12 @@
       timeout-critical = 0;
 
       # 通知中心
-      control-center-margin-top = 10;
-      control-center-margin-bottom = 10;
-      control-center-margin-right = 10;
-      control-center-margin-left = 10;
-      control-center-width = 400;
-      control-center-height = 600;
+      control-center-margin-top = 5;
+      control-center-margin-bottom = 5;
+      control-center-margin-right = 5;
+      control-center-margin-left = 5;
+      control-center-width = 200;
+      control-center-height = 300;
 
       # 通知样式
       notification-window-width = 400;

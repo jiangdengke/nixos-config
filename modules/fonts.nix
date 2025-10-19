@@ -12,18 +12,20 @@
       enable = true;
       defaultFonts = {
         monospace = [
-          "JetBrains Mono"
+          "MesloLGL Nerd Font"
+          "MesloLGL Nerd Font Mono"
           "JetBrainsMono Nerd Font"
+          "JetBrains Mono"
         ];
         sansSerif = [
-          "JetBrains Mono"
-          "JetBrainsMono Nerd Font"
+          "MesloLGL Nerd Font"
           "Noto Sans CJK SC"
+          "WenQuanYi Zen Hei"
         ];
         serif = [
-          "JetBrains Mono"
-          "JetBrainsMono Nerd Font"
+          "MesloLGL Nerd Font"
           "Noto Serif CJK SC"
+          "WenQuanYi Zen Hei"
         ];
       };
     };
@@ -35,8 +37,10 @@
       noto-fonts-extra
       jetbrains-mono
       nerd-fonts.jetbrains-mono
+      nerd-fonts.meslo-lg
       wqy_microhei
       wqy_zenhei
+      source-han-serif
       xorg.fontadobe75dpi
       noto-fonts-color-emoji
     ];
