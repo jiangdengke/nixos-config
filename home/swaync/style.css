@@ -2,53 +2,78 @@
 
 * {
   font-family: "MesloLGL Nerd Font", "Noto Sans CJK SC", "Noto Sans", "WenQuanYi Zen Hei";
-  font-size: 11pt;
+  font-size: 10pt;
   font-weight: 400;
+  letter-spacing: 0.2px;
 }
 
 .control-center,
 .control-center * {
-  font-size: 8pt;
+  font-size: 9pt;
 }
 
 .control-center .notification {
-  border: 1px solid #9ccfd8;
-  border-radius: 6px;
-  margin: 4px;
+  background: rgba(17, 17, 27, 0.82);
+  border: 1px solid rgba(156, 207, 216, 0.8);
+  border-radius: 12px;
+  margin: 6px 8px;
+  box-shadow: 0 10px 24px rgba(15, 23, 42, 0.4);
 }
 
 .control-center .notification-content {
-  padding: 8px;
+  padding: 10px 12px;
 }
 
 .control-center .summary {
-  font-size: 9pt;
-  margin-bottom: 3px;
+  font-size: 9.5pt;
+  font-weight: 600;
+  margin-bottom: 4px;
+  color: #e6edf3;
 }
 
 .control-center .body {
-  font-size: 8pt;
+  font-size: 8.5pt;
+  color: #cdd6f4;
+  line-height: 1.25;
 }
 
 .control-center .time {
-  font-size: 7pt;
-  margin-top: 3px;
+  font-size: 7.5pt;
+  margin-top: 1px;
+  color: #9399b2;
 }
 
 .control-center .notification-default-action .notification-icon {
-  margin-right: 6px;
+  margin-right: 10px;
 }
 
 .control-center .close-button {
-  border-radius: 3px;
-  padding: 2px 4px;
-  margin: 3px;
+  background: rgba(235, 111, 146, 0.9);
+  border: none;
+  border-radius: 6px;
+  padding: 4px 8px;
+  margin: 4px;
+  color: #1e1e2e;
+  transition: background 0.2s ease;
+}
+
+.control-center .close-button:hover {
+  background: rgba(246, 193, 119, 0.85);
 }
 
 .control-center .notification-action {
-  border-radius: 3px;
-  padding: 3px 6px;
-  margin: 2px;
+  background: rgba(156, 207, 216, 0.82);
+  border: none;
+  border-radius: 7px;
+  padding: 4px 10px;
+  margin: 3px 2px;
+  color: #1e1e2e;
+  transition: background 0.2s ease;
+}
+
+.control-center .notification-action:hover {
+  background: rgba(246, 193, 119, 0.9);
+  color: #1e1e2e;
 }
 
 /* 通知窗口背景 */
@@ -108,46 +133,50 @@
 
 /* 通知中心面板 */
 .control-center {
-  background: #1e1e2ef0;
-  border: 1px solid #9ccfd8;
-  border-radius: 6px;
-  margin: 5px;
-  padding: 5px;
+  background: rgba(17, 17, 27, 0.75);
+  border: 1px solid rgba(156, 207, 216, 0.6);
+  border-radius: 16px;
+  margin: 14px 16px;
+  padding: 12px 14px;
+  backdrop-filter: blur(18px);
 }
 
 /* 通知中心标题 */
 .control-center .notification-row {
-  margin: 3px 0;
+  margin: 6px 0;
 }
 
 /* DND 按钮 */
 .control-center-dnd {
-  background: #1e1e2e;
-  border: 1px solid #9ccfd8;
-  border-radius: 4px;
-  padding: 4px;
-  margin: 3px;
-  color: #e0def4;
+  background: rgba(30, 30, 46, 0.9);
+  border: 1px solid rgba(156, 207, 216, 0.5);
+  border-radius: 10px;
+  padding: 6px 12px;
+  margin: 5px 8px 3px;
+  color: #e6edf3;
+  transition: background 0.2s ease, border 0.2s ease;
 }
 
 .control-center-dnd:checked {
-  background: #eb6f92;
-  border-color: #eb6f92;
+  background: rgba(235, 111, 146, 0.88);
+  border-color: rgba(235, 111, 146, 0.9);
   color: #1e1e2e;
 }
 
 /* 清除按钮 */
 .control-center-clear-all {
-  background: #1e1e2e;
-  border: 1px solid #9ccfd8;
-  border-radius: 4px;
-  padding: 4px;
-  margin: 3px;
-  color: #e0def4;
+  background: rgba(30, 30, 46, 0.9);
+  border: 1px solid rgba(156, 207, 216, 0.5);
+  border-radius: 10px;
+  padding: 7px 14px;
+  margin: 5px 8px;
+  color: #e6edf3;
+  transition: background 0.2s ease, border 0.2s ease;
 }
 
 .control-center-clear-all:hover {
-  background: #9ccfd8;
+  background: rgba(156, 207, 216, 0.9);
+  border-color: rgba(156, 207, 216, 0.9);
   color: #1e1e2e;
 }
 
@@ -188,36 +217,38 @@
 }
 
 .control-center scrollbar slider {
-  background: #6e6a86;
-  border-radius: 4px;
+  background: rgba(110, 106, 134, 0.55);
+  border-radius: 10px;
 }
 
 .control-center scrollbar slider:hover {
-  background: #9ccfd8;
+  background: rgba(156, 207, 216, 0.8);
 }
 
 /* Widget 标题 */
 .widget-title {
-  color: #e0def4;
-  font-size: 8pt;
+  color: #e6edf3;
+  font-size: 9.5pt;
   font-weight: 600;
-  margin: 6px;
+  margin: 8px 6px 4px;
 }
 
 /* Widget 按钮 */
 .widget-dnd {
-  background: #1e1e2e;
-  border: 1px solid #9ccfd8;
-  border-radius: 4px;
-  padding: 5px;
-  margin: 3px;
+  background: rgba(49, 50, 68, 0.75);
+  border: 1px solid rgba(156, 207, 216, 0.4);
+  border-radius: 11px;
+  padding: 8px 12px;
+  margin: 5px 8px;
+  color: #cdd6f4;
 }
 
 .widget-dnd > switch {
-  background: #6e6a86;
-  border-radius: 6px;
+  background: rgba(110, 106, 134, 0.6);
+  border-radius: 999px;
+  padding: 2px;
 }
 
 .widget-dnd > switch:checked {
-  background: #eb6f92;
+  background: rgba(235, 111, 146, 0.85);
 }
