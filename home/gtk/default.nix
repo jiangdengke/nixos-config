@@ -39,8 +39,8 @@
 
     # 字体
     font = {
-      package = pkgs.nerd-fonts.meslo-lg;
-      name = "MesloLGL Nerd Font 11";
+      package = pkgs.maple-mono;
+      name = "Maple Mono 11";
     };
 
     # GTK3 额外配置
