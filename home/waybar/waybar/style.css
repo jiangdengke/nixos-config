@@ -3,7 +3,7 @@
 * {
   border: none;
   border-radius: 0px;
-  font-family: "Maple Mono";
+  font-family: "MesloLGL Nerd Font", "Noto Sans CJK SC", "WenQuanYi Zen Hei";
   font-weight: 500;
   font-size: 13px;
   min-height: 0px;
@@ -21,14 +21,14 @@ tooltip {
   border-radius: 10px;
   border: 2px solid @accent;
   padding: 12px;
-  font-family: "Maple Mono";
+  font-family: "MesloLGL Nerd Font", "Noto Sans CJK SC", "WenQuanYi Zen Hei";
 }
 
 /* 日历 tooltip 特殊样式 */
 tooltip.clock {
   padding: 16px;
   min-width: 280px;
-  font-family: "Maple Mono";
+  font-family: "MesloLGL Nerd Font", "Noto Sans CJK SC", "WenQuanYi Zen Hei";
 }
 
 #workspaces button {

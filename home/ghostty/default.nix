@@ -22,11 +22,11 @@
     # ===== Ghostty 详细配置 =====
     settings = {
       # --- 字体设置 ---
-      # 字体家族：Maple Mono
-      font-family = "Maple Mono";
-      font-family-bold = "Maple Mono";
-      font-family-italic = "Maple Mono";
-      font-family-bold-italic = "Maple Mono";
+      # 字体家族：MesloLGL Nerd Font（包含编程连字和图标）
+      font-family = "MesloLGL Nerd Font";
+      font-family-bold = "MesloLGL Nerd Font";
+      font-family-italic = "MesloLGL Nerd Font";
+      font-family-bold-italic = "MesloLGL Nerd Font";
       # 字体大小：8pt（可根据屏幕和喜好调整，范围通常 8-14）
       font-size = 10;
 
@@ -73,6 +73,6 @@
   # ===== 字体包安装 =====
   # 确保所需字体已安装到系统
   home.packages = with pkgs; [
-    maple-mono
+    nerd-fonts.meslo-lg  # MesloLGL Nerd Font（包含编程图标）
   ];
 }

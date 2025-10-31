@@ -24,9 +24,9 @@
   fonts.fontconfig = {
     enable = true;
     defaultFonts = {
-      monospace = [ "Maple Mono" ];
-      serif = [ "Maple Mono" ];
-      sansSerif = [ "Maple Mono" ];
+      monospace = [ "MesloLGL Nerd Font" "MesloLGL Nerd Font Mono" "Noto Sans CJK SC" ];
+      serif = [ "MesloLGL Nerd Font" "Noto Serif CJK SC" ];
+      sansSerif = [ "MesloLGL Nerd Font" "Noto Sans CJK SC" ];
     };
   };
 }

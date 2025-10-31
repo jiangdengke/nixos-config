@@ -1,7 +1,7 @@
 /* swaync 样式配置 - 匹配 mako 主题风格 */
 
 * {
-  font-family: "Maple Mono";
+  font-family: "MesloLGL Nerd Font", "Noto Sans CJK SC", "Noto Sans", "WenQuanYi Zen Hei";
   font-size: 10pt;
   font-weight: 400;
   letter-spacing: 0.2px;
