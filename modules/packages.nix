@@ -33,6 +33,7 @@
     wpa_supplicant # WPA 无线网络认证工具，用于连接到加密的 Wi-Fi 网络
     localsend # 本地文件传输工具，通常用于在设备之间传输文件
     termius # 跨平台 SSH 客户端（AppImage 包装）
+    feishu
 
     # 格式化工具
     stylua # Lua 代码格式化工具

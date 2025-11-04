@@ -62,7 +62,26 @@
     btop.enable = true;    # 启用 btop，是 htop 和 nmon 的现代替代品
     eza.enable = true;     # 启用 eza，是 ls 命令的现代替代品，带有更多功能
     jq.enable = true;      # 启用 jq，轻量级灵活的 JSON 处理工具
-    ssh.enable = true;     # 启用 SSH 客户端配置管理
+    ssh = {
+      enable = true;       # 启用 SSH 客户端配置管理
+      enableDefaultConfig = false; # 2025-05: 上游将移除默认值，显式管理配置
+      matchBlocks = {
+        "*" = {
+          extraOptions = {
+            ForwardAgent = "no";
+            ServerAliveInterval = "0";
+            ServerAliveCountMax = "3";
+            Compression = "no";
+            AddKeysToAgent = "no";
+            HashKnownHosts = "no";
+            UserKnownHostsFile = "~/.ssh/known_hosts";
+            ControlMaster = "no";
+            ControlPath = "~/.ssh/master-%r@%n:%p";
+            ControlPersist = "no";
+          };
+        };
+      };
+    };
     aria2.enable = true;   # 启用 aria2，轻量级多协议下载工具
 
     # skim 是一个模糊查找器，类似于 fzf
