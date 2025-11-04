@@ -44,7 +44,7 @@
   nixpkgs.overlays = [
     (final: prev: {
       libsForQt5 = (prev.libsForQt5 or { }) // {
-        fcitx5-with-addons = prev.fcitx5-with-addons;
+        fcitx5-with-addons = prev.qt6Packages.fcitx5-with-addons;
       };
     })
   ];

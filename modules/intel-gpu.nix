@@ -7,7 +7,7 @@
       intel-media-driver
       intel-vaapi-driver
       intel-compute-runtime
-      vaapiVdpau
+      libva-vdpau-driver
     ];
     extraPackages32 = with pkgs.pkgsi686Linux; [
       intel-vaapi-driver

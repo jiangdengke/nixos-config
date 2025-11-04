@@ -3,7 +3,7 @@
   i18n.inputMethod = {
     enable = true;
     type = "fcitx5";
-    fcitx5.fcitx5-with-addons = pkgs.fcitx5-with-addons;
+    fcitx5.fcitx5-with-addons = pkgs.qt6Packages.fcitx5-with-addons;
     fcitx5.addons = with pkgs; [
       fcitx5-rime
       fcitx5-chinese-addons
