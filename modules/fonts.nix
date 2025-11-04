@@ -33,8 +33,6 @@
       noto-fonts
       noto-fonts-cjk-sans
       noto-fonts-cjk-serif
-      noto-fonts-emoji
-      noto-fonts-extra
       jetbrains-mono
       nerd-fonts.jetbrains-mono
       nerd-fonts.meslo-lg

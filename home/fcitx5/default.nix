@@ -8,8 +8,8 @@
       pkgs.fcitx5-rime
       pkgs.fcitx5-table-extra
       pkgs.qt6Packages.fcitx5-chinese-addons
-      pkgs.qt6Packages.fcitx5-pinyin-moegirl
-      pkgs.qt6Packages.fcitx5-pinyin-zhwiki
+      pkgs.fcitx5-pinyin-moegirl
+      pkgs.fcitx5-pinyin-zhwiki
     ];
   };
   home.sessionVariables = {

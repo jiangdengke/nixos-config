@@ -7,7 +7,9 @@
   programs.git = {
     enable = true;
 
-    userName = "jiangdengke";
-    userEmail = "jiang1728439852@gmail.com";
+    settings = {
+      user.name = "jiangdengke";
+      user.email = "jiang1728439852@gmail.com";
+    };
   };
 }
