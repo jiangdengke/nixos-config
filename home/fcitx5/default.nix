@@ -4,12 +4,12 @@
     enable = true;
     type = "fcitx5";
     fcitx5.fcitx5-with-addons = pkgs.qt6Packages.fcitx5-with-addons;
-    fcitx5.addons = with pkgs; [
-      fcitx5-rime
-      fcitx5-chinese-addons
-      fcitx5-table-extra
-      fcitx5-pinyin-moegirl
-      fcitx5-pinyin-zhwiki
+    fcitx5.addons = [
+      pkgs.fcitx5-rime
+      pkgs.fcitx5-table-extra
+      pkgs.qt6Packages.fcitx5-chinese-addons
+      pkgs.qt6Packages.fcitx5-pinyin-moegirl
+      pkgs.qt6Packages.fcitx5-pinyin-zhwiki
     ];
   };
   home.sessionVariables = {
