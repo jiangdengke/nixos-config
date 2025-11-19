@@ -6,6 +6,9 @@
     # 启用 Kitty 终端
     enable = true;
 
+    # 禁用 shell 集成（避免与 Zim 的 completion 模块冲突）
+    shellIntegration.enableZshIntegration = false;
+
     # Kitty 详细配置选项
     settings = {
       # ==================== 字体配置 ====================
@@ -22,7 +25,7 @@
       bold_italic_font = "MesloLGL Nerd Font Bold Italic";
 
       # 字体大小（调整为 10 更舒适）
-      font_size = 10;
+      font_size = 12;
 
       # ==================== 光标配置 ====================
       # 光标形状：block（方块）、beam（竖线）、underline（下划线）
@@ -39,8 +42,8 @@
       scrollback_lines = 10000;
 
       # ==================== 窗口配置 ====================
-      # 窗口内边距宽度（HyDE 风格：25px，更宽松的视觉效果）
-      window_padding_width = 25;
+      # 窗口内边距宽度（调整为更紧凑的 5px）
+      window_padding_width = 5;
 
       # 记住窗口大小（关闭后重新打开时恢复窗口大小）
       remember_window_size = true;
