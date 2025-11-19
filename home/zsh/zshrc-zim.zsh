@@ -3,12 +3,15 @@
 # 替代之前的 zshrc.zsh
 
 # ==================== Zim 基础设置 ====================
-# Zim 安装目录
+# Zim 安装目录（使用 ZDOTDIR）
 ZIM_HOME=${ZDOTDIR:-${HOME}}/.zim
+
+# 设置 zimrc 配置文件位置
+ZIM_CONFIG_FILE=${ZDOTDIR:-${HOME}}/.zimrc
 
 # 使用本地的 zimfw（从 ~/zimfw 仓库）
 # 安装缺失的模块并初始化
-if [[ ! ${ZIM_HOME}/init.zsh -nt ${ZDOTDIR:-${HOME}}/.zimrc ]]; then
+if [[ ! ${ZIM_HOME}/init.zsh -nt ${ZIM_CONFIG_FILE} ]]; then
   source ${HOME}/zimfw/zimfw.zsh init -q
 fi
 

@@ -91,11 +91,18 @@
     };
   };
 
-  # ==================== Zim 配置文件部署 ====================
-  # 将 zimrc 配置文件复制到正确位置
+  # ==================== Zim 配置文件和主题部署 ====================
+  # 将 zimrc 配置文件和 magicmace 主题复制到正确位置
   home.file = {
-    ".zimrc" = {
+    # zimrc 配置文件
+    ".config/zsh/.zimrc" = {
       source = ./zimrc;
+    };
+
+    # magicmace 主题目录
+    ".config/zsh/.zim/modules/magicmace" = {
+      source = ./magicmace;
+      recursive = true;
     };
   };
 
