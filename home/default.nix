@@ -13,7 +13,7 @@
     ./programs
     ./zsh
     ./fastfetch
-    ./ghostty
+    ./kitty # Kitty 终端配置
     ./rofi
     ./yazi
     ./nvim

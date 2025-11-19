@@ -177,9 +177,9 @@ window-rule {
     open-floating true
 }
 
-// Ghostty 终端透明度设置
+// Kitty 终端透明度设置
 window-rule {
-    match app-id="com.mitchellh.ghostty"
+    match app-id="kitty"
     opacity 1.0
 }
 
@@ -202,7 +202,7 @@ binds {
 
     // 帮助与系统启动类
     Mod+Shift+Slash { show-hotkey-overlay; }
-    Mod+Return hotkey-overlay-title="Open a Terminal: ghostty" { spawn "ghostty"; }
+    Mod+Return hotkey-overlay-title="Open a Terminal: kitty" { spawn "kitty"; }
     Mod+D hotkey-overlay-title="Run an Application: rofi" { spawn "~/.local/bin/toggle-rofi.sh"; }
     Mod+V hotkey-overlay-title="Toggle Clipboard History: cliphist + rofi" { spawn "~/.local/bin/toggle-cliphist.sh"; }
     Super+Alt+L hotkey-overlay-title="Lock the Screen: swaylock" { spawn "swaylock"; }
