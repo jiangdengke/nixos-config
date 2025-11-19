@@ -26,6 +26,12 @@
         ${pkgs.procps}/bin/pkill fcitx5 || true
       '';
     };
+    ".config/fcitx5/profile" = {
+      source = ./profile;
+      onChange = ''
+        ${pkgs.procps}/bin/pkill fcitx5 || true
+      '';
+    };
     ".local/share/fcitx5/themes/macOS-dark" = {
       source = ./macOS-dark;
       recursive = true;
