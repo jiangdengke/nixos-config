@@ -22,10 +22,10 @@ cursor {
 }
 
 // 如需单独配置显示器，可取消注释下方示例（目前保持注释，不会生效）
-/-output "eDP-1" {
+output "eDP-1" {
     // 设定 1920×1080@120Hz、缩放 2、保持默认方向与位置
-    mode "1920x1080@120.030"
-    scale 2
+    mode "1920x1080@60.012"
+    scale 1
     transform "normal"
     position x=1280 y=0
 }
