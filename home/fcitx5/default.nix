@@ -20,9 +20,18 @@
     GLFW_IM_MODULE = lib.mkForce "fcitx";
   };
   home.file = {
-    ".config/fcitx5/conf/classicui.conf".source = ./classicui.conf;
+    ".config/fcitx5/conf/classicui.conf" = {
+      source = ./classicui.conf;
+      onChange = ''
+        ${pkgs.procps}/bin/pkill fcitx5 || true
+      '';
+    };
     ".local/share/fcitx5/themes/macOS-dark" = {
       source = ./macOS-dark;
+      recursive = true;
+    };
+    ".local/share/fcitx5/themes/macOS-dark-png" = {
+      source = ./macOS-dark-png;
       recursive = true;
     };
   };
