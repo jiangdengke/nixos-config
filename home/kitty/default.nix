@@ -114,6 +114,10 @@
       # read-clipboard：允许读取系统剪贴板
       # read-primary：允许读取主选择区
       clipboard_control = "write-clipboard write-primary read-clipboard read-primary";
+
+      # ==================== 窗口关闭确认 ====================
+      # 关闭窗口时是否需要确认（0 = 不确认，直接关闭）
+      confirm_os_window_close = 0;
     };
 
     # ==================== 主题配置 ====================
