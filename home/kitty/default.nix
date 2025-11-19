@@ -9,20 +9,20 @@
     # Kitty 详细配置选项
     settings = {
       # ==================== 字体配置 ====================
-      # 普通文本使用的字体（HyDE 风格：CaskaydiaCove Nerd Font）
-      font_family = "CaskaydiaCove Nerd Font Mono";
+      # 普通文本使用的字体（MesloLGL 更粗更清晰）
+      font_family = "MesloLGL Nerd Font";
 
-      # 粗体文本使用的字体（自动选择）
-      bold_font = "auto";
+      # 粗体文本使用的字体
+      bold_font = "MesloLGL Nerd Font Bold";
 
-      # 斜体文本使用的字体（自动选择）
-      italic_font = "auto";
+      # 斜体文本使用的字体
+      italic_font = "MesloLGL Nerd Font Italic";
 
-      # 粗斜体文本使用的字体（自动选择）
-      bold_italic_font = "auto";
+      # 粗斜体文本使用的字体
+      bold_italic_font = "MesloLGL Nerd Font Bold Italic";
 
-      # 字体大小（HyDE 风格：9.0）
-      font_size = "9.0";
+      # 字体大小（调整为 10 更舒适）
+      font_size = 10;
 
       # ==================== 光标配置 ====================
       # 光标形状：block（方块）、beam（竖线）、underline（下划线）

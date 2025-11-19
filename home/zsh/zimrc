@@ -1,0 +1,42 @@
+# ==================== Zim 框架配置文件 ====================
+# Zim 是一个模块化、可定制、极速的 ZSH 框架
+# 比 Oh My Zsh 快 10 倍以上
+# 文件位置：~/.config/home-manager/home/zsh/zimrc
+
+# ==================== Zim 模块配置 ====================
+
+# 环境变量设置
+zmodule environment
+
+# 输入配置
+zmodule input
+
+# 终端标题设置
+zmodule termtitle
+
+# 实用工具函数
+zmodule utility
+
+# ==================== 提示符主题 ====================
+# magicmace 主题（简洁、快速、美观）
+# 需要 prompt-pwd 和 git-info 模块
+zmodule prompt-pwd
+zmodule git-info
+zmodule magicmace
+
+# ==================== 补全系统 ====================
+# ZSH 补全配置
+zmodule completion
+
+# ==================== 插件模块 ====================
+
+# 语法高亮（需要在最后加载）
+zmodule zsh-users/zsh-syntax-highlighting
+
+# 命令自动建议
+zmodule zsh-users/zsh-autosuggestions
+
+# 历史子串搜索
+zmodule zsh-users/zsh-history-substring-search
+
+# ==================== Zim 配置完成 ====================
