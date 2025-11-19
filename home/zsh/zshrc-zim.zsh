@@ -6,20 +6,10 @@
 # Zim 安装目录
 ZIM_HOME=${ZDOTDIR:-${HOME}}/.zim
 
-# 下载 zimfw 插件管理器（如果不存在）
-if [[ ! -e ${ZIM_HOME}/zimfw.zsh ]]; then
-  if (( ${+commands[curl]} )); then
-    curl -fsSL --create-dirs -o ${ZIM_HOME}/zimfw.zsh \
-        https://github.com/zimfw/zimfw/releases/latest/download/zimfw.zsh
-  else
-    mkdir -p ${ZIM_HOME} && wget -nv -O ${ZIM_HOME}/zimfw.zsh \
-        https://github.com/zimfw/zimfw/releases/latest/download/zimfw.zsh
-  fi
-fi
-
+# 使用本地的 zimfw（从 ~/zimfw 仓库）
 # 安装缺失的模块并初始化
 if [[ ! ${ZIM_HOME}/init.zsh -nt ${ZDOTDIR:-${HOME}}/.zimrc ]]; then
-  source ${ZIM_HOME}/zimfw.zsh init -q
+  source ${HOME}/zimfw/zimfw.zsh init -q
 fi
 
 # 初始化 Zim

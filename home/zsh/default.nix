@@ -12,8 +12,8 @@
     enable = true;
 
     # ==================== Zsh 环境设置 ====================
-    # Zim 配置目录
-    dotDir = ".config/zsh";
+    # Zim 配置目录（使用绝对路径）
+    dotDir = "${config.xdg.configHome}/zsh";
 
     # ==================== 自动启动 Wayland 会话 ====================
     # 登录到 tty1 时自动启动 Niri Wayland 会话
@@ -80,7 +80,7 @@
 
     # ==================== Zim 配置加载 ====================
     # 加载 Zim 框架和自定义配置
-    initExtra = builtins.readFile ./zshrc-zim.zsh;
+    initContent = builtins.readFile ./zshrc-zim.zsh;
 
     # ==================== 环境变量配置 ====================
     sessionVariables = {
