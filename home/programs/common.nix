@@ -87,7 +87,7 @@
     # skim 是一个模糊查找器，类似于 fzf
     skim = {
       enable = true;
-      enableZshIntegration = true;  # 与 Zsh 集成
+      enableZshIntegration = false;  # 禁用 Zsh 集成（避免与 Zim completion 模块冲突）
       defaultCommand = "rg --files --hidden";  # 默认命令，使用 ripgrep 查找文件，包括隐藏文件
       changeDirWidgetOptions = [
         # 为目录切换小部件设置预览选项，显示目录树
