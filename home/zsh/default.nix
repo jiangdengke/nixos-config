@@ -15,6 +15,10 @@
     # Zim 配置目录（使用绝对路径）
     dotDir = "${config.xdg.configHome}/zsh";
 
+    # 禁用 home-manager 自动调用 compinit
+    # 让 Zim 的 completion 模块来处理
+    enableCompletion = false;
+
     # ==================== 自动启动 Wayland 会话 ====================
     # 登录到 tty1 时自动启动 Niri Wayland 会话
     profileExtra = ''
