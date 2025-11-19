@@ -12,6 +12,7 @@
       enable = true;
       defaultFonts = {
         monospace = [
+          "CaskaydiaCove Nerd Font Mono"
           "MesloLGL Nerd Font"
           "MesloLGL Nerd Font Mono"
           "JetBrainsMono Nerd Font"
@@ -34,6 +35,7 @@
       noto-fonts-cjk-sans
       noto-fonts-cjk-serif
       jetbrains-mono
+      nerd-fonts.caskaydia-cove  # CaskaydiaCove (Cascadia Code) Nerd Font - HyDE 风格
       nerd-fonts.jetbrains-mono
       nerd-fonts.meslo-lg
       wqy_microhei

@@ -9,20 +9,20 @@
     # Kitty 详细配置选项
     settings = {
       # ==================== 字体配置 ====================
-      # 普通文本使用的字体（支持 Nerd Font 图标）
-      font_family = "MesloLGL Nerd Font";
+      # 普通文本使用的字体（HyDE 风格：CaskaydiaCove Nerd Font）
+      font_family = "CaskaydiaCove Nerd Font Mono";
 
-      # 粗体文本使用的字体
-      bold_font = "MesloLGL Nerd Font Bold";
+      # 粗体文本使用的字体（自动选择）
+      bold_font = "auto";
 
-      # 斜体文本使用的字体
-      italic_font = "MesloLGL Nerd Font Italic";
+      # 斜体文本使用的字体（自动选择）
+      italic_font = "auto";
 
-      # 粗斜体文本使用的字体
-      bold_italic_font = "MesloLGL Nerd Font Bold Italic";
+      # 粗斜体文本使用的字体（自动选择）
+      bold_italic_font = "auto";
 
-      # 字体大小（单位：pt）
-      font_size = 10;
+      # 字体大小（HyDE 风格：9.0）
+      font_size = "9.0";
 
       # ==================== 光标配置 ====================
       # 光标形状：block（方块）、beam（竖线）、underline（下划线）
@@ -31,13 +31,16 @@
       # 光标闪烁间隔（0 表示不闪烁，单位：秒）
       cursor_blink_interval = 0;
 
+      # 光标轨迹效果（HyDE 风格：移动时有拖尾）
+      cursor_trail = 1;
+
       # ==================== 滚动配置 ====================
       # 回滚缓冲区行数（保存的历史记录行数）
       scrollback_lines = 10000;
 
       # ==================== 窗口配置 ====================
-      # 窗口内边距宽度（单位：像素）
-      window_padding_width = 5;
+      # 窗口内边距宽度（HyDE 风格：25px，更宽松的视觉效果）
+      window_padding_width = 25;
 
       # 记住窗口大小（关闭后重新打开时恢复窗口大小）
       remember_window_size = true;
@@ -112,6 +115,6 @@
 
     # ==================== 主题配置 ====================
     # 使用的配色主题（Catppuccin Mocha 是柔和的深色主题）
-    theme = "Catppuccin-Mocha";
+    themeFile = "Catppuccin-Mocha";
   };
 }
