@@ -1,254 +1,360 @@
-/* swaync 样式配置 - 匹配 mako 主题风格 */
+/* ==================== SwayNC 通知中心样式配置 ====================
+ * 现代化设计，采用毛玻璃效果和圆角设计
+ * 配色方案：Catppuccin Mocha + Rose Pine
+ * ================================================================= */
 
+/* ==================== 全局字体配置 ==================== */
 * {
-  font-family: "MesloLGL Nerd Font", "Noto Sans CJK SC", "Noto Sans", "WenQuanYi Zen Hei";
-  font-size: 10pt;
+  font-family: "MesloLGL Nerd Font", "Noto Sans CJK SC", "Noto Sans", sans-serif;
+  font-size: 11pt;
   font-weight: 400;
-  letter-spacing: 0.2px;
+  letter-spacing: 0.3px;
 }
 
-.control-center,
-.control-center * {
-  font-size: 9pt;
-}
-
-.control-center .notification {
-  background: rgba(17, 17, 27, 0.82);
-  border: 1px solid rgba(156, 207, 216, 0.8);
-  border-radius: 12px;
-  margin: 6px 8px;
-  box-shadow: 0 10px 24px rgba(15, 23, 42, 0.4);
-}
-
-.control-center .notification-content {
-  padding: 10px 12px;
-}
-
-.control-center .summary {
-  font-size: 9.5pt;
-  font-weight: 600;
-  margin-bottom: 4px;
-  color: #e6edf3;
-}
-
-.control-center .body {
-  font-size: 8.5pt;
-  color: #cdd6f4;
-  line-height: 1.25;
-}
-
-.control-center .time {
-  font-size: 7.5pt;
-  margin-top: 1px;
-  color: #9399b2;
-}
-
-.control-center .notification-default-action .notification-icon {
-  margin-right: 10px;
-}
-
-.control-center .close-button {
-  background: rgba(235, 111, 146, 0.9);
-  border: none;
-  border-radius: 6px;
-  padding: 4px 8px;
-  margin: 4px;
-  color: #1e1e2e;
-  transition: background 0.2s ease;
-}
-
-.control-center .close-button:hover {
-  background: rgba(246, 193, 119, 0.85);
-}
-
-.control-center .notification-action {
-  background: rgba(156, 207, 216, 0.82);
-  border: none;
-  border-radius: 7px;
-  padding: 4px 10px;
-  margin: 3px 2px;
-  color: #1e1e2e;
-  transition: background 0.2s ease;
-}
-
-.control-center .notification-action:hover {
-  background: rgba(246, 193, 119, 0.9);
-  color: #1e1e2e;
-}
-
-/* 通知窗口背景 */
+/* ==================== 通知窗口样式（浮动通知）==================== */
 .notification {
-  background: #1e1e2edd;
-  border: 2px solid #9ccfd8;
-  border-radius: 12px;
-  margin: 8px;
+  background: rgba(30, 30, 46, 0.92);        /* 深色半透明背景 */
+  border: 2px solid rgba(137, 180, 250, 0.4); /* 淡蓝色边框 */
+  border-radius: 16px;                        /* 大圆角 */
+  margin: 10px;
   padding: 0;
+  box-shadow: 0 8px 32px rgba(0, 0, 0, 0.5),  /* 外阴影 */
+              0 0 0 1px rgba(255, 255, 255, 0.05); /* 内光晕 */
+  backdrop-filter: blur(20px);                /* 毛玻璃模糊效果 */
 }
 
 .notification-content {
   background: transparent;
-  padding: 15px;
+  padding: 18px 20px;
   margin: 0;
 }
 
-/* 通知标题 */
+/* ==================== 通知文本样式 ==================== */
 .summary {
-  color: #e0def4;
-  font-weight: 600;
+  color: #cdd6f4;                            /* 标题颜色：浅蓝灰 */
+  font-weight: 700;                          /* 粗体 */
   font-size: 12pt;
-  margin-bottom: 5px;
+  margin-bottom: 6px;
+  text-shadow: 0 1px 2px rgba(0, 0, 0, 0.3); /* 文字阴影 */
 }
 
-/* 通知正文 */
 .body {
-  color: #e0def4;
-  font-size: 11pt;
+  color: #bac2de;                            /* 正文颜色：灰蓝 */
+  font-size: 10.5pt;
+  line-height: 1.5;                          /* 行高增加可读性 */
+  opacity: 0.95;
 }
 
-/* 通知时间 */
 .time {
-  color: #6e6a86;
+  color: #7f849c;                            /* 时间颜色：深灰 */
   font-size: 9pt;
-  margin-top: 5px;
+  margin-top: 8px;
+  font-weight: 500;
 }
 
-/* 紧急程度样式 */
+/* ==================== 通知图标样式 ==================== */
+.notification-default-action .notification-icon {
+  margin-right: 14px;
+  border-radius: 12px;                       /* 图标圆角 */
+  padding: 4px;
+}
+
+.image {
+  border-radius: 12px;                       /* 图片圆角 */
+}
+
+/* ==================== 紧急程度样式 ==================== */
 .low {
-  border-color: #6e6a86;
+  border-color: rgba(166, 227, 161, 0.4);    /* 低优先级：绿色 */
+  background: rgba(30, 30, 46, 0.88);
 }
 
 .normal {
-  border-color: #9ccfd8;
+  border-color: rgba(137, 180, 250, 0.4);    /* 普通：蓝色 */
 }
 
 .critical {
-  border-color: #eb6f92;
-  background: #1e1e2edd;
+  border-color: rgba(243, 139, 168, 0.8);    /* 紧急：红色 */
+  background: rgba(243, 139, 168, 0.12);     /* 红色背景高亮 */
+  animation: pulse 2s ease-in-out infinite;  /* 脉冲动画 */
 }
 
-.critical .summary,
-.critical .body {
-  color: #eb6f92;
+@keyframes pulse {
+  0%, 100% {
+    border-color: rgba(243, 139, 168, 0.8);
+    box-shadow: 0 0 20px rgba(243, 139, 168, 0.3);
+  }
+  50% {
+    border-color: rgba(243, 139, 168, 1);
+    box-shadow: 0 0 30px rgba(243, 139, 168, 0.6);
+  }
 }
 
-/* 通知中心面板 */
+.critical .summary {
+  color: #f38ba8;                            /* 紧急通知标题：红色 */
+}
+
+/* ==================== 通知中心面板 ==================== */
 .control-center {
-  background: rgba(17, 17, 27, 0.75);
-  border: 1px solid rgba(156, 207, 216, 0.6);
-  border-radius: 16px;
-  margin: 14px 16px;
-  padding: 12px 14px;
-  backdrop-filter: blur(18px);
+  background: rgba(17, 17, 27, 0.85);        /* 深色半透明背景 */
+  border: 1px solid rgba(137, 180, 250, 0.25);
+  border-radius: 20px;                       /* 大圆角 */
+  margin: 18px 20px;
+  padding: 16px;
+  backdrop-filter: blur(24px);               /* 更强的毛玻璃效果 */
+  box-shadow: 0 12px 40px rgba(0, 0, 0, 0.6),
+              0 0 0 1px rgba(255, 255, 255, 0.08);
 }
 
-/* 通知中心标题 */
+/* 通知中心内的通知卡片 */
+.control-center .notification {
+  background: rgba(30, 30, 46, 0.75);
+  border: 1px solid rgba(137, 180, 250, 0.25);
+  border-radius: 14px;
+  margin: 8px 0;
+  padding: 0;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.3);
+  transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+.control-center .notification:hover {
+  background: rgba(30, 30, 46, 0.9);
+  border-color: rgba(137, 180, 250, 0.5);
+  transform: translateY(-2px);               /* 悬停上移效果 */
+  box-shadow: 0 6px 16px rgba(0, 0, 0, 0.4);
+}
+
+.control-center .notification-content {
+  padding: 14px 16px;
+}
+
+.control-center .summary {
+  font-size: 10.5pt;
+  font-weight: 650;
+  margin-bottom: 5px;
+  color: #cdd6f4;
+}
+
+.control-center .body {
+  font-size: 9.5pt;
+  color: #bac2de;
+  line-height: 1.4;
+}
+
+.control-center .time {
+  font-size: 8.5pt;
+  margin-top: 6px;
+  color: #7f849c;
+}
+
+/* ==================== 控制按钮样式 ==================== */
+/* 勿扰模式按钮 */
+.widget-dnd {
+  background: rgba(49, 50, 68, 0.7);
+  border: 1px solid rgba(137, 180, 250, 0.3);
+  border-radius: 12px;
+  padding: 10px 16px;
+  margin: 8px 0;
+  color: #cdd6f4;
+  transition: all 0.3s ease;
+}
+
+.widget-dnd:hover {
+  background: rgba(49, 50, 68, 0.9);
+  border-color: rgba(137, 180, 250, 0.5);
+}
+
+.widget-dnd > switch {
+  background: rgba(88, 91, 112, 0.6);
+  border-radius: 999px;
+  min-width: 48px;
+  min-height: 24px;
+  padding: 2px;
+  transition: all 0.3s ease;
+}
+
+.widget-dnd > switch:checked {
+  background: linear-gradient(135deg, #f38ba8 0%, #eba0ac 100%);
+  box-shadow: 0 0 12px rgba(243, 139, 168, 0.4);
+}
+
+.widget-dnd > switch slider {
+  background: #ffffff;
+  border-radius: 50%;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
+}
+
+/* 清空全部按钮 */
+.widget-label {
+  color: #cdd6f4;
+  font-size: 10pt;
+  font-weight: 600;
+  margin: 12px 8px 8px;
+  text-transform: uppercase;                 /* 大写 */
+  letter-spacing: 1px;
+  opacity: 0.8;
+}
+
+.widget-title {
+  color: #cdd6f4;
+  font-size: 13pt;
+  font-weight: 700;
+  margin: 12px 8px 8px;
+}
+
+/* 通知行 */
 .control-center .notification-row {
-  margin: 6px 0;
+  margin: 8px 0;
 }
 
-/* DND 按钮 */
-.control-center-dnd {
-  background: rgba(30, 30, 46, 0.9);
-  border: 1px solid rgba(156, 207, 216, 0.5);
-  border-radius: 10px;
-  padding: 6px 12px;
-  margin: 5px 8px 3px;
-  color: #e6edf3;
-  transition: background 0.2s ease, border 0.2s ease;
-}
-
-.control-center-dnd:checked {
-  background: rgba(235, 111, 146, 0.88);
-  border-color: rgba(235, 111, 146, 0.9);
-  color: #1e1e2e;
-}
-
-/* 清除按钮 */
-.control-center-clear-all {
-  background: rgba(30, 30, 46, 0.9);
-  border: 1px solid rgba(156, 207, 216, 0.5);
-  border-radius: 10px;
-  padding: 7px 14px;
-  margin: 5px 8px;
-  color: #e6edf3;
-  transition: background 0.2s ease, border 0.2s ease;
-}
-
-.control-center-clear-all:hover {
-  background: rgba(156, 207, 216, 0.9);
-  border-color: rgba(156, 207, 216, 0.9);
-  color: #1e1e2e;
-}
-
-/* 通知图标 */
-.notification-default-action .notification-icon {
-  margin-right: 10px;
-}
-
+/* ==================== 按钮样式 ==================== */
 /* 关闭按钮 */
 .close-button {
-  background: #eb6f92;
+  background: linear-gradient(135deg, #f38ba8 0%, #eba0ac 100%);
   color: #1e1e2e;
-  border-radius: 6px;
-  padding: 4px 8px;
-  margin: 5px;
+  border: none;
+  border-radius: 10px;
+  padding: 6px 10px;
+  margin: 6px;
+  font-weight: 600;
+  transition: all 0.3s ease;
+  box-shadow: 0 2px 8px rgba(243, 139, 168, 0.3);
 }
 
 .close-button:hover {
-  background: #f6c177;
+  background: linear-gradient(135deg, #fab387 0%, #f9e2af 100%);
+  transform: scale(1.05);
+  box-shadow: 0 4px 12px rgba(250, 179, 135, 0.4);
 }
 
 /* 通知操作按钮 */
 .notification-action {
-  background: #9ccfd8;
+  background: linear-gradient(135deg, #89b4fa 0%, #74c7ec 100%);
   color: #1e1e2e;
-  border-radius: 6px;
-  padding: 6px 12px;
-  margin: 3px;
+  border: none;
+  border-radius: 10px;
+  padding: 8px 14px;
+  margin: 4px 3px;
+  font-weight: 600;
+  transition: all 0.3s ease;
+  box-shadow: 0 2px 8px rgba(137, 180, 250, 0.3);
 }
 
 .notification-action:hover {
-  background: #f6c177;
+  background: linear-gradient(135deg, #74c7ec 0%, #89dceb 100%);
+  transform: translateY(-2px);
+  box-shadow: 0 4px 12px rgba(116, 199, 236, 0.4);
 }
 
-/* 滚动条 */
+/* 清除全部按钮 */
+button {
+  background: rgba(49, 50, 68, 0.7);
+  border: 1px solid rgba(137, 180, 250, 0.3);
+  border-radius: 12px;
+  padding: 10px 18px;
+  margin: 8px 4px;
+  color: #cdd6f4;
+  font-weight: 600;
+  transition: all 0.3s ease;
+}
+
+button:hover {
+  background: linear-gradient(135deg, #89b4fa 0%, #74c7ec 100%);
+  border-color: transparent;
+  color: #1e1e2e;
+  transform: translateY(-2px);
+  box-shadow: 0 4px 12px rgba(137, 180, 250, 0.4);
+}
+
+/* ==================== 滚动条样式 ==================== */
 .control-center scrollbar {
   background: transparent;
+  border-radius: 12px;
+  margin: 4px;
+}
+
+.control-center scrollbar trough {
+  background: rgba(49, 50, 68, 0.3);
+  border-radius: 12px;
 }
 
 .control-center scrollbar slider {
-  background: rgba(110, 106, 134, 0.55);
+  background: linear-gradient(180deg,
+              rgba(137, 180, 250, 0.6) 0%,
+              rgba(116, 199, 236, 0.6) 100%);
   border-radius: 10px;
+  min-height: 40px;
+  transition: all 0.3s ease;
 }
 
 .control-center scrollbar slider:hover {
-  background: rgba(156, 207, 216, 0.8);
+  background: linear-gradient(180deg,
+              rgba(137, 180, 250, 0.8) 0%,
+              rgba(116, 199, 236, 0.8) 100%);
+  box-shadow: 0 0 8px rgba(137, 180, 250, 0.4);
 }
 
-/* Widget 标题 */
-.widget-title {
-  color: #e6edf3;
-  font-size: 9.5pt;
-  font-weight: 600;
-  margin: 8px 6px 4px;
+/* ==================== 特殊效果 ==================== */
+/* 通知进入动画 */
+@keyframes slideIn {
+  from {
+    opacity: 0;
+    transform: translateX(100px);
+  }
+  to {
+    opacity: 1;
+    transform: translateX(0);
+  }
 }
 
-/* Widget 按钮 */
-.widget-dnd {
-  background: rgba(49, 50, 68, 0.75);
-  border: 1px solid rgba(156, 207, 216, 0.4);
-  border-radius: 11px;
-  padding: 8px 12px;
-  margin: 5px 8px;
-  color: #cdd6f4;
+.notification {
+  animation: slideIn 0.4s cubic-bezier(0.4, 0, 0.2, 1);
 }
 
-.widget-dnd > switch {
-  background: rgba(110, 106, 134, 0.6);
-  border-radius: 999px;
-  padding: 2px;
+/* 通知离开时的淡出效果 */
+.notification.closing {
+  animation: slideOut 0.3s cubic-bezier(0.4, 0, 0.2, 1);
 }
 
-.widget-dnd > switch:checked {
-  background: rgba(235, 111, 146, 0.85);
+@keyframes slideOut {
+  from {
+    opacity: 1;
+    transform: translateX(0);
+  }
+  to {
+    opacity: 0;
+    transform: translateX(100px);
+  }
+}
+
+/* ==================== 空状态样式 ==================== */
+.blank-window {
+  background: transparent;
+}
+
+.notification-group {
+  margin: 0;
+  padding: 0;
+}
+
+/* ==================== 通知分组标题 ==================== */
+.notification-group-headers {
+  color: #89b4fa;
+  font-size: 11pt;
+  font-weight: 700;
+  margin: 16px 8px 8px;
+  text-transform: uppercase;
+  letter-spacing: 1.2px;
+}
+
+/* ==================== 通知计数 ==================== */
+.notification-count {
+  background: linear-gradient(135deg, #f38ba8 0%, #eba0ac 100%);
+  color: #1e1e2e;
+  border-radius: 12px;
+  padding: 2px 8px;
+  margin-left: 8px;
+  font-size: 9pt;
+  font-weight: 700;
+  box-shadow: 0 2px 6px rgba(243, 139, 168, 0.3);
 }

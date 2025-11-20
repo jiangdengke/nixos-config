@@ -1,0 +1,196 @@
+{
+  // ==================== Bar 基本属性 ====================
+  "layer": "top",            // 显示层级：top（最上层）/overlay（覆盖层）/bottom（底层）
+  "position": "top",         // 位置：top（顶部）/bottom（底部）
+  "mode": "dock",            // 模式：dock（停靠模式，为 bar 预留空间）
+  "height": 32,              // Waybar 高度（像素）
+  "exclusive": true,         // 为 bar 预留空间，避免窗口遮挡
+  "passthrough": false,      // 禁止鼠标事件透传到底下的窗口
+  "gtk-layer-shell": true,   // 使用 gtk-layer-shell（Wayland 协议支持）
+
+  // ==================== 模块布局 ====================
+  // 左侧模块：时钟 + CPU + 内存
+  "modules-left": [
+    "custom/l_end",      // 左端圆角装饰
+    "clock",             // 时钟模块
+    "custom/r_end",      // 右端圆角装饰
+    "custom/l_end",      // 左端圆角装饰
+    "cpu",               // CPU 使用率
+    "memory",            // 内存使用率
+    "custom/r_end",      // 右端圆角装饰
+    "custom/padd"        // 填充空白
+  ],
+
+  // 中间模块：工作区 + 窗口标题
+  "modules-center": [
+    "custom/padd",       // 填充空白
+    "custom/l_end",      // 左端圆角装饰
+    "niri/workspaces",   // Niri 窗口管理器工作区
+    "niri/window",       // 当前活动窗口标题
+    "custom/r_end",      // 右端圆角装饰
+    "custom/padd"        // 填充空白
+  ],
+
+  // 右侧模块：系统托盘 + 通知 + 网络 + 亮度 + 音量 + 电池
+  "modules-right": [
+    "custom/padd",          // 填充空白
+    "custom/l_end",         // 左端圆角装饰
+    "tray",                 // 系统托盘（包含输入法图标等）
+    "custom/padd",          // 填充空白（增加间距）
+    "custom/notification",  // 通知中心
+    "custom/padd",          // 填充空白（增加间距）
+    "network",              // 网络状态
+    "backlight",            // 屏幕亮度
+    "pulseaudio",           // 音量控制
+    "battery",              // 电池状态
+    "custom/r_end"          // 右端圆角装饰
+  ],
+
+  // ==================== Niri 工作区配置 ====================
+  "niri/workspaces": {
+    "disable-scroll": true,      // 禁用滚轮切换工作区
+    "all-outputs": true,         // 在所有显示器上显示工作区
+    "on-click": "activate",      // 左键点击激活对应工作区
+    "persistent_workspaces": {   // 固定显示的工作区（即使为空也显示）
+      "1": [], "2": [], "3": [], "4": [], "5": [],
+      "6": [], "7": [], "8": [], "9": [], "10": []
+    }
+  },
+
+  // ==================== 窗口标题配置 ====================
+  "niri/window": {
+    "format": "  {}",            //  = NixOS 图标（需要 Nerd Font 字体）
+    "separate-outputs": true,    // 每个显示器独立显示窗口标题
+    "max-length": 1000           // 窗口标题最大长度
+  },
+
+  // ==================== 系统托盘配置 ====================
+  "tray": {
+    "icon-size": 15,             // 托盘图标大小（像素）
+    "spacing": 10,               // 图标之间的间距（像素）
+    "reverse-direction": true    // 从右向左排列图标
+  },
+
+  // ==================== 屏幕亮度配置 ====================
+  "backlight": {
+    "device": "intel_backlight", // 亮度控制设备（Intel 集成显卡）
+    "format": "{icon} {percent}%", // 显示格式：图标 + 亮度百分比
+    "format-icons": ["󰃞","󰃟","󰃠"], // 亮度图标：低、中、高
+    "on-scroll-up": "brightnessctl set 1%+",   // 向上滚动：亮度 +1%
+    "on-scroll-down": "brightnessctl set 1%-", // 向下滚动：亮度 -1%
+    "min-length": 6              // 最小显示宽度，保持对齐
+  },
+
+  // ==================== 电池状态配置 ====================
+  "battery": {
+    "states": {                  // 电池状态阈值
+      "good": 95,                // 95% 以上显示为良好状态
+      "warning": 30,             // 30% 以下显示为警告状态
+      "critical": 20             // 20% 以下显示为危急状态
+    },
+    "format": "{icon} {capacity}%",        // 默认格式：图标 + 电量百分比
+    "format-charging": " {capacity}%",    // 充电时：闪电图标 + 百分比
+    "format-plugged": " {capacity}%",     // 插电时：插头图标 + 百分比
+    "format-alt": "{time} {icon}",         // 备用格式（点击切换）：剩余时间 + 图标
+    "format-icons": [            // 不同电量等级的电池图标
+      "󰂎","󰁺","󰁻","󰁼","󰁽","󰁾","󰁿","󰂀","󰂁","󰂂","󰁹"
+    ]
+  },
+
+  // ==================== 时钟和日历配置 ====================
+  "clock": {
+    "format": "{:%I:%M %p}",     // 12小时制格式（例：02:30 PM）
+    "rotate": 0,                 // 旋转角度（0 = 不旋转）
+    "format-alt": "{:%R 󰃭 %d·%m·%y}", // 备用格式：24小时制 + 日期（点击切换）
+    "tooltip-format": "<span>{calendar}</span>", // 鼠标悬停显示日历
+    "calendar": {
+      "mode": "month",
+      "mode-mon-col": 3,
+      "on-scroll": 1,
+      "on-click-right": "mode",
+      "format": {
+        "months":   "<span color='#ffead3'><b>{}</b></span>",
+        "weekdays": "<span color='#ffcc66'><b>{}</b></span>",
+        "today":    "<span color='#ff6699'><b>{}</b></span>"
+      }
+    },
+    "actions": {
+      "on-click-right": "mode",
+      "on-click-forward": "tz_up",
+      "on-click-backward": "tz_down",
+      "on-scroll-up": "shift_up",
+      "on-scroll-down": "shift_down"
+    }
+  },
+
+  // ==================== 音量控制配置 ====================
+  "pulseaudio": {
+    "format": "{icon} {volume}%",
+    "format-muted": "  muted",
+    "format-bluetooth": "{icon} {volume}%",
+    "tooltip-format": "{desc} — {volume}%",
+    "scroll-step": 5,
+    "on-click": "pavucontrol -t 3",
+    "on-click-middle": "wpctl set-mute @DEFAULT_AUDIO_SINK@ toggle",
+    "on-scroll-up": "wpctl set-volume -l 1.0 @DEFAULT_AUDIO_SINK@ 5%+",
+    "on-scroll-down": "wpctl set-volume -l 1.0 @DEFAULT_AUDIO_SINK@ 5%-",
+    "format-icons": {
+      "default": ["", "", ""]
+    }
+  },
+
+  // ==================== 内存和 CPU 监控 ====================
+  "memory": {
+    "interval": 1,
+    "format": "  {}%",
+    "format-alt": "  {used}GB",
+    "tooltip": true,
+    "tooltip-format": "Memory - {used:0.1f}GB used"
+  },
+  "cpu": {
+    "interval": 1,
+    "format": "  {usage}%"
+  },
+
+  // ==================== 通知中心配置 ====================
+  "custom/notification": {
+    "tooltip": true,
+    "format": "{icon} {0}",
+    "format-icons": {
+      "notification": "<span foreground='#ff6b6b'></span>",
+      "dnd-notification": "<span foreground='#ff6b6b'>󰒳</span>",
+      "dnd-none": "󰒳",
+      "none": ""
+    },
+    "return-type": "json",
+    "exec-if": "swaync-client --count --skip-wait 1>2 /dev/null",
+    "exec": "swaync-client -swb",
+    "on-click": "swaync-client -t -sw",
+    "on-click-right": "swaync-client -d -sw",
+    "on-click-middle": "swaync-client -C",
+    "escape": true
+  },
+
+  // ==================== 网络状态配置 ====================
+  "network": {
+    "tooltip": true,
+    "format-wifi": " {essid}",
+    "format-ethernet": "󱘖 Wired",
+    "format-linked": "󱘖 {ifname} (No IP)",
+    "format-disconnected": "󰖪 Disconnected",
+    "format-alt": " {signalStrength}% {bandwidthDownBytes} {bandwidthUpBytes}",
+    "tooltip-format": "Network: <big><b>{essid}</b></big>\nSignal: <b>{signaldBm}dBm ({signalStrength}%)</b>\nFrequency: <b>{frequency}MHz</b>\nInterface: <b>{ifname}</b>\nIP: <b>{ipaddr}/{cidr}</b>\nGateway: <b>{gwaddr}</b>\nDownload: <b>{bandwidthDownBytes}</b>\nUpload: <b>{bandwidthUpBytes}</b>",
+    "tooltip-format-disconnected": "Disconnected",
+    "interval": 2,
+    "on-click-right": "nm-connection-editor"
+  },
+
+  // ==================== 装饰和填充模块 ====================
+  "custom/l_end": { "format": " ", "interval": "once", "tooltip": false },
+  "custom/r_end": { "format": " ", "interval": "once", "tooltip": false },
+  "custom/sl_end": { "format": " ", "interval": "once", "tooltip": false },
+  "custom/sr_end": { "format": " ", "interval": "once", "tooltip": false },
+  "custom/rl_end": { "format": " ", "interval": "once", "tooltip": false },
+  "custom/rr_end": { "format": " ", "interval": "once", "tooltip": false },
+  "custom/padd": { "format": "  ", "interval": "once", "tooltip": false }
+}

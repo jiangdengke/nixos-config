@@ -11,7 +11,7 @@
   // ===== 模块布局 =====
   "modules-left":   ["custom/l_end","clock","custom/r_end","custom/l_end","cpu","memory","custom/r_end","custom/padd"],
   "modules-center": ["custom/padd","custom/l_end","niri/workspaces","niri/window","custom/r_end","custom/padd"],
-  "modules-right":  ["custom/padd","custom/l_end","tray","custom/padd","custom/notification","custom/padd","network","backlight","pulseaudio","battery","custom/r_end"],
+  "modules-right":  ["custom/padd","custom/l_end","tray","custom/notification","network","backlight","pulseaudio","battery","custom/r_end"],
 
   // ===== Niri 工作区与窗口标题 =====
   "niri/workspaces": {
@@ -98,22 +98,6 @@
   "format-icons": { "default": ["","",""] }
 },
 
- // ===== 音量 =====
-
-
-
-  // // 可选：麦克风模块
-  // "pulseaudio#microphone": {
-  //   "format": "{format_source}",
-  //   "format-source": "",
-  //   "format-source-muted": "",
-  //   "on-click": "pavucontrol -t 4",
-  //   "on-click-middle": "~/.config/waybar/scripts/volumecontrol.sh -i m",
-  //   "on-scroll-up": "~/.config/waybar/scripts/volumecontrol.sh -i i",
-  //   "on-scroll-down": "~/.config/waybar/scripts/volumecontrol.sh -i d",
-  //   "tooltip-format": "{format_source} {source_desc} // {source_volume}%",
-  //   "scroll-step": 5
-  // },
 
   // ===== 内存 / CPU =====
   "memory": {

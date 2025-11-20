@@ -3,7 +3,6 @@
   i18n.inputMethod = {
     enable = true;
     type = "fcitx5";
-    fcitx5.fcitx5-with-addons = pkgs.qt6Packages.fcitx5-with-addons;
     fcitx5.addons = [
       pkgs.fcitx5-rime
       pkgs.fcitx5-table-extra
