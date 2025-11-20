@@ -36,5 +36,9 @@
       source = ./macOS-dark;
       recursive = true;
     };
+    ".local/share/fcitx5/themes/macOS-dark-png" = {
+      source = ./macOS-dark-png;
+      recursive = true;
+    };
   };
 }

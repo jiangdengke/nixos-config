@@ -11,7 +11,7 @@
   // ===== 模块布局 =====
   "modules-left":   ["custom/l_end","clock","custom/r_end","custom/l_end","cpu","memory","custom/r_end","custom/padd"],
   "modules-center": ["custom/padd","custom/l_end","niri/workspaces","niri/window","custom/r_end","custom/padd"],
-  "modules-right":  ["custom/padd","custom/l_end","tray","custom/notification","network","backlight","pulseaudio","battery","custom/r_end"],
+  "modules-right":  ["custom/padd","custom/l_end","tray","custom/padd","custom/notification","custom/padd","network","backlight","pulseaudio","battery","custom/r_end"],
 
   // ===== Niri 工作区与窗口标题 =====
   "niri/workspaces": {
@@ -128,21 +128,22 @@
     "format": "  {usage}%"
   },
 
-  // ===== 通知中心 =====
+  // ===== 通知中心（参考 HyDE）=====
   "custom/notification": {
     "tooltip": true,
-    "format": "{icon}",
+    "format": "{icon} {0}",
     "format-icons": {
-      "notification": " ",
-      "none": "󰂚",
-      "dnd-notification": "󰒳 ",
-      "dnd-none": "󰒳"
+      "notification": "<span foreground='#ff6b6b'></span>",
+      "dnd-notification": "<span foreground='#ff6b6b'>󰒳</span>",
+      "dnd-none": "󰒳",
+      "none": ""
     },
     "return-type": "json",
-    "exec-if": "which swaync-client",
-    "exec": "~/.config/waybar/scripts/swaync-waybar.py",
+    "exec-if": "swaync-client --count --skip-wait 1>2 /dev/null",
+    "exec": "swaync-client -swb",
     "on-click": "swaync-client -t -sw",
     "on-click-right": "swaync-client -d -sw",
+    "on-click-middle": "swaync-client -C",
     "escape": true
   },
 
