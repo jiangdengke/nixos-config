@@ -1,9 +1,4 @@
-{
-  lib,
-  pkgs,
-  catppuccin-bat,  # 引入 Catppuccin 主题作为外部依赖
-  ...
-}: {
+{ lib, pkgs, ... }: {
   # 用户级软件包安装
   home.packages = with pkgs; [
     # 归档工具
