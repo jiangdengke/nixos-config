@@ -70,7 +70,8 @@
 
   services.getty.autologinUser = "jdk";
 
-  home-manager.backupFileExtension = "backup";
+  # 禁用 Home Manager 自动生成 .backup 文件
+  home-manager.backupFileExtension = null;
   # 使用libinput禁用触控板
   services.libinput = {
     enable = true;

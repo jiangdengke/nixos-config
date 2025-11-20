@@ -159,11 +159,10 @@
       # XDG_CACHE_HOME/nvim：临时缓存文件
       $DRY_RUN_CMD mkdir -p $VERBOSE_ARG ${config.xdg.cacheHome}/nvim
 
-      # ===== 备份旧配置 =====
-      # 如果已存在 nvim 配置目录，先备份
-      # 备份文件名包含时间戳，避免覆盖
+      # ===== 覆盖旧配置 =====
+      # 直接删除旧的 nvim 目录，避免不断生成 .bak 备份
       if [ -d "${config.xdg.configHome}/nvim" ]; then
-        $DRY_RUN_CMD mv $VERBOSE_ARG ${config.xdg.configHome}/nvim ${config.xdg.configHome}/nvim.bak.$(date +%Y%m%d%H%M%S)
+        $DRY_RUN_CMD rm -rf $VERBOSE_ARG ${config.xdg.configHome}/nvim
       fi
 
       # ===== 复制新配置到配置目录 =====

@@ -14,13 +14,13 @@
       timeout-low = 3;
       timeout-critical = 0;
 
-      # 通知中心
-      control-center-margin-top = 5;
-      control-center-margin-bottom = 5;
-      control-center-margin-right = 5;
-      control-center-margin-left = 5;
-      control-center-width = 220;
-      control-center-height = 540;
+      # 通知中心尺寸和位置
+      control-center-margin-top = 10;
+      control-center-margin-bottom = 10;
+      control-center-margin-right = 10;
+      control-center-margin-left = 10;
+      control-center-width = 480;        # 增加宽度：220 -> 480
+      control-center-height = 680;       # 增加高度：540 -> 680
 
       # 通知样式
       notification-window-width = 400;
@@ -46,6 +46,6 @@
         "notifications"
       ];
     };
-    style = builtins.readFile ../swaync/style.css;
+    style = builtins.readFile ./style.css;  # 读取同目录下的 style.css
   };
 }
