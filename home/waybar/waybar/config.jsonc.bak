@@ -128,14 +128,14 @@
     "format": "  {usage}%"
   },
 
-  // ===== 通知中心 =====
+  // ===== 通知 =====
   "custom/notification": {
-    "tooltip": true,
-    "format": "{icon}",
+    "tooltip": false,
+    "format": "{icon}{text}",
     "format-icons": {
-      "notification": " ",
+      "notification": "",
       "none": "󰂚",
-      "dnd-notification": "󰒳 ",
+      "dnd-notification": "󰒳",
       "dnd-none": "󰒳"
     },
     "return-type": "json",

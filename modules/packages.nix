@@ -42,6 +42,10 @@
     taplo # TOML 文件格式化工具
     google-chrome
 
+    # Qt 图像插件（提供 SVG/图片支持，避免 fcitx5 主题空白）
+    qt6Packages.qtsvg
+    qt6Packages.qtimageformats
+
     # 通讯应用
     qq # 腾讯 QQ，聊天工具
     wechat-uos
