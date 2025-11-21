@@ -48,6 +48,6 @@
     wemeet
 
     # 开发工具
-    # vscode  # 暂时注释，网络问题
+     vscode   
   ];
 }

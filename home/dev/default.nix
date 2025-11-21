@@ -1,7 +1,8 @@
-{ pkgs, ... }: 
+{ pkgs, ... }:
 {
-    imports = [
-     ./go.nix
-     ./python.nix
-    ];
+  imports = [
+    ./go.nix
+    ./python.nix
+    ./php.nix
+  ];
 }
