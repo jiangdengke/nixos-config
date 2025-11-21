@@ -1,4 +1,5 @@
 {
+  # 主界面行为：面板比例/滚动与排序策略
   mgr = {
     linemode = "none";
     mouse_events = [
@@ -9,7 +10,7 @@
       2
       3
       5
-    ];
+    ]; # 面板宽度 2:3:5，对应 README 中的描述
     scrolloff = 5;
     show_hidden = false;
     show_symlink = true;
@@ -20,6 +21,8 @@
     sort_translit = false;
     title_format = "Yazi: {cwd}";
   };
+
+  # 针对不同类型的文件，选择预设 opener
   open = {
     rules = [
       {
@@ -88,6 +91,8 @@
       }
     ];
   };
+
+  # 定义可复用的 opener：编辑/播放/提取/显示元信息
   opener = {
     edit = [
       {
@@ -148,6 +153,8 @@
       }
     ];
   };
+
+  # 预览行为：配合 ueberzugpp 的尺寸/质量设定
   preview = {
     cache_dir = "";
     image_delay = 30;
@@ -166,6 +173,8 @@
     ueberzug_scale = 1;
     wrap = "no";
   };
+
+  # which 面板：保持原生排序（与 README 快捷键对应）
   which = {
     sort_by = "none";
     sort_reverse = false;

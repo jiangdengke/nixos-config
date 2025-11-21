@@ -1,4 +1,5 @@
 {
+  # 自动补全窗口配色
   completion = {
     border = {
       fg = "#81A1C1";
@@ -20,6 +21,7 @@
       fg = "#81A1C1";
     };
   };
+  # 针对不同类型的文件高亮（与 README 描述配色一致）
   filetype = {
     rules = [
       {
@@ -88,6 +90,7 @@
       reversed = true;
     };
   };
+  # 主面板颜色（边框/计数器/预览 hover 等）
   mgr = {
     border_style = {
       fg = "#4C566A";
@@ -148,6 +151,7 @@
     };
     tab_width = 1;
   };
+  # 模式指示：normal/select/unset 三种状态
   mode = {
     normal_alt = {
       bg = "#4C566A";
