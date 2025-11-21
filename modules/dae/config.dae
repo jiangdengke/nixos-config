@@ -6,7 +6,8 @@ node {
 global {
     # The WAN interface to bind. Use it if you want to proxy localhost.
     # Multiple interfaces split by ",". Use "auto" to auto detect.
-    wan_interface: auto
+    # 添加 lo (loopback) 接口以代理本地发起的连接（如终端命令）
+    wan_interface: auto,lo
 
     log_level: info
 
