@@ -15,6 +15,13 @@ return {
         -- 如果需要自定义设置，放到这里
         -- settings = { ... }
       })
+
+      -- PHP Language Server (phpactor)
+      -- 通过 Nix 安装，不需要 Mason
+      lspconfig.phpactor.setup({
+        -- phpactor 配置
+        -- settings = { ... }
+      })
     end,
   },
 }

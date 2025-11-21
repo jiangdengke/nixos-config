@@ -118,6 +118,10 @@
 
       # Node.js 运行时（运行 JavaScript 代码）
       nodejs
+
+      # ===== PHP 开发工具链 =====
+      # PHP Language Server（PHP 代码补全和诊断）
+      phpactor
     ];
   };
 
