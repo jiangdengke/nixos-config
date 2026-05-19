@@ -76,8 +76,7 @@ layout {
     struts { }
 }
 
-// 开机自动启动 waybar、fcitx5 和壁纸脚本
-spawn-at-startup "waybar"
+// 开机自动启动 fcitx5 和壁纸脚本；waybar 交给 systemd user service 管理，避免重复启动
 spawn-at-startup "fcitx5"
 spawn-at-startup "sh" "-c" "~/.local/bin/swaybg-random.sh \"$HOME\"/Pictures/Wallpapers"
 

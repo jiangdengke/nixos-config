@@ -24,4 +24,7 @@
     enable = true;
     powertop.enable = false; # 禁用 powertop 的自动调整
   };
+
+  # 减少内存压力落到磁盘 swap 时的卡顿。
+  zramSwap.enable = true;
 }

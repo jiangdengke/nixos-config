@@ -1,77 +1,128 @@
 # nixos-config
 
-## Yazi
+这是一个 flake 化的 NixOS 配置。当前主机名是 `nixos`，flake 输出名也是 `nixos`，默认用户是 `jdk`。
 
-### 导航与面板
+参考资料：
 
-| 快捷键 | 功能 |
-|--------|------|
-| `j / k` | 上下移动列表 |
-| `h / l` | 左右切换面板 |
-| `g` | 跳转到顶部 |
-| `G` | 跳转到底部 |
-| `g f` | 一键进入 `~/Flakes` |
-| `z` | 显示/隐藏隐藏文件 |
+- [NixOS Manual](https://nixos.org/manual/nixos/stable/)
+- [NixOS Wiki: nixos-generate-config](https://wiki.nixos.org/wiki/Nixos-generate-config)
+- [NixOS Wiki: Flakes](https://wiki.nixos.org/wiki/Flakes)
 
-### 文件与选择
+## 新机器安装
 
-| 快捷键 | 功能 |
-|--------|------|
-| `yy` | 复制选中文件 |
-| `dd` | 剪切 |
-| `p` | 粘贴 |
-| `x` | 删除 |
-| `r` | 重命名 |
-| `c` | 创建文件/目录 |
-| `Space` | 选择/取消选择 |
-| `v` | 反向选择 |
+### 1. 启动安装介质
 
-### 打开与预览
+用官方 NixOS ISO 启动机器。进入终端后先联网，能 ping 通外网即可。
 
-| 快捷键 | 功能 |
-|--------|------|
-| `Enter` | 打开文件/进入目录 |
-| `o` | 使用默认程序打开 |
+有线网络通常插网线就行；无线网络可以用：
 
-### 搜索与过滤
+```bash
+nmtui
+```
 
-| 快捷键 | 功能 |
-|--------|------|
-| `/` | 搜索 |
-| `f` | 过滤文件 |
-| `n / N` | 搜索结果的下一个/上一个匹配 |
+### 2. 分区和格式化
 
-### 下载与脚本
+这套配置默认是 UEFI + `systemd-boot` + `btrfs`。推荐保留一个 EFI 分区、一个 swap 分区、一个 btrfs 根分区。
 
-| 快捷键 | 功能 |
-|--------|------|
-| `y d v` | 调用 `yt-dlp -ic` 下载视频 |
-| `y d a` | `yt-dlp -x --audio-format mp3` 下载音频 |
+下面是示例命令。`DISK` 是整块磁盘，后面的 `*_PART` 是分区路径。NVMe 通常是 `/dev/nvme0n1p1`，SATA 通常是 `/dev/sda1`，按你的机器替换。
 
-### 标签与会话
+```bash
+sudo -i
 
-| 快捷键 | 功能 |
-|--------|------|
-| `t` | 新建标签页 |
-| `Tab` | 切换标签 |
-| `1-9` | 跳转到指定标签 |
-| `q` | 关闭当前标签 |
+DISK=/dev/nvme0n1
+EFI_PART=/dev/nvme0n1p1
+SWAP_PART=/dev/nvme0n1p2
+ROOT_PART=/dev/nvme0n1p3
 
-### 其他
+parted --script "$DISK" mklabel gpt \
+  mkpart ESP fat32 1MiB 1025MiB \
+  set 1 esp on \
+  mkpart primary linux-swap 1025MiB 17409MiB \
+  mkpart primary btrfs 17409MiB 100%
 
-| 快捷键 | 功能 |
-|--------|------|
-| `?` | 显示帮助 |
-| `~` | 跳转到 HOME |
-| `.` | 显示隐藏文件（命令模式） |
+mkfs.fat -F 32 -n BOOT "$EFI_PART"
+mkswap -L SWAP "$SWAP_PART"
+mkfs.btrfs -f -L NIXOS "$ROOT_PART"
+```
 
-### 功能配置
+### 3. 挂载文件系统
 
-| 功能 | 说明 |
-|------|------|
-| 启动命令 | `y`（退出后自动 cd） |
-| 图片预览 | ueberzugpp 终端内预览 |
-| 面板比例 | 2:3:5（左:中:右） |
-| 主题 | Nord 配色 |
-| 鼠标支持 | 点击选择、滚动浏览 |
-| 排序方式 | 字母顺序，目录优先 |
+```bash
+mount /dev/disk/by-label/NIXOS /mnt
+btrfs subvolume create /mnt/root
+btrfs subvolume create /mnt/home
+btrfs subvolume create /mnt/nix
+umount /mnt
+
+mount -o subvol=root,compress=zstd,noatime /dev/disk/by-label/NIXOS /mnt
+mkdir -p /mnt/{home,nix,boot}
+mount -o subvol=home,compress=zstd,noatime /dev/disk/by-label/NIXOS /mnt/home
+mount -o subvol=nix,compress=zstd,noatime /dev/disk/by-label/NIXOS /mnt/nix
+mount /dev/disk/by-label/BOOT /mnt/boot
+swapon /dev/disk/by-label/SWAP
+```
+
+如果你不想留磁盘 swap，也可以不建 swap 分区，但要记得把生成出来的 `swapDevices` 删掉，或者改成你自己的方案。
+
+### 4. 获取配置
+
+```bash
+cd /mnt
+git clone https://github.com/jiangdengke/nixos-config.git nixos-config
+cd nixos-config
+```
+
+### 5. 生成并替换硬件配置
+
+先让 NixOS 根据当前机器生成硬件配置：
+
+```bash
+nixos-generate-config --root /mnt
+```
+
+再把生成出来的硬件配置覆盖到仓库里：
+
+```bash
+cp /mnt/etc/nixos/hardware-configuration.nix /mnt/nixos-config/nixos/hardware-configuration.nix
+```
+
+这一步很重要。仓库里的旧 `hardware-configuration.nix` 是上一台机器的 UUID，不能直接拿到新机器上用。
+
+### 6. 安装系统
+
+如果安装环境里 flakes 还没开，先临时启用：
+
+```bash
+export NIX_CONFIG="experimental-features = nix-command flakes"
+```
+
+然后安装：
+
+```bash
+nixos-install --flake '.#nixos'
+```
+
+安装时会要求设置 `root` 密码。
+
+### 7. 重启
+
+```bash
+reboot
+```
+
+第一次进系统后，这套配置会自动在 TTY1 登录 `jdk`，然后启动 Niri 会话。
+
+## 日常更新
+
+在仓库目录里执行：
+
+```bash
+sudo nixos-rebuild switch --flake '.#nixos'
+```
+
+迁移到新机器时，优先检查这些文件：
+
+- `nixos/hardware-configuration.nix`
+- `modules/dae/config.dae`
+- `modules/boot.nix`
+- `modules/intel-gpu.nix`
