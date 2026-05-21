@@ -12,17 +12,19 @@
 
 ### 1. 启动安装介质
 
-用官方 NixOS ISO 启动机器。进入终端后先联网，能 ping 通外网即可。
+用 Ventoy 启动官方 NixOS ISO。进到终端后先联网，能 ping 通外网就行。
 
-有线网络通常插网线就行；无线网络可以用：
+有线网络通常直接插网线；无线网络可以用：
 
 ```bash
 nmtui
 ```
 
+如果 GitHub 访问不通，先临时走可用代理或镜像，把仓库和 flake 输入拉下来再继续。
+
 ### 2. 分区和格式化
 
-这套配置默认是 UEFI + `systemd-boot` + `btrfs`。推荐保留一个 EFI 分区、一个 swap 分区、一个 btrfs 根分区。
+这套配置默认是 UEFI + `systemd-boot` + `btrfs`。磁盘 swap 不必保留，系统里已经启用了 `zramSwap`。
 
 下面是示例命令。`DISK` 是整块磁盘，后面的 `*_PART` 是分区路径。NVMe 通常是 `/dev/nvme0n1p1`，SATA 通常是 `/dev/sda1`，按你的机器替换。
 
@@ -31,17 +33,14 @@ sudo -i
 
 DISK=/dev/nvme0n1
 EFI_PART=/dev/nvme0n1p1
-SWAP_PART=/dev/nvme0n1p2
-ROOT_PART=/dev/nvme0n1p3
+ROOT_PART=/dev/nvme0n1p2
 
 parted --script "$DISK" mklabel gpt \
   mkpart ESP fat32 1MiB 1025MiB \
   set 1 esp on \
-  mkpart primary linux-swap 1025MiB 17409MiB \
-  mkpart primary btrfs 17409MiB 100%
+  mkpart primary btrfs 1025MiB 100%
 
 mkfs.fat -F 32 -n BOOT "$EFI_PART"
-mkswap -L SWAP "$SWAP_PART"
 mkfs.btrfs -f -L NIXOS "$ROOT_PART"
 ```
 
@@ -59,10 +58,7 @@ mkdir -p /mnt/{home,nix,boot}
 mount -o subvol=home,compress=zstd,noatime /dev/disk/by-label/NIXOS /mnt/home
 mount -o subvol=nix,compress=zstd,noatime /dev/disk/by-label/NIXOS /mnt/nix
 mount /dev/disk/by-label/BOOT /mnt/boot
-swapon /dev/disk/by-label/SWAP
 ```
-
-如果你不想留磁盘 swap，也可以不建 swap 分区，但要记得把生成出来的 `swapDevices` 删掉，或者改成你自己的方案。
 
 ### 4. 获取配置
 
@@ -101,8 +97,6 @@ export NIX_CONFIG="experimental-features = nix-command flakes"
 ```bash
 nixos-install --flake '.#nixos'
 ```
-
-安装时会要求设置 `root` 密码。
 
 ### 7. 重启
 
