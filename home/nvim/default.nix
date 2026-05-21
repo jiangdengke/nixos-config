@@ -23,6 +23,10 @@
     # unwrapped 版本允许我们自己管理插件和配置
     package = pkgs.neovim-unwrapped;
 
+    # 显式保留旧默认值，避免 Home Manager 26.05 之后默认值变化带来的 warning。
+    withRuby = true;
+    withPython3 = true;
+
     # ==================== 额外工具包 ====================
     # 这些包会被添加到 Neovim 的运行时环境中
     # 插件可以直接调用这些工具，无需单独安装

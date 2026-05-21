@@ -1,5 +1,5 @@
 # home/modules/gtk.nix
-{ pkgs, lib, ... }:
+{ config, pkgs, lib, ... }:
 
 {
   # 主题包和工具
@@ -53,6 +53,7 @@
     };
 
     # GTK4 额外配置
+    gtk4.theme = config.gtk.theme;
     gtk4.extraConfig = {
       gtk-application-prefer-dark-theme = true;
       gtk-hint-font-metrics = true;

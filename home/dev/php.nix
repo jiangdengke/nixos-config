@@ -27,7 +27,7 @@ in {
     # phpWithExtensions    # 带自定义配置和扩展
 
     # PHP 包管理和开发工具
-    php84Packages.composer # Composer 包管理器
+    composer               # Composer 包管理器
     phpactor               # PHP 语言服务器（LSP）
     # nodePackages.intelephense  # 备选 LSP（功能更强，但需要许可证）
 
