@@ -119,4 +119,4 @@ sudo nixos-rebuild switch --flake '.#nixos'
 - `nixos/hardware-configuration.nix`
 - `modules/dae/config.dae`
 - `modules/boot.nix`
-- `modules/intel-gpu.nix`
+- `modules/nvidia-gpu.nix`

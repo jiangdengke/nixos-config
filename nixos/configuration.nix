@@ -13,7 +13,7 @@
     ../modules/i18n.nix
     ../modules/networking.nix
     ../modules/packages.nix
-    ../modules/intel-gpu.nix
+    ../modules/nvidia-gpu.nix
     ../modules/dae
     ../modules/users.nix
     ../modules/niri
