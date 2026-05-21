@@ -19,13 +19,9 @@
     # 让 Zim 的 completion 模块来处理
     enableCompletion = false;
 
-    # ==================== 自动启动 Wayland 会话 ====================
-    # 登录到 tty1 时自动启动 Niri Wayland 会话
-    profileExtra = ''
-      if [[ -z $WAYLAND_DISPLAY && "$(tty)" == "/dev/tty1" ]]; then
-        exec niri --session
-      fi
-    '';
+    # 新机器安装阶段先不要在 tty1 自动进入 Niri，避免图形会话异常时直接黑屏。
+    # 登录后可手动执行 `niri-session` 排查或启动桌面。
+    profileExtra = "";
 
     # ==================== 命令历史配置 ====================
     # ZSH 的命令历史功能
