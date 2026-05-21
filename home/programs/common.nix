@@ -13,7 +13,7 @@
 
     # 其他工具
     libnotify      # 发送桌面通知的库
-    wineWowPackages.wayland  # Wine 的 Wayland 支持版本，用于运行 Windows 应用程序
+    wineWow64Packages.wayland  # Wine 的 Wayland 支持版本，用于运行 Windows 应用程序
     xdg-utils      # freedesktop.org 实用工具，如 xdg-open
     graphviz       # 图形可视化工具，用于创建图表
 
