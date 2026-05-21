@@ -38,7 +38,7 @@
     # 格式化工具
     stylua # Lua 代码格式化工具
     nixfmt-rfc-style # Nix 语言的官方格式化器，自动格式化 Nix 配置文件
-    nodePackages.prettier # JavaScript、CSS、HTML、JSON、YAML 和 Markdown 格式化工具
+    prettier # JavaScript、CSS、HTML、JSON、YAML 和 Markdown 格式化工具
     taplo # TOML 文件格式化工具
     google-chrome
 

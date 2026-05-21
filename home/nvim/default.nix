@@ -111,10 +111,10 @@
 
       # ===== TypeScript/JavaScript 开发工具链 =====
       # TypeScript 编译器
-      nodePackages.typescript
+      typescript
 
       # TypeScript Language Server（TS/JS 代码补全）
-      nodePackages.typescript-language-server
+      typescript-language-server
 
       # Node.js 运行时（运行 JavaScript 代码）
       nodejs
