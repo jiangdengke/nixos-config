@@ -84,9 +84,6 @@
       # Go 编译器和运行时
       go
 
-      # Go 额外工具集（goimports、godoc 等）
-      gotools
-
       # ===== Python 语言开发工具链 =====
       # Python Language Server（Python 代码补全和诊断）
       pyright

@@ -41,7 +41,7 @@
       wqy_microhei
       wqy_zenhei
       source-han-serif
-      xorg.fontadobe75dpi
+      font-adobe-75dpi
       noto-fonts-color-emoji
     ];
   };

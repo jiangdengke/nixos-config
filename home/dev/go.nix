@@ -5,7 +5,6 @@
     gopls
     golangci-lint
     delve
-    gotools
   ];
 
   # 可选：给 GOPATH/GOBIN 一个位置（模块时代不是必须，但装工具会方便）
@@ -17,4 +16,3 @@
   # 可选：把 GOBIN 加进 PATH（如果你用 go install 安装工具）
   home.sessionPath = [ "$HOME/go/bin" ];
 }
-
