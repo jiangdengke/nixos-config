@@ -32,7 +32,7 @@ in {
     # nodePackages.intelephense  # 备选 LSP（功能更强，但需要许可证）
 
     # 代码质量工具
-    php84Packages.phpstan  # 静态分析
+    phpstan                # 静态分析
     # php-cs-fixer         # 代码格式化（可选，nixpkgs 中可能没有）
     # phpmd                # 代码质量检测（可选）
 
