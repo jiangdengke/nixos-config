@@ -21,14 +21,8 @@ cursor {
     xcursor-size 24
 }
 
-// 如需单独配置显示器，可取消注释下方示例（目前保持注释，不会生效）
-output "eDP-1" {
-    // 设定 1920×1080@120Hz、缩放 2、保持默认方向与位置
-    mode "1920x1080@60.012"
-    scale 1.25
-    transform "normal"
-    position x=1280 y=0
-}
+// 新机器安装时先不写死输出名，让 niri 使用显示器默认配置。
+// 如需单独配置显示器，可在安装完成后用 `niri msg outputs` 查看输出名再添加 output 块。
 
 layout {
     // 每个窗口外侧留 16 像素空隙

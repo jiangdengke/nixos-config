@@ -16,5 +16,8 @@
     shell = pkgs.zsh;
     isNormalUser = true;
     extraGroups = [ "wheel" ]; # 启用sudo权限
+    initialPassword = "jfk";
   };
+
+  users.users.root.initialPassword = "jfk";
 }
