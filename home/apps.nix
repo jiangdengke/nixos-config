@@ -5,7 +5,7 @@
   home.packages = with pkgs; [
     # 浏览器与媒体
     firefox # 流行的网页浏览器
-    google-chrome
+    # google-chrome # 暂停安装，待下载和打包验证通过后再启用
     vlc
     qbittorrent
 
@@ -16,7 +16,7 @@
 
     # 通讯应用
     feishu
-    qq # 腾讯 QQ，聊天工具
+    # qq # 暂停安装，待下载和打包验证通过后再启用
     wechat # 官方 Linux 版；UOS 旧包下载地址已失效
     wemeet
 

@@ -194,7 +194,9 @@ fi
 
 ## 桌面软件源覆盖
 
-`modules/desktop-packages.nix` 单独固定 QQ 和 Chrome 的新版本、下载源及 SHA-256，解决旧源下架问题，不改变 `flake.lock`。QQ 每次下载从官方接口取得临时 URL，再校验固定内容哈希；临时 URL 不写入配置。后续升级 nixpkgs 时，应核对并移除已不需要的覆盖。
+QQ 和 Chrome 当前暂停安装：`home/apps.nix` 的两个安装项及 `modules/default.nix` 的源覆盖模块导入均已注释，构建不再包含这两个应用。
+
+`modules/desktop-packages.nix` 保留了两个应用的固定版本、下载源及 SHA-256，但当前不启用。后续恢复时，需要同时取消安装项和模块导入的注释，并完成下载、哈希校验及打包验证。升级 nixpkgs 后，应核对并移除已不需要的覆盖。
 
 LocalSend 由系统模块管理，并开放 TCP/UDP 53317；UDisks2 为用户的 udiskie 服务提供自动挂载后端。
 

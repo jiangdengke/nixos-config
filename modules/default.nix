@@ -9,7 +9,7 @@
     ./fonts.nix
     ./networking.nix
     ./desktop.nix
-    ./desktop-packages.nix
+    # ./desktop-packages.nix # QQ、Chrome 暂停安装，对应源覆盖一并停用
     ./niri
     ./packages.nix
     ./nix-ld.nix
