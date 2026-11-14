@@ -97,13 +97,11 @@ fvim() {
 # 确保 Nix 配置文件路径在 PATH 中
 export PATH="$HOME/.nix-profile/bin:$PATH"
 
-# Anthropic Claude API 配置
-export ANTHROPIC_BASE_URL="https://www.88code.org/api"
-export ANTHROPIC_AUTH_TOKEN="88_12d9277bbd33440e432294d1f80b11bced198002f85ddee298baeb89d7d69dff"
-
-# OpenAI API 配置
-export OPENAI_BASE_URL="https://www.88code.org/openai/v1"
-export OPENAI_API_KEY="88_12d9277bbd33440e432294d1f80b11bced198002f85ddee298baeb89d7d69dff"
+# 本机环境覆盖和 API 凭据从仓库外加载，不进入 Nix store。
+# 此文件由用户自行创建，不由 Home Manager 管理。
+if [[ -r "${ZDOTDIR:-$HOME/.config/zsh}/local.zsh" ]]; then
+  source "${ZDOTDIR:-$HOME/.config/zsh}/local.zsh"
+fi
 
 # FZF 配置
 export FZF_DEFAULT_OPTS='

@@ -1,32 +1,84 @@
 # nixos-config
 
-这是一个 flake 化的 NixOS 配置。当前主机名是 `nixos`，flake 输出名也是 `nixos`，默认用户是 `jdk`。
+个人 NixOS 配置，使用 Niri 和 Home Manager。当前 flake 输出为 `nixos`，主机名为 `nixos`，用户为 `jdk`。
 
-参考资料：
+## 配置结构
 
-- [NixOS Manual](https://nixos.org/manual/nixos/stable/)
-- [NixOS Wiki: nixos-generate-config](https://wiki.nixos.org/wiki/Nixos-generate-config)
-- [NixOS Wiki: Flakes](https://wiki.nixos.org/wiki/Flakes)
+```text
+flake.nix                       # 输入、格式化器和主机输出
+hosts/nixos/
+  default.nix                   # 本机硬件模块、账户、Home Manager 用户绑定
+  hardware-configuration.nix    # 当前机器生成的磁盘与平台配置
+modules/
+  default.nix                   # 通用系统模块入口
+  home-manager.nix              # Home Manager 通用集成设置
+  users.nix                     # 系统级 Shell 设置
+  desktop.nix                   # Portal、蓝牙和输入设备
+  nix.nix                       # Flakes、缓存、GC 和兼容 overlay
+  boot.nix / power.nix           # 引导与电源管理
+  dae/default.nix               # 可选 DAE 服务，读取运行时私有配置
+home/
+  default.nix                   # 通用环境、PATH 和模块入口
+  desktop.nix                   # 图形应用与桌面组件入口
+  dev/                          # Go、Python、PHP
+  programs/                     # 通用工具与 Git
+  nvim/ / zsh/ / yazi/           # 编辑器、Shell 和文件管理器
+  waybar/                       # 状态栏配置与独立脚本
+```
+
+`flake.nix` 负责装配；主机配置决定账户、GPU 和 DAE 服务；`modules/` 提供通用系统设置；`home/` 管理用户环境。用户名只在主机配置中定义，Home Manager 从系统账户继承用户名与主目录。
+
+系统和 Home Manager 的 `stateVersion` 保持 `25.05`。更新依赖不需要修改这两个值。
+
+## 从旧配置迁移
+
+### DAE 私有配置
+
+DAE 现在读取 `/etc/dae/config.dae`，不再把仓库中的配置复制到 Nix store。本地旧文件 `modules/dae/config.dae` 保留在磁盘上，但已退出 Git 跟踪并被忽略；新克隆的仓库不包含它。
+
+在已有 NixOS 机器上，首次切换前执行：
+
+```bash
+sudo install -Dm600 modules/dae/config.dae /etc/dae/config.dae
+```
+
+如果配置来自其他私有位置，将源路径替换为实际位置。不要使用 `builtins.readFile` 或 Nix 路径字面量引用这份文件。
+
+不需要 DAE 时，移除 `hosts/nixos/default.nix` 中的 `../../modules/dae` 导入。之后不需要准备 DAE 配置。
+
+### API 凭据与账户密码
+
+Zsh 从 `${ZDOTDIR}/local.zsh` 加载本机设置；当前路径是 `~/.config/zsh/local.zsh`。该文件不由 Home Manager 管理，也不应放入仓库：
+
+```bash
+install -d -m700 "$HOME/.config/zsh"
+touch "$HOME/.config/zsh/local.zsh"
+chmod 600 "$HOME/.config/zsh/local.zsh"
+```
+
+在此文件中按需设置 `ANTHROPIC_BASE_URL`、`ANTHROPIC_AUTH_TOKEN`、`OPENAI_BASE_URL` 和 `OPENAI_API_KEY`。仓库不提供这些值。
+
+硬编码的 API 凭据和账户初始密码已从当前配置移除。现有账户密码不会因此自动改变；需要时在目标机器执行 `passwd` 和 `sudo passwd root`。
+
+旧凭据仍可能存在于 Git 历史及旧的 Nix store 路径中。此次重构不重写历史；曾提交的 API 凭据需要在提供方轮换。
 
 ## 新机器安装
 
 ### 1. 启动安装介质
 
-用 Ventoy 启动官方 NixOS ISO。进到终端后先联网，能 ping 通外网就行。
-
-有线网络通常直接插网线；无线网络可以用：
+用 Ventoy 启动官方 NixOS ISO，先确认网络可用。有线网络通常直接插网线；无线网络可以使用：
 
 ```bash
 nmtui
 ```
 
-如果 GitHub 访问不通，先临时走可用代理或镜像，把仓库和 flake 输入拉下来再继续。
+如果 GitHub 无法访问，先准备可用代理或镜像，再获取仓库与 flake 输入。
 
 ### 2. 分区和格式化
 
-这套配置默认是 UEFI + `systemd-boot` + `btrfs`。磁盘 swap 不必保留，系统里已经启用了 `zramSwap`。
+配置使用 UEFI、`systemd-boot` 和 `btrfs`，已启用 `zramSwap`。下列命令会清空所选磁盘；先确认磁盘及分区路径。
 
-下面是示例命令。`DISK` 是整块磁盘，后面的 `*_PART` 是分区路径。NVMe 通常是 `/dev/nvme0n1p1`，SATA 通常是 `/dev/sda1`，按你的机器替换。
+示例使用 NVMe。SATA 磁盘的分区路径通常是 `/dev/sda1`、`/dev/sda2`。
 
 ```bash
 sudo -i
@@ -68,55 +120,82 @@ git clone https://github.com/jiangdengke/nixos-config.git nixos-config
 cd nixos-config
 ```
 
-### 5. 生成并替换硬件配置
-
-先让 NixOS 根据当前机器生成硬件配置：
+### 5. 替换硬件配置
 
 ```bash
 nixos-generate-config --root /mnt
+cp /mnt/etc/nixos/hardware-configuration.nix /mnt/nixos-config/hosts/nixos/hardware-configuration.nix
 ```
 
-再把生成出来的硬件配置覆盖到仓库里：
+仓库中的 UUID 和磁盘 swap 来自原机器，必须替换。生成的文件会反映本机实际文件系统与 swap。
+
+同时检查 `hosts/nixos/default.nix`：选择适用的 GPU 模块、用户名、自动登录和触控板设置。当前配置启用 NVIDIA，禁用触控板。
+
+### 6. 准备 DAE 配置
+
+如果保留 DAE 导入，从私有位置安装配置；替换下面的源路径：
 
 ```bash
-cp /mnt/etc/nixos/hardware-configuration.nix /mnt/nixos-config/nixos/hardware-configuration.nix
+install -Dm600 /path/to/private/config.dae /mnt/etc/dae/config.dae
 ```
 
-这一步很重要。仓库里的旧 `hardware-configuration.nix` 是上一台机器的 UUID，不能直接拿到新机器上用。
+如果移除了 DAE 导入，跳过此步。
 
-### 6. 安装系统
+### 7. 安装并设置用户密码
 
-如果安装环境里 flakes 还没开，先临时启用：
+如果安装环境尚未启用 flakes：
 
 ```bash
 export NIX_CONFIG="experimental-features = nix-command flakes"
 ```
 
-然后安装：
+安装系统后，为默认用户设置密码；如果修改了用户名，替换 `jdk`：
 
 ```bash
 nixos-install --flake '.#nixos'
-```
-
-### 7. 重启
-
-```bash
+nixos-enter --root /mnt -c 'passwd jdk'
 reboot
 ```
 
-第一次进系统后，这套配置会自动在 TTY1 登录 `jdk`，然后启动 Niri 会话。
+`nixos-install` 默认会提示设置 root 密码。仓库不再提供预设账户密码。
 
-## 日常更新
+### 8. 启动桌面
 
-在仓库目录里执行：
+系统会在 TTY1 自动登录 `jdk`。登录后执行：
 
 ```bash
+niri-session
+```
+
+当前没有配置自动启动 Niri。Waybar、Polkit 和 XWayland Satellite 随图形会话的 systemd 用户服务启动。
+
+Zsh 的 Zim 框架目前仍依赖 `~/zimfw/zimfw.zsh` 和各 Zim 模块；新机器需单独准备，尚未纳入 Nix 依赖锁定。
+
+## 日常检查与更新
+
+在仓库目录执行。新增的 Nix 模块或脚本必须先纳入 Git 跟踪，本地 Git flake 才会包含它们：
+
+```bash
+git add <新增文件路径>
+nix flake check
+nix build '.#nixosConfigurations.nixos.config.system.build.toplevel' --no-link
+```
+
+保留 DAE 时，锁定版本的上游模块会在求值中构建资源目录。首次检查允许构建这些依赖，不使用 `nix flake check --no-build`。
+
+确认构建通过、私有 DAE 配置就位后，先临时激活验证，再持久切换：
+
+```bash
+sudo nixos-rebuild test --flake '.#nixos'
 sudo nixos-rebuild switch --flake '.#nixos'
 ```
 
-迁移到新机器时，优先检查这些文件：
+Home Manager 随 NixOS 一起部署，不单独执行 `home-manager switch`。Zsh 的 `update` 和 `hmupdate` 都在仓库根目录调用 `nixos-rebuild --flake .`，按本机主机名选择输出。`nixconf` 编辑仓库根目录的 `flake.nix`。
 
-- `nixos/hardware-configuration.nix`
-- `modules/dae/config.dae`
-- `modules/boot.nix`
-- `modules/nvidia-gpu.nix`
+格式化 Nix 文件可以执行 `nix fmt <文件路径>`。
+
+参考资料：
+
+- [NixOS Manual](https://nixos.org/manual/nixos/stable/)
+- [nixos-generate-config](https://wiki.nixos.org/wiki/Nixos-generate-config)
+- [Flakes](https://wiki.nixos.org/wiki/Flakes)

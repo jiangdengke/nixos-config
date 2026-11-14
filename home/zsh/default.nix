@@ -55,8 +55,9 @@
       cat = "bat";
 
       # ===== 系统操作别名 =====
-      update = "sudo nixos-rebuild switch";
-      hmupdate = "home-manager switch";
+      # 在配置仓库根目录执行；Home Manager 随 NixOS 一起更新。
+      update = "sudo nixos-rebuild switch --flake .";
+      hmupdate = "sudo nixos-rebuild switch --flake .";
 
       # ===== Git 快捷别名 =====
       g = "git";
@@ -75,7 +76,7 @@
 
       # ===== 配置文件编辑别名 =====
       zshrc = "$EDITOR $HOME/.zshrc";
-      nixconf = "$EDITOR $HOME/.config/nixpkgs/configuration.nix";
+      nixconf = "$EDITOR ./flake.nix";
     };
 
     # ==================== Zim 配置加载 ====================

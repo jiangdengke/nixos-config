@@ -1,5 +1,5 @@
 {
-  description = "A very basic flake";
+  description = "jdk 的 NixOS 配置（Niri + Home Manager）";
 
   inputs = {
     nixpkgs.url = "github:nixos/nixpkgs?ref=nixos-unstable";
@@ -8,26 +8,17 @@
     home-manager.inputs.nixpkgs.follows = "nixpkgs";
   };
 
-  outputs = { self, nixpkgs, home-manager, ... }@inputs: {
+  outputs =
+    { nixpkgs, home-manager, ... }:
+    {
+      formatter.x86_64-linux = nixpkgs.legacyPackages.x86_64-linux.nixfmt;
 
-    packages.x86_64-linux.hello = nixpkgs.legacyPackages.x86_64-linux.hello;
-    packages.x86_64-linux.default = self.packages.x86_64-linux.hello;
-    
-    nixosConfigurations = {
-      nixos = nixpkgs.lib.nixosSystem {
-        system = "x86_64-linux";
+      nixosConfigurations.nixos = nixpkgs.lib.nixosSystem {
+        # 平台由主机的 hardware-configuration.nix 决定。
         modules = [
-          ./nixos/configuration.nix
           home-manager.nixosModules.home-manager
-          {
-            home-manager.useGlobalPkgs = true;
-            home-manager.useUserPackages = true;
-            home-manager.users.jdk = ./home;
-            
-            home-manager.extraSpecialArgs = { };
-          }
+          ./hosts/nixos
         ];
       };
     };
-  };
 }

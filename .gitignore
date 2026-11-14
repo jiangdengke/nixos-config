@@ -1,0 +1,7 @@
+# 本机私有配置；DAE 只在运行时读取 /etc/dae/config.dae。
+/modules/dae/config.dae
+
+# Nix 构建输出与开发缓存。
+/result
+/result-*
+/.direnv/

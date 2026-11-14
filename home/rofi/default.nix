@@ -35,11 +35,6 @@
     };
   };
   
-  # 确保 ~/.local/bin 在 PATH 中
-  home.sessionPath = [
-    "$HOME/.local/bin"
-  ];
-  
   # 确保安装图标主题
   home.packages = with pkgs; [
     papirus-icon-theme

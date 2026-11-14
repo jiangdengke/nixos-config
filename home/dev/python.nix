@@ -28,9 +28,6 @@ in {
   # 防止误用全局 pip（强烈建议）
   home.sessionVariables.PIP_REQUIRE_VIRTUALENV = "1";
 
-  # 确保 pipx 安装的可执行文件能进 PATH
-  home.sessionPath = [ "$HOME/.local/bin" ];
-
   # 可选：pip 全局配置（例：超时/镜像）
   xdg.configFile."pip/pip.conf".text = ''
     [global]
