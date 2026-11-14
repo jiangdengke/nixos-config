@@ -1,4 +1,4 @@
-{ config, pkgs, lib, ... }:
+{ pkgs, ... }:
 
 {
   # ==================== Neovim 编辑器配置 ====================
@@ -52,8 +52,9 @@
       # Lua Language Server（Lua 语言支持）
       lua-language-server
 
-      # Lua 格式化器（重复声明，可能需要清理）
-      stylua
+      # Markdown LSP 与 shell 格式化器由 Nix 提供。
+      marksman
+      shfmt
 
       # 快速文本搜索工具（Telescope 等插件依赖）
       ripgrep
@@ -131,73 +132,10 @@
   # 这是 Linux 下的标准配置目录结构
   xdg.enable = true;
 
-  # ==================== 环境变量配置 ====================
-  # 设置全局环境变量
-  home.sessionVariables = {
-    # 默认编辑器设置为 nvim
-    EDITOR = "nvim";
-
-    # 可视化编辑器也设置为 nvim
-    VISUAL = "nvim";
-
-    # ===== Mason 插件配置 =====
-    # Mason 是 Neovim 的 LSP/DAP/Linter 管理器
-    # 强制设置 Mason 的安装目录到 XDG 数据目录
-    # 这样可以保持配置的整洁性
-    MASON_INSTALL_DIR = lib.mkForce "${config.xdg.dataHome}/nvim/mason";
+  # 逐文件链接配置；遇到未受管理的不同内容时由 Home Manager 报错，
+  # 不删除用户目录。首次迁移请按 README 保留原配置。
+  xdg.configFile."nvim" = {
+    source = ./nvim;
+    recursive = true;
   };
-
-  # ==================== Neovim 配置文件管理 ====================
-  # 使用激活脚本在每次 Home Manager 切换时复制配置
-  # 这种方式允许 Neovim 插件在运行时修改配置文件
-  home.activation = {
-    # 定义复制 Neovim 配置的激活脚本
-    # entryAfter ["writeBoundary"] 确保在文件写入边界之后执行
-    copyNeovimConfig = lib.hm.dag.entryAfter ["writeBoundary"] ''
-      # ===== 创建必要的 Neovim 目录 =====
-      # XDG_DATA_HOME/nvim：插件数据、状态文件
-      $DRY_RUN_CMD mkdir -p $VERBOSE_ARG ${config.xdg.dataHome}/nvim
-
-      # XDG_STATE_HOME/nvim：编辑器状态（undo 历史等）
-      $DRY_RUN_CMD mkdir -p $VERBOSE_ARG ${config.xdg.stateHome}/nvim
-
-      # XDG_CACHE_HOME/nvim：临时缓存文件
-      $DRY_RUN_CMD mkdir -p $VERBOSE_ARG ${config.xdg.cacheHome}/nvim
-
-      # ===== 覆盖旧配置 =====
-      # 直接删除旧的 nvim 目录，避免不断生成 .bak 备份
-      if [ -d "${config.xdg.configHome}/nvim" ]; then
-        $DRY_RUN_CMD rm -rf $VERBOSE_ARG ${config.xdg.configHome}/nvim
-      fi
-
-      # ===== 复制新配置到配置目录 =====
-      # 创建配置根目录
-      $DRY_RUN_CMD mkdir -p $VERBOSE_ARG ${config.xdg.configHome}
-
-      # 递归复制 nvim 配置目录
-      # ./nvim 指向当前目录下的 nvim 文件夹
-      $DRY_RUN_CMD cp -r $VERBOSE_ARG ${./nvim} ${config.xdg.configHome}/nvim
-
-      # ===== 设置正确的文件权限 =====
-      # 确保用户对配置文件有写权限
-      # 这样插件管理器可以安装和更新插件
-      $DRY_RUN_CMD chmod -R u+w $VERBOSE_ARG ${config.xdg.configHome}/nvim
-      $DRY_RUN_CMD chmod -R u+w $VERBOSE_ARG ${config.xdg.dataHome}/nvim
-      $DRY_RUN_CMD chmod -R u+w $VERBOSE_ARG ${config.xdg.cacheHome}/nvim
-    '';
-  };
-
-  # ==================== 确保配置目录存在 ====================
-  # 创建一个空的 .keep 文件确保目录被创建
-  # 即使配置还没复制，目录也会存在
-  home.file = {
-    ".config/nvim/.keep".text = "";
-  };
-
-  # ==================== 重要提示 ====================
-  # Yanky 插件配置说明：
-  # Yanky 是一个 Neovim 的剪贴板管理插件
-  # 在 NixOS 环境下，需要使用 shada 或 memory 存储模式
-  # 相关配置应该在 ./nvim/lua/config/plugins/yanky.lua 中设置
-  # 这样可以避免 SQLite 数据库相关的权限问题
 }

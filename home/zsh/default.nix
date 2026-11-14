@@ -3,8 +3,22 @@
 # Zim 特点：模块化、可定制、极速启动（比 Oh My Zsh 快 10 倍）
 # 文件位置：~/.config/home-manager/home/zsh/default.nix
 
-{ config, pkgs, ... }:
+{ config, pkgs, lib, ... }:
 
+let
+  pins = builtins.fromJSON (builtins.readFile ./zim-sources.json);
+  modules = lib.mapAttrs (name: pin: pkgs.fetchFromGitHub {
+    owner = "zimfw";
+    repo = name;
+    inherit (pin) rev hash;
+  }) pins;
+  zimrc = pkgs.replaceVars ./zimrc (modules // {
+    magicmace = ./magicmace;
+    syntaxHighlighting = "${pkgs.zsh-syntax-highlighting}/share/zsh-syntax-highlighting";
+    autosuggestions = "${pkgs.zsh-autosuggestions}/share/zsh-autosuggestions";
+    historySubstringSearch = "${pkgs.zsh-history-substring-search}/share/zsh-history-substring-search";
+  });
+in
 {
   # ==================== ZSH 基本配置 ====================
   programs.zsh = {
@@ -81,7 +95,10 @@
 
     # ==================== Zim 配置加载 ====================
     # 加载 Zim 框架和自定义配置
-    initContent = builtins.readFile ./zshrc-zim.zsh;
+    initContent = builtins.replaceStrings
+      [ "@zimfw@" "@zimrc@" "@zimHome@" ]
+      [ "${pkgs.zimfw}/zimfw.zsh" "${zimrc}" "${config.xdg.cacheHome}/zim/${builtins.baseNameOf zimrc}" ]
+      (builtins.readFile ./zshrc-zim.zsh);
 
     # ==================== 环境变量配置 ====================
     sessionVariables = {
@@ -92,20 +109,9 @@
     };
   };
 
-  # ==================== Zim 配置文件和主题部署 ====================
-  # 将 zimrc 配置文件和 magicmace 主题复制到正确位置
-  home.file = {
-    # zimrc 配置文件
-    ".config/zsh/.zimrc" = {
-      source = ./zimrc;
-    };
-
-    # magicmace 主题目录
-    ".config/zsh/.zim/modules/magicmace" = {
-      source = ./magicmace;
-      recursive = true;
-    };
-  };
+  # ==================== Zim 配置部署 ====================
+  # Zim 只读取 Nix store 中的模块；初始化缓存随配置路径隔离。
+  home.file.".config/zsh/.zimrc".source = zimrc;
 
   # ==================== 安装必要的命令行工具 ====================
   home.packages = with pkgs; [
@@ -127,12 +133,9 @@
 #   - 状态指示：错误码、后台任务、Python venv
 #   - 颜色可定制
 #
-# Zim 框架管理命令：
-#   zimfw install  - 安装新模块
-#   zimfw update   - 更新所有模块
-#   zimfw uninstall - 卸载模块
-#   zimfw upgrade  - 升级 zimfw 本身
-#   zimfw info     - 查看已安装模块
+# Zim 维护：修改 zim-sources.json 的版本与哈希后重新构建。
+# 模块位于只读 Nix store；不要使用 zimfw update/upgrade 修改它们。
+# zimfw info 可查看已加载模块。
 #
 # 快捷键：
 #   Ctrl+R - 模糊搜索历史命令

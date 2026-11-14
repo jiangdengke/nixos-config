@@ -167,9 +167,36 @@ reboot
 niri-session
 ```
 
-当前没有配置自动启动 Niri。Waybar、Polkit 和 XWayland Satellite 随图形会话的 systemd 用户服务启动。
+当前没有配置自动启动 Niri。Waybar、Polkit 随图形会话的 systemd 用户服务启动。XWayland Satellite 由 Niri 25.08 按需启动，不再额外运行用户服务。
 
-Zsh 的 Zim 框架目前仍依赖 `~/zimfw/zimfw.zsh` 和各 Zim 模块；新机器需单独准备，尚未纳入 Nix 依赖锁定。
+Zim 框架由锁定的 nixpkgs 提供，模块版本与哈希记录在 `home/zsh/zim-sources.json`。首次登录只在用户缓存目录生成初始化文件，无需克隆 `~/zimfw`，也不在 Shell 启动时下载模块。
+
+## 从旧配置迁移 Neovim
+
+Neovim 改为 Home Manager 逐文件管理，不再删除整个配置目录。旧版本留下的普通文件若与新版本不同，首次切换会报文件冲突；先备份再切换。以下命令只移动配置目录，不删除插件数据：
+
+```bash
+config_root="${XDG_CONFIG_HOME:-$HOME/.config}"
+state_root="${XDG_STATE_HOME:-$HOME/.local/state}/nvim"
+if [ -d "$config_root/nvim" ] && [ ! -L "$config_root/nvim" ]; then
+  mkdir -p "$state_root"
+  # 保留旧配置中由 :Lazy update 更新过的锁文件。
+  if [ -f "$config_root/nvim/lazy-lock.json" ] && [ ! -e "$state_root/lazy-lock.json" ]; then
+    cp "$config_root/nvim/lazy-lock.json" "$state_root/lazy-lock.json"
+  fi
+  backup_dir=$(mktemp -d "$config_root/nvim-before-nix.XXXXXX")
+  mv "$config_root/nvim" "$backup_dir/nvim"
+  printf 'Neovim 配置已保留在 %s/nvim\n' "$backup_dir"
+fi
+```
+
+此后修改仓库的 `home/nvim/nvim/` 并重新构建。Lazy 的可写锁文件位于 `$XDG_STATE_HOME/nvim/lazy-lock.json`（默认 `~/.local/state/nvim/lazy-lock.json`），不会被切换覆盖。语言服务器由 Nix 提供，通过 Neovim 0.11 内置 LSP 启用，不再通过 Mason 重复安装。
+
+## 桌面软件源覆盖
+
+`modules/desktop-packages.nix` 单独固定 QQ 和 Chrome 的新版本、下载源及 SHA-256，解决旧源下架问题，不改变 `flake.lock`。QQ 每次下载从官方接口取得临时 URL，再校验固定内容哈希；临时 URL 不写入配置。后续升级 nixpkgs 时，应核对并移除已不需要的覆盖。
+
+LocalSend 由系统模块管理，并开放 TCP/UDP 53317；UDisks2 为用户的 udiskie 服务提供自动挂载后端。
 
 ## 日常检查与更新
 

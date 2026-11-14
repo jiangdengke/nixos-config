@@ -13,7 +13,6 @@
     kdePackages.dolphin # KDE 的文件管理器 Dolphin
     kdePackages.dolphin-plugins # Dolphin 文件管理器插件（如集成网络共享等）
     nautilus # GNOME Files 文件管理器
-    localsend # 本地文件传输工具，通常用于在设备之间传输文件
 
     # 通讯应用
     feishu

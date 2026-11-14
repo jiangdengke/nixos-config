@@ -123,7 +123,7 @@
       "none": ""
     },
     "return-type": "json",
-    "exec-if": "swaync-client --count --skip-wait 1>2 /dev/null",
+    "exec-if": "swaync-client --count --skip-wait >/dev/null 2>&1",
     "exec": "swaync-client -swb",
     "on-click": "swaync-client -t -sw",
     "on-click-right": "swaync-client -d -sw",

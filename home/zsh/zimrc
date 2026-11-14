@@ -6,37 +6,37 @@
 # ==================== Zim 模块配置 ====================
 
 # 环境变量设置
-zmodule environment
+zmodule @environment@ --name environment
 
 # 输入配置
-zmodule input
+zmodule @input@ --name input
 
 # 终端标题设置
-zmodule termtitle
+zmodule @termtitle@ --name termtitle
 
 # 实用工具函数
-zmodule utility
+zmodule @utility@ --name utility
 
 # ==================== 提示符主题 ====================
 # magicmace 主题（简洁、快速、美观）
 # 需要 prompt-pwd 和 git-info 模块
-zmodule prompt-pwd
-zmodule git-info
-zmodule magicmace
+zmodule @prompt-pwd@ --name prompt-pwd
+zmodule @git-info@ --name git-info
+zmodule @magicmace@ --name magicmace --source magicmace.zsh-theme
 
 # ==================== 补全系统 ====================
 # ZSH 补全配置
-zmodule completion
+zmodule @completion@ --name completion
 
 # ==================== 插件模块 ====================
 
 # 语法高亮（需要在最后加载）
-zmodule zsh-users/zsh-syntax-highlighting
+zmodule @syntaxHighlighting@ --name zsh-syntax-highlighting --source zsh-syntax-highlighting.zsh
 
 # 命令自动建议
-zmodule zsh-users/zsh-autosuggestions
+zmodule @autosuggestions@ --name zsh-autosuggestions --source zsh-autosuggestions.zsh
 
 # 历史子串搜索
-zmodule zsh-users/zsh-history-substring-search
+zmodule @historySubstringSearch@ --name zsh-history-substring-search --source zsh-history-substring-search.zsh
 
 # ==================== Zim 配置完成 ====================

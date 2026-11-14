@@ -9,6 +9,7 @@
     ./fonts.nix
     ./networking.nix
     ./desktop.nix
+    ./desktop-packages.nix
     ./niri
     ./packages.nix
     ./nix-ld.nix

@@ -12,7 +12,10 @@
         "gnome"
         "gtk"
       ];
-      filechooser.default = [ "gtk" ];
+      niri = {
+        default = [ "gnome" "gtk" ];
+        "org.freedesktop.impl.portal.FileChooser" = [ "gtk" ];
+      };
     };
   };
 
@@ -20,6 +23,13 @@
   hardware.bluetooth.powerOnBoot = true;
 
   services.libinput.enable = true;
+  services.udisks2.enable = true;
+
+  # LocalSend 的接收与发现需要 TCP/UDP 53317。
+  programs.localsend = {
+    enable = true;
+    openFirewall = true;
+  };
 
   environment.variables = {
     EDITOR = "nvim";

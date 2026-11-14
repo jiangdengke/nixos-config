@@ -2,21 +2,21 @@
 # 这个文件在 Zim 框架下使用
 # 替代之前的 zshrc.zsh
 
-# ==================== Zim 基础设置 ====================
-# Zim 安装目录（使用 ZDOTDIR）
-ZIM_HOME=${ZDOTDIR:-${HOME}}/.zim
+# 模块及框架由 Nix 固定，首次启动不下载网络依赖。
+ZIM_HOME="@zimHome@"
+ZIM_CONFIG_FILE="@zimrc@"
+zstyle ':zim' disable-version-check yes
 
-# 设置 zimrc 配置文件位置
-ZIM_CONFIG_FILE=${ZDOTDIR:-${HOME}}/.zimrc
-
-# 使用本地的 zimfw（从 ~/zimfw 仓库）
-# 安装缺失的模块并初始化
-if [[ ! ${ZIM_HOME}/init.zsh -nt ${ZIM_CONFIG_FILE} ]]; then
-  source ${HOME}/zimfw/zimfw.zsh init -q
+if [[ ! -r ${ZIM_HOME}/init.zsh ]]; then
+  source "@zimfw@" init -q
 fi
-
-# 初始化 Zim
-source ${ZIM_HOME}/init.zsh
+if [[ -r ${ZIM_HOME}/init.zsh ]]; then
+  source "${ZIM_HOME}/init.zsh"
+else
+  # 初始化失败仍提供基本补全；不依赖用户预先克隆 ~/zimfw。
+  autoload -Uz compinit
+  compinit
+fi
 
 # ==================== ZSH 选项设置 ====================
 # 自动切换目录（无需输入 cd 命令）

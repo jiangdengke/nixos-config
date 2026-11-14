@@ -59,6 +59,13 @@ vim.g.mapleader = " "
 -- localleader 用于特定文件类型的快捷键
 vim.g.maplocalleader = "\\"
 
+-- 首次启动用仓库中的锁文件初始化；以后保留 :Lazy update 的结果。
+local lockfile = vim.fn.stdpath("state") .. "/lazy-lock.json"
+if not (vim.uv or vim.loop).fs_stat(lockfile) then
+    vim.fn.mkdir(vim.fn.stdpath("state"), "p")
+    vim.fn.writefile(vim.fn.readfile(vim.fn.stdpath("config") .. "/lazy-lock.json"), lockfile)
+end
+
 -- ==================== 插件加载配置 ====================
 -- 调用 lazy.nvim 的 setup 函数加载所有插件
 -- 每个 require 语句都会加载对应的插件配置文件
@@ -158,32 +165,13 @@ require("lazy").setup({
     -- 集成 nvim-cmp 及各种补全源
     require("config.plugins.autocomplete"),
 
-    -- ===== 工具管理器 =====
-    -- 管理外部工具的安装
-
-    -- mason：LSP/DAP/Linter 安装管理器
-    -- 自动下载和管理各种开发工具
-    require("config.plugins.mason"),
-
-    -- ===== LSP 配置（已注释） =====
-    -- Language Server Protocol 相关配置
-    -- 注释掉是因为可能使用其他 LSP 配置方式
-
-    -- lsp：LSP 客户端配置
-    -- 配置各种语言服务器
-    -- require("config.plugins.lsp"),
-
-    -- mason-lspconfig：Mason 与 LSP 集成
-    -- 自动安装 LSP 服务器
-    -- require("config.plugins.mason-lspconfig"),
-
-    -- ===== 开发工具（已注释） =====
-    -- 其他开发辅助工具
-
-    -- lazydev：Lua 开发工具
-    -- 为 Neovim 插件开发提供补全
-    -- require("config.plugins.lazydev"),
+}, {
+    -- 配置目录由 Home Manager 管理；运行时更新写入 state 目录。
+    lockfile = vim.fn.stdpath("state") .. "/lazy-lock.json",
 })
+
+-- 语言服务器由 Nix 安装，使用 Neovim 0.11 内置 LSP 接入。
+require("config.lsp")
 
 -- ==================== 插件管理器使用说明 ====================
 -- 常用命令：

@@ -1,0 +1,30 @@
+{
+  "environment": {
+    "rev": "d4bceaa3da89cd819843334dba1a5bf7dc137e14",
+    "hash": "sha256-B8Cki4uCcSce0xewZ91P9wCpA5+x/AlT1IwC+HVs6OI="
+  },
+  "input": {
+    "rev": "bdec2b372f8bd16a072d30ebc447a22dad52cfb4",
+    "hash": "sha256-/tWks6oFH6/LK8u9SxsZIJ9uAonJ2T6l91BflDwog80="
+  },
+  "termtitle": {
+    "rev": "b0de7783181804d21cc73fbb109fb89e8b021327",
+    "hash": "sha256-KKoxwKQV9kJJCTkFKu3I1g27TONkoWB4oIwxHSolVoM="
+  },
+  "utility": {
+    "rev": "c7ed9b9da79224d820661d9b4337429764784c69",
+    "hash": "sha256-n9uaqsKZb9F5Si9wiATr2LYFCLDNuEZbjozTvG6YwF4="
+  },
+  "prompt-pwd": {
+    "rev": "1531846f2536d8824eee29623c1576d099f2a116",
+    "hash": "sha256-IgvQOUCCClMJCNDSjpjVH4GjK2iz4aiyKpG41llK00Y="
+  },
+  "git-info": {
+    "rev": "a04d45a7bbd4fe6dab98039b0482801f367402b3",
+    "hash": "sha256-wGPN0BGJHwOhJKnv9Wew3pHM9T/0EF7XUbVs5xVgeM4="
+  },
+  "completion": {
+    "rev": "213d38b36475865445b0ea1a3f7779c881f132cd",
+    "hash": "sha256-5Evq5UqAaaUUo3s6qmlrHbCfD2W56H5m1NkxP+S2gCs="
+  }
+}
